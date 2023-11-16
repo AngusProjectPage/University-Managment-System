@@ -9,6 +9,7 @@ module com.example.cs308fx {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires java.sql;
 
     opens com.example.cs308fx to javafx.fxml;
     exports com.example.cs308fx;
