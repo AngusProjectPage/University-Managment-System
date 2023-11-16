@@ -1,0 +1,35 @@
+package com.example.cs308fx;
+
+import java.util.Date;
+/**
+ * The Person is the subclass of {@link UserController} that is used to describe active users <br>
+ * A Person can branch to a {@link Lecturer}, or a {@link Student} <br>
+ * A Person has a:
+ * <ul><ul>
+ *     <li>email - {@link String}</li>
+ *     <li>password - String</li>
+ *     <li>first name - String</li>
+ *     <li>second name - String</li>
+ *     <li>gender - String</li>
+ *     <li>Date of Birth - {@link Date}</li>
+ * </ul></ul>
+ *  
+ * @see UserModel
+ * @see Lecturer
+ * @see Student
+ */
+
+
+public class Person extends UserController {
+    String firstName;
+    String secondName;
+    String gender;
+    Date DOB;
+    public Person(String email,String firstName, String secondName, String gender, Date DOB) {
+        super(email, new UserModel());
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.gender = gender;
+        this.DOB = DOB;
+    }
+}
