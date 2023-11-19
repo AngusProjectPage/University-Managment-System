@@ -20,28 +20,37 @@ public class LoginController {
         private Parent root;
 
         @FXML
-        private Label myLabel;
+        private TextField username;
         @FXML
-        private TextField myTextField;
+        private TextField password;
         @FXML
         private Button myButton;
 
         @FXML
         public void login(ActionEvent event) throws IOException {
                 try {
-                        String username = myTextField.getText();
-                        String password = myTextField.getText();
+                        String user = username.getText();
+                        String pass = password.getText();
+                        System.out.println(user);
+                        System.out.println(pass);
                 }
                 catch (Exception e) {
                         System.out.println(e);
                 }
-             /*
+
                 root = FXMLLoader.load(getClass().getResource("student.fxml"));
                 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
+        }
 
-              */
+        @FXML
+        public void signup(ActionEvent event) throws IOException {
+                root = FXMLLoader.load(getClass().getResource("signup.fxml"));
+                stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
         }
 }
