@@ -44,4 +44,8 @@ public class UserModel {
         return this.dateOfBirth;
     }
 
+    public void addUserToDB() {
+
+    }
+
 }
