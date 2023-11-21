@@ -13,17 +13,15 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
-import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class SignupController implements Initializable {
 
+    private UserModel user;
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -38,10 +36,13 @@ public class SignupController implements Initializable {
     @FXML
     private ComboBox<String> genderField;
     @FXML
-    private DatePicker dateField;
-
+    private DatePicker dateOfBirthField;
     @FXML
     private ComboBox<String> userRoleField;
+
+    public SignupController(UserModel user) {
+        this.user = user;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -56,22 +57,10 @@ public class SignupController implements Initializable {
         String password  = passwordField.getText();
         String userRole  = userRoleField.getValue();
 
-        LocalDate date = dateField.getValue();
+        LocalDate date = dateOfBirthField.getValue();
         String dateOfBirth = date.format(DateTimeFormatter.ISO_LOCAL_DATE);
         boolean approved = false;
 
-        if(Objects.equals(userRole, "student")) {
-            String query = "INSERT INTO student(firstname, surname, password, gender, email, dateOfBirth, approved) " +
-                    "VALUES ("+ firstName + ", "+ surname + ", "+ password + ", "+ gender + ", "+ email + ",  "+ dateOfBirth + ", "+ approved + ";";
-        }
-        else if(Objects.equals(userRole, "lecturer")) {
-            String query = "INSERT INTO lecturer(firstname, surname, password, gender, email, dateOfBirth, approved) " +
-                    "VALUES ("+ firstName + ", "+ surname + ", "+ password + ", "+ gender + ", "+ email + ",  "+ dateOfBirth + ", "+ approved + ";";
-        }
-        else {
-            String query = "INSERT INTO manager(firstname, surname, password, gender, email, dateOfBirth, approved) " +
-                    "VALUES ("+ firstName + ", "+ surname + ", "+ password + ", "+ gender + ", "+ email + ",  "+ dateOfBirth + ", "+ approved + ";";
-        }
     }
 
     public void login(ActionEvent event) throws IOException {
@@ -81,7 +70,4 @@ public class SignupController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
-
-
 }

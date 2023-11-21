@@ -1,8 +1,11 @@
 package com.example.cs308fx;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Objects;
 
 public class UserModel {
-    static MySqlConnect connection;
-
+    static Connection connection = MySqlConnect.getConnection();
     private String firstName;
     private String surname;
     private int Id;
@@ -18,6 +21,25 @@ public class UserModel {
     public UserModel getUser(int userId) {
 
         return null;
+    }
+
+    public boolean addUser(String firstName, String surname, String email, String gender, String password, String userRole, String dateOfBirth, boolean approved) throws SQLException {
+        if(Objects.equals(userRole, "student")) {
+            String query = "INSERT INTO student(firstname, surname, password, gender, email, dateOfBirth, approved) " +
+                    "VALUES ("+ firstName + ", "+ surname + ", "+ password + ", "+ gender + ", "+ email + ",  "+ dateOfBirth + ", "+ approved + ";";
+            PreparedStatement ps = connection.prepareStatement(query);
+        }
+        else if(Objects.equals(userRole, "lecturer")) {
+            String query = "INSERT INTO lecturer(firstname, surname, password, gender, email, dateOfBirth, approved) " +
+                    "VALUES ("+ firstName + ", "+ surname + ", "+ password + ", "+ gender + ", "+ email + ",  "+ dateOfBirth + ", "+ approved + ";";
+            PreparedStatement ps = connection.prepareStatement(query);
+        }
+        else {
+            String query = "INSERT INTO manager(firstname, surname, password, gender, email, dateOfBirth, approved) " +
+                    "VALUES ("+ firstName + ", "+ surname + ", "+ password + ", "+ gender + ", "+ email + ",  "+ dateOfBirth + ", "+ approved + ";";
+            PreparedStatement ps = connection.prepareStatement(query);
+        }
+        return true;
     }
 
     public int getId() {
