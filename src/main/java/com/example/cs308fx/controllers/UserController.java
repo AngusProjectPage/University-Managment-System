@@ -1,12 +1,15 @@
-package com.example.cs308fx;
+package com.example.cs308fx.controllers;
+
+import com.example.cs308fx.Manager;
+import com.example.cs308fx.Person;
+import com.example.cs308fx.StringAsker;
+import com.example.cs308fx.UserModel;
 
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
-
-import java.sql.*;
 
 /**
  * The user is the superclass that is used to describe all the users on the app. <br>

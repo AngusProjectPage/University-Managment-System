@@ -1,5 +1,7 @@
 package com.example.cs308fx;
 
+import com.example.cs308fx.controllers.UserController;
+
 import java.util.Date;
 
 /**

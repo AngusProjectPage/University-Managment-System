@@ -1,6 +1,7 @@
-package com.example.cs308fx;
+package com.example.cs308fx.controllers;
 
 
+import com.example.cs308fx.UserModel;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
