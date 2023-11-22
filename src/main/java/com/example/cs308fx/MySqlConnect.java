@@ -20,7 +20,7 @@ public class MySqlConnect {
     static {
         Scanner scanner = null;
         try {
-            scanner = new Scanner(new File("./database_connection/dbConnect.txt"));
+            scanner = new Scanner(new File("../../resources/database_connection/dbConnect.txt"));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

@@ -12,6 +12,9 @@ target/
 *.iml
 *.ipr
 
+### Database Connection ###
+/src/main/resources/com.example.cs308fx/database_connection/
+
 ### Eclipse ###
 .apt_generated
 .classpath
