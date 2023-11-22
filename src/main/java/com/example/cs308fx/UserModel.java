@@ -18,6 +18,12 @@ public class UserModel {
     private String decision;
     private boolean approved;
 
+    private boolean loginSuccessful = false;
+
+    public boolean isLoginSuccessful() {
+        return loginSuccessful;
+    }
+
 
     public boolean addUser(String firstName, String surname, String email, String gender, String password, String userRole, String dateOfBirth, boolean approved) throws SQLException {
         if(Objects.equals(userRole, "student")) {
@@ -61,13 +67,14 @@ public class UserModel {
      * @return userType of Student, Lecturer or Manager
      */
     public void login(String username, String password, String role) throws SQLException {
+        loginSuccessful = false;
         if(Objects.equals("student", role)) {
-            String query = "SELECT * FROM student WHERE username = ?, password = ?";
+            String query = "SELECT * FROM student WHERE username = ? AND password = ?";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, username);
             ps.setString(2, password);
-
             ResultSet rs = ps.executeQuery();
+
             if(rs.next()) {
                 // Get fields from database
                 this.id          = rs.getInt("id");
@@ -80,6 +87,7 @@ public class UserModel {
                 this.courseId    = rs.getInt("courseId");
                 this.decision    = rs.getString("decision");
                 this.approved    = rs.getBoolean("approved");
+                loginSuccessful = true;
             }
             else {
                 System.out.println("No matching record found");
@@ -87,12 +95,12 @@ public class UserModel {
 
         }
         else if(Objects.equals("lecturer", role)) {
-            String query = "SELECT * FROM student WHERE username = ?, password = ?";
+            String query = "SELECT * FROM lecturer WHERE username = ? AND password = ?";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, username);
             ps.setString(2, password);
-
             ResultSet rs = ps.executeQuery();
+
             if(rs.next()) {
                 // Get fields from database
                 this.id          = rs.getInt("id");
@@ -105,30 +113,30 @@ public class UserModel {
                 this.courseId    = rs.getInt("courseId");
                 this.decision    = rs.getString("decision");
                 this.approved    = rs.getBoolean("approved");
+                loginSuccessful = true;
             }
             else {
                 System.out.println("No matching record found");
             }
+
         }
         else {
-            String query = "SELECT * FROM student WHERE username = ?, password = ?";
+            String query = "SELECT * FROM manager WHERE username = ? AND password = ?";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, username);
             ps.setString(2, password);
-
             ResultSet rs = ps.executeQuery();
+
             if(rs.next()) {
                 // Get fields from database
-                this.id          = rs.getInt("id");
-                this.username    = rs.getString("username");
-                this.firstName   = rs.getString("firstname");
-                this.surname     = rs.getString("surname");
-                this.gender      = rs.getString("gender");
-                this.email       = rs.getString("email");
+                this.id = rs.getInt("managerId"); // assuming 'id' corresponds to 'managerId'
+                this.username = rs.getString("username");
+                this.firstName = rs.getString("firstname"); // make sure the case matches the database
+                this.surname = rs.getString("surname"); // make sure the case matches the database
+                this.gender = rs.getString("gender"); // the case of 'gender' must match the database
+                this.email = rs.getString("email");
                 this.dateOfBirth = rs.getString("dateOfBirth");
-                this.courseId    = rs.getInt("courseId");
-                this.decision    = rs.getString("decision");
-                this.approved    = rs.getBoolean("approved");
+                loginSuccessful = true;
             }
             else {
                 System.out.println("No matching record found");

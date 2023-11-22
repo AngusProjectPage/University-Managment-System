@@ -12,6 +12,9 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
+import com.example.cs308fx.UserModel;
 
 public class LoginController {
 
@@ -27,27 +30,51 @@ public class LoginController {
         private Button myButton;
 
         @FXML
-        public void login(ActionEvent event) throws IOException {
-                try {
-                        String user = username.getText();
-                        String pass = password.getText();
-                        System.out.println(user);
-                        System.out.println(pass);
-                }
-                catch (Exception e) {
-                        System.out.println(e);
-                }
+        private Label errorLabel;
 
-                root = FXMLLoader.load(getClass().getResource("student.fxml"));
-                stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
+        @FXML
+        public void initialize() {
+                username.setOnKeyPressed(e -> clearErrorMessage());
+                password.setOnKeyPressed(e -> clearErrorMessage());
+        }
+
+        @FXML
+        private void clearErrorMessage() {
+                errorLabel.setText("");
+        }
+
+        private UserModel userModel = new UserModel();
+
+        @FXML
+        public void login(ActionEvent event) throws IOException {
+                String user = username.getText();
+                String pass = password.getText();
+                String role = "manager"; //temp
+
+                try {
+                        userModel.login(user, pass, role);
+
+                        if (userModel.isLoginSuccessful()) {
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/cs308fx/student.fxml"));
+                                Parent root = loader.load();
+                                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                                Scene scene = new Scene(root);
+                                stage.setScene(scene);
+                                stage.show();
+                        } else {
+
+                                errorLabel.setText("Login failed. Please check your username and password.");
+
+                        }
+                } catch (SQLException e) {
+                        e.printStackTrace();
+                        // Handle SQLException (e.g., show an error dialog).
+                }
         }
 
         @FXML
         public void signup(ActionEvent event) throws IOException {
-                root = FXMLLoader.load(getClass().getResource("signup.fxml"));
+                root = FXMLLoader.load(getClass().getResource("/com/example/cs308fx/signup.fxml"));
                 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
