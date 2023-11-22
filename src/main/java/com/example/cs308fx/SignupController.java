@@ -15,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
@@ -38,7 +39,7 @@ public class SignupController implements Initializable {
     @FXML
     private DatePicker dateOfBirthField;
     @FXML
-    private ComboBox<String> userRoleField;
+    private ComboBox<String> roleField;
 
     public SignupController(UserModel user) {
         this.user = user;
@@ -46,21 +47,24 @@ public class SignupController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        userRoleField.setItems(FXCollections.observableArrayList("student", "lecturer", "manager"));
+        roleField.setItems(FXCollections.observableArrayList("student", "lecturer", "manager"));
+        genderField.setItems(FXCollections.observableArrayList("Male", "Female"));
     }
 
-    public void signUp(ActionEvent event) {
+    public void signUp(ActionEvent event) throws SQLException {
         String firstName = firstNameField.getText();
         String surname   = surnameField.getText();
         String email     = emailField.getText();
         String gender    = genderField.getValue();
         String password  = passwordField.getText();
-        String userRole  = userRoleField.getValue();
+        String userRole  = roleField.getValue();
 
         LocalDate date = dateOfBirthField.getValue();
         String dateOfBirth = date.format(DateTimeFormatter.ISO_LOCAL_DATE);
         boolean approved = false;
 
+        // Add User to database
+        user.addUser(firstName, surname, email, gender, password, userRole, dateOfBirth, approved);
     }
 
     public void login(ActionEvent event) throws IOException {
