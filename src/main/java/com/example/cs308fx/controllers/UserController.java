@@ -49,9 +49,6 @@ public class UserController {
 
     }
 
-    public void register() {
-
-    }
 
     /**
      * This function is used to ask the user to enter their password
