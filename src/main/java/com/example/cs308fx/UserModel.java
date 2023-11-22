@@ -46,12 +46,9 @@ public class UserModel {
             String query = "INSERT INTO student(firstname, surname, password, gender, email, dateOfBirth, approved) " +
                     "VALUES (firstName=?, surname=?, password=?, gender=?, email=?, dateOfBirth=?, approved=?;";
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1, firstName);
-            ps.setString(2, surname);
-            ps.setString(3, password);
-            ps.setString(4, gender);
-            ps.setString(5, email);
-            ps.setBoolean(6, approved);
+            ps.setString(1, email);
+            ps.setString(2, password);
+
         }
         return true;
     }
