@@ -1,5 +1,7 @@
 package com.example.cs308fx;
 
+import com.example.cs308fx.controllers.UserController;
+
 import java.util.Date;
 /**
  * The Person is the subclass of {@link UserController} that is used to describe active users <br>

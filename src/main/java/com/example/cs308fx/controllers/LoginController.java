@@ -1,4 +1,4 @@
-package com.example.cs308fx;
+package com.example.cs308fx.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
