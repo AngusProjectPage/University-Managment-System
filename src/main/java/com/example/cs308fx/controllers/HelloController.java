@@ -1,4 +1,4 @@
-package com.example.cs308fx;
+package com.example.cs308fx.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

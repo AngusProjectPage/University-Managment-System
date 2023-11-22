@@ -13,4 +13,6 @@ module com.example.cs308fx {
 
     opens com.example.cs308fx to javafx.fxml;
     exports com.example.cs308fx;
+    exports com.example.cs308fx.controllers;
+    opens com.example.cs308fx.controllers to javafx.fxml;
 }

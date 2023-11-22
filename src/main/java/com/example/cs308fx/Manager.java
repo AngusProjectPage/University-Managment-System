@@ -1,6 +1,6 @@
 package com.example.cs308fx;
 
-import java.awt.*;
+import com.example.cs308fx.controllers.UserController;
 
 /**
  * A Manager is a subclass of {@link UserController} and has the most permissions over the app</li>
