@@ -141,7 +141,7 @@ public class UserModel {
 
 
     public int getId() {
-        return this.Id;
+        return this.id;
     }
 
     public String getFirstName() {
@@ -152,7 +152,7 @@ public class UserModel {
         return this.surname;
     }
 
-    public char getGender() {
+    public String getGender() {
         return this.gender;
     }
 
