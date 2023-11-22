@@ -49,18 +49,57 @@ public class LoginController {
         public void login(ActionEvent event) throws IOException {
                 String user = username.getText();
                 String pass = password.getText();
-                String role = "manager"; //temp
+                String role;
+
+                // Determine role by username prefix
+                if (user.startsWith("mgr")) {
+                        role = "manager";
+                } else if (user.startsWith("stu")) {
+                        role = "student";
+                } else if (user.startsWith("lct")) {
+                        role = "lecturer";
+                } else {
+                        // Handle unknown role or show error message
+                        errorLabel.setText("Unknown username prefix. Cannot determine role.");
+                        return; // Stop further processing
+                }
 
                 try {
                         userModel.login(user, pass, role);
 
                         if (userModel.isLoginSuccessful()) {
-                                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/cs308fx/student.fxml"));
+                                String fxmlFile = switch (role) {
+                                    case "manager" -> "/com/example/cs308fx/manager.fxml";
+                                    case "student" -> "/com/example/cs308fx/student.fxml";
+                                    case "lecturer" -> "/com/example/cs308fx/lecturer.fxml";
+                                    default -> "";
+                                };
+
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
                                 Parent root = loader.load();
+
+                                switch (role) {
+                                        case "manager":
+                                                ManagerController managerController = loader.getController();
+                                                managerController.setUserModel(userModel);
+                                                break;
+                                        /*
+                                        case "student":
+                                                StudentController studentController = loader.getController();
+                                                studentController.setUserModel(userModel);
+                                                break;
+                                        case "lecturer":
+                                                LecturerController lecturerController = loader.getController();
+                                                lecturerController.setUserModel(userModel);
+                                                break;
+                                                */
+                                }
+
                                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                                 Scene scene = new Scene(root);
                                 stage.setScene(scene);
                                 stage.show();
+
                         } else {
 
                                 errorLabel.setText("Login failed. Please check your username and password.");

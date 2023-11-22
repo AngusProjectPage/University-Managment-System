@@ -77,17 +77,23 @@ public class UserModel {
 
             if(rs.next()) {
                 // Get fields from database
-                this.id          = rs.getInt("id");
+                this.id          = rs.getInt("studentId");
                 this.username    = rs.getString("username");
                 this.firstName   = rs.getString("firstname");
                 this.surname     = rs.getString("surname");
-                this.gender      = rs.getString("gender");
-                this.email       = rs.getString("email");
-                this.dateOfBirth = rs.getString("dateOfBirth");
-                this.courseId    = rs.getInt("courseId");
+                this.gender       = rs.getString("gender");
+                this.email = rs.getString("email");
+                this.dateOfBirth    = rs.getString("dateOfBirth");
+                this.courseId = rs.getInt("courseId");
                 this.decision    = rs.getString("decision");
                 this.approved    = rs.getBoolean("approved");
-                loginSuccessful = true;
+
+                //only allow login if approved!
+                if (!this.approved){
+                    System.out.println("Not approved!");
+                } else {
+                    loginSuccessful = true;
+                }
             }
             else {
                 System.out.println("No matching record found");
