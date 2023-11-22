@@ -31,6 +31,7 @@
                   <Insets left="20.0" top="20.0" />
                </padding>
             </VBox>
+            <Button mnemonicParsing="false" style="-fx-background-color: #E76F51;" text="Update password" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="431.0" prefWidth="438.0">
          <children>
