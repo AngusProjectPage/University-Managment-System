@@ -1,5 +1,7 @@
 package com.example.cs308fx.controllers;
 
+import com.example.cs308fx.Manager;
+import com.example.cs308fx.Student;
 import com.example.cs308fx.UserModel;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -17,15 +19,16 @@ public class StudentController {
     @FXML
     private Label courseLabel;
 
-    private UserModel userModel;
+    private Student loggedInStudent;
 
-    public void setUserModel(UserModel userModel) {
-        this.userModel = userModel;
+
+    public void setLoggedInUser(Student student) {
+        this.loggedInStudent = student;
         updateLabels();
     }
 
     private void updateLabels() {
-        studentIdLabel.setText("Student ID: " + userModel.getId());
-        courseLabel.setText("Course: " + userModel.getCourse().getName());
+        studentIdLabel.setText("Student ID: " + loggedInStudent.getId());
+        courseLabel.setText("Course: " + loggedInStudent.getCourseName());
     }
 }

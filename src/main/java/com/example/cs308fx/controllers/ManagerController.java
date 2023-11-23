@@ -17,13 +17,23 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.example.cs308fx.UserModel;
+import com.example.cs308fx.Manager;
 public class ManagerController {
 
-    private UserModel userModel;
-    public void setUserModel(UserModel userModel) {
-        this.userModel = userModel;
-        updateManagerIdLabel();
+    private Manager loggedInManager;
+
+    public void setLoggedInUser(Manager manager) {
+        this.loggedInManager = manager;
+        updateManagerDetails();
         populateUsersComboBox();
+    }
+
+    private void updateManagerDetails() {
+        if (loggedInManager != null) {
+            // Use loggedInManager's details to update the UI
+            managerIdLabel.setText("Manager ID: " + loggedInManager.getId());
+            // Other UI updates or logic based on manager's details
+        }
     }
 
     @FXML
@@ -49,15 +59,14 @@ public class ManagerController {
 
     public void populateUsersComboBox() {
         try {
-            List<String> unapprovedStudents = userModel.getUnapprovedStudents();
+            List<String> unapprovedUsers = loggedInManager.getUnapprovedUsers();
             usersComboBox.getItems().clear();
-            usersComboBox.getItems().addAll(unapprovedStudents);
+            usersComboBox.getItems().addAll(unapprovedUsers);
         } catch (SQLException e) {
             // Handle SQL Exception
             e.printStackTrace();
         }
     }
-
 
     @FXML
     private Label managerIdLabel;
@@ -65,16 +74,24 @@ public class ManagerController {
     @FXML
     private void handleApproveButtonAction() {
         String selectedStudent = usersComboBox.getValue();
-        if (selectedStudent != null) {
-            int studentId = Integer.parseInt(selectedStudent.split(" - ")[0]);
-            try {
-                userModel.approveStudent(studentId);
-                updateFeedback("User approved successfully.");
-                populateUsersComboBox();
-            } catch (SQLException e) {
-                updateFeedback("Error: Unable to approve user.");
-                e.printStackTrace();
-            }
+        String[] parts = selectedStudent.split(" - ");
+        String username = parts[0];
+        int userId = Integer.parseInt(username.replaceAll("[^\\d]", "")); // Extracts numeric part, assuming the ID is numeric
+        String role = "";
+
+        if (username.startsWith("stu")) {
+            role = "student";
+        } else if (username.startsWith("lct")) {
+            role = "lecturer";
+        }
+
+        try {
+            loggedInManager.approveUser(userId, role);
+            updateFeedback("User approved successfully.");
+            populateUsersComboBox();
+        } catch (SQLException e) {
+            updateFeedback("Error: Unable to approve user.");
+            e.printStackTrace();
         }
     }
 
@@ -85,17 +102,6 @@ public class ManagerController {
         feedbackLabel.setText(message);
     }
 
-    private void updateManagerIdLabel() {
-        // Check if userModel is not null and login was successful
-        if (userModel != null && userModel.isLoginSuccessful()) {
-            int managerId = userModel.getId();
-            managerIdLabel.setText("Manager ID: " + managerId);
-        } else {
-            managerIdLabel.setText("Manager ID: Not Available");
-        }
-    }
-
-    // Example of an event handler method
     @FXML
     private void handleAddCourseAction() {
         String courseCode = courseCodeField.getText();
@@ -103,7 +109,7 @@ public class ManagerController {
         String courseDescription = courseDescriptionField.getText();
 
         try {
-            userModel.addCourse(courseCode, courseName, courseDescription);
+            loggedInManager.addCourse(courseCode, courseName, courseDescription);
             updateFeedback("Course added successfully.");
         } catch (SQLException e) {
             updateFeedback("Error adding course: " + e.getMessage());
@@ -117,7 +123,7 @@ public class ManagerController {
         String moduleCredit = moduleCreditField.getText();
 
         try {
-            userModel.addModule(moduleCode, moduleName, moduleCredit);
+            loggedInManager.addModule(moduleCode, moduleName, moduleCredit);
             updateFeedback("Module added successfully.");
         } catch (SQLException e) {
             updateFeedback("Error adding module: " + e.getMessage());
@@ -131,7 +137,7 @@ public class ManagerController {
             Parent root = loader.load();
 
             UpdatePasswordController updatePasswordController = loader.getController();
-            updatePasswordController.setUserModel(userModel);
+            updatePasswordController.setLoggedInUser(loggedInManager); // Assuming you have a method like this in UpdatePasswordController
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
@@ -143,10 +149,6 @@ public class ManagerController {
             updateFeedback("Error: Unable to open the update password view.");
         }
     }
-
-
-
-
 
 
 }

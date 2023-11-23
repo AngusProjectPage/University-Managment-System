@@ -1,5 +1,6 @@
 package com.example.cs308fx.controllers;
 
+import com.example.cs308fx.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +14,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import com.example.cs308fx.UserModel;
 
 public class LoginController {
 
@@ -44,54 +44,61 @@ public class LoginController {
                 errorLabel.setText("");
         }
 
+        private final UserModel userModel = new UserModel();
+
         @FXML
         public void login(ActionEvent event) throws IOException {
                 String user = username.getText();
                 String pass = password.getText();
-                String role;
 
-                // Determine role by username prefix
-                if (user.startsWith("mgr")) {
-                        role = "manager";
-                } else if (user.startsWith("stu")) {
-                        role = "student";
-                } else if (user.startsWith("lct")) {
-                        role = "lecturer";
+                // Extract the role from the first three letters of the username
+                String role = "";
+                if (user.length() >= 3) {
+                        String prefix = user.substring(0, 3).toLowerCase();
+                        switch (prefix) {
+                                case "mgr":
+                                        role = "manager";
+                                        break;
+                                case "stu":
+                                        role = "student";
+                                        break;
+                                case "lct":
+                                        role = "lecturer";
+                                        break;
+                                default:
+                                        errorLabel.setText("Invalid username. Please check your username.");
+                                        return;
+                        }
                 } else {
-                        // Handle unknown role or show error message
-                        errorLabel.setText("Unknown username prefix. Cannot determine role.");
-                        return; // Stop further processing
+                        errorLabel.setText("Invalid username. Please check your username.");
+                        return;
                 }
 
                 try {
-                        userModel.login(user, pass, role);
+                        Person loggedInUser = userModel.login(user, pass, role);
 
-                        if (userModel.isLoginSuccessful()) {
-                                String fxmlFile = switch (role) {
-                                    case "manager" -> "/com/example/cs308fx/manager.fxml";
-                                    case "student" -> "/com/example/cs308fx/student.fxml";
-                                    case "lecturer" -> "/com/example/cs308fx/lecturer.fxml";
-                                    default -> "";
-                                };
+                        if (loggedInUser != null) {
+                                String fxmlFile = "";
+                                if (loggedInUser instanceof Student) {
+                                        fxmlFile = "/com/example/cs308fx/student.fxml";
+                                } else if (loggedInUser instanceof Lecturer) {
+                                        fxmlFile = "/com/example/cs308fx/lecturer.fxml";
+                                } else if (loggedInUser instanceof Manager) {
+                                        fxmlFile = "/com/example/cs308fx/manager.fxml";
+                                }
 
                                 FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
                                 Parent root = loader.load();
 
-                                switch (role) {
-                                        case "manager":
-                                                ManagerController managerController = loader.getController();
-                                                managerController.setUserModel(userModel);
-                                                break;
-                                        case "student":
-                                                StudentController studentController = loader.getController();
-                                                studentController.setUserModel(userModel);
-                                                break;
-                                                /*
-                                        case "lecturer":
-                                                LecturerController lecturerController = loader.getController();
-                                                lecturerController.setUserModel(userModel);
-                                                break;
-                                                */
+                                if (loggedInUser instanceof Student) {
+                                        StudentController studentController = loader.getController();
+                                        studentController.setLoggedInUser((Student) loggedInUser);
+                                } else if (loggedInUser instanceof Lecturer) {
+                                        LecturerController lecturerController = loader.getController();
+                                        lecturerController.setLoggedInUser((Lecturer) loggedInUser);
+                                } else if (loggedInUser instanceof Manager) {
+                                        ManagerController managerController = loader.getController();
+                                        managerController.setLoggedInUser((Manager) loggedInUser);
                                 }
 
                                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -100,16 +107,15 @@ public class LoginController {
                                 stage.show();
 
                         } else {
-
                                 errorLabel.setText("Login failed. Please check your username and password.");
-
                         }
                 } catch (SQLException e) {
                         e.printStackTrace();
-                        // Handle SQLException (e.g., show an error dialog).
+                        // Handle SQLException
                 }
-
         }
+
+
 
         @FXML
         public void signup(ActionEvent event) throws IOException {

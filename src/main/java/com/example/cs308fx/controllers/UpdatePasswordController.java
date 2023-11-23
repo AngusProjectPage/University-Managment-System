@@ -1,5 +1,6 @@
 package com.example.cs308fx.controllers;
 
+import com.example.cs308fx.Manager;
 import com.example.cs308fx.UserModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +18,7 @@ import java.sql.SQLException;
 
 public class UpdatePasswordController {
 
+    private Manager loggedInManager;
     @FXML
     private TextField userIdField;
     @FXML
@@ -26,6 +28,10 @@ public class UpdatePasswordController {
 
     @FXML
     private Label feedbackLabel;
+
+    public void setLoggedInUser(Manager manager) {
+        this.loggedInManager = manager;
+    }
 
     private void updateFeedback(String message) {
         feedbackLabel.setText(message);
@@ -43,7 +49,7 @@ public class UpdatePasswordController {
         }
 
         try {
-            userModel.updatePassword(userIdText, newPassword);
+            loggedInManager.updatePassword(userIdText, newPassword);
             updateFeedback("Password updated successfully.");
         } catch (IllegalArgumentException e) {
             updateFeedback("Invalid user ID.");
@@ -63,7 +69,7 @@ public class UpdatePasswordController {
 
 
             ManagerController managerController = loader.getController();
-            managerController.setUserModel(userModel);
+            managerController.setLoggedInUser(loggedInManager);
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
@@ -75,11 +81,5 @@ public class UpdatePasswordController {
         }
     }
 
-
-    private UserModel userModel;
-
-    public void setUserModel(UserModel userModel) {
-        this.userModel = userModel;
-    }
 }
 

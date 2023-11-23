@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #d4ebe9;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #d4ebe9;" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs308fx.controllers.LecturerController">
    <children>
        <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
         <columnConstraints>
@@ -28,7 +28,7 @@
                   <Insets bottom="10.0" right="10.0" />
                </GridPane.margin>
             </Button>
-            <Label alignment="CENTER" text="Lecturer ID: ">
+            <Label fx:id="lecturerId" alignment="CENTER" text="Lecturer ID: ">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
