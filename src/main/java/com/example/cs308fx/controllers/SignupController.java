@@ -23,7 +23,7 @@ import java.util.ResourceBundle;
 
 public class SignupController implements Initializable {
 
-    private UserModel user;
+    private UserModel userModel;
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -42,8 +42,8 @@ public class SignupController implements Initializable {
     @FXML
     private ComboBox<String> roleField;
 
-    public SignupController(UserModel user) {
-        this.user = user;
+    public void setUserModel(UserModel userModel) {
+        this.userModel = userModel;
     }
 
     @Override
@@ -52,6 +52,7 @@ public class SignupController implements Initializable {
         genderField.setItems(FXCollections.observableArrayList("Male", "Female"));
     }
 
+    @FXML
     public void signUp(ActionEvent event) throws SQLException {
         String firstName = firstNameField.getText();
         String surname   = surnameField.getText();
@@ -65,14 +66,26 @@ public class SignupController implements Initializable {
         boolean approved = false;
 
         // Add User to database
-        user.addUser(firstName, surname, email, gender, password, userRole, dateOfBirth, approved);
+        userModel.addUser(firstName, surname, email, gender, password, userRole, dateOfBirth, approved);
     }
 
+    @FXML
     public void login(ActionEvent event) throws IOException {
-        root  = FXMLLoader.load(getClass().getResource("login.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
+        root = loader.load();
+
+        // Get the controller instance from the FXMLLoader
+        LoginController loginController = loader.getController();
+
+        // Pass the userModel to the signupController
+        loginController.setUserModel(userModel);
+
+        // Set up the stage and scene
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
+
+
 }

@@ -17,10 +17,6 @@ import com.example.cs308fx.UserModel;
 
 public class LoginController {
 
-        private Stage stage;
-        private Scene scene;
-        private Parent root;
-
         @FXML
         private TextField username;
         @FXML
@@ -30,6 +26,12 @@ public class LoginController {
 
         @FXML
         private Label errorLabel;
+
+        private UserModel userModel;
+
+        public void setUserModel(UserModel userModel) {
+                this.userModel = userModel;
+        }
 
         @FXML
         public void initialize() {
@@ -41,8 +43,6 @@ public class LoginController {
         private void clearErrorMessage() {
                 errorLabel.setText("");
         }
-
-        private UserModel userModel = new UserModel();
 
         @FXML
         public void login(ActionEvent event) throws IOException {
@@ -113,9 +113,18 @@ public class LoginController {
 
         @FXML
         public void signup(ActionEvent event) throws IOException {
-                root = FXMLLoader.load(getClass().getResource("signup.fxml"));
-                stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../signup.fxml"));
+                Parent root = loader.load();
+
+                // Get the controller instance from the FXMLLoader
+                SignupController signupController = loader.getController();
+
+                // Pass the userModel to the signupController
+                signupController.setUserModel(userModel);
+
+                // Set up the stage and scene
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
         }
