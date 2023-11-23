@@ -31,4 +31,8 @@ public class Course {
     public ArrayList<Module> getModules() {
         return modules;
     }
+
+    public String getName() {
+        return name;
+    }
 }
