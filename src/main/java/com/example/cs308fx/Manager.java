@@ -58,10 +58,18 @@ public class Manager extends Person {
 
 
     public void approveUser(int userId, String userType) throws SQLException {
-        String tableName = userType.equalsIgnoreCase("student") ? "student" : "lecturer";
-        String query = "UPDATE " + tableName + " SET approved = true WHERE " + tableName + "Id = ?";
+        System.out.println("User Type: " + userType); // For debugging purposes
+
+        String tableName = userType.trim().equalsIgnoreCase("student") ? "student" : "lecturer";
+        String prefix = tableName.equals("student") ? "stu" : "lct";
+        String newUsername = prefix + userId;
+
+        System.out.println("Table Name: " + tableName); // For debugging purposes
+        String query = "UPDATE " + tableName + " SET approved = true, username = ? WHERE " + tableName + "Id = ?";
+        System.out.println(query);
         PreparedStatement ps = connection.prepareStatement(query);
-        ps.setInt(1, userId);
+        ps.setString(1, newUsername);
+        ps.setInt(2, userId);
         ps.executeUpdate();
     }
 

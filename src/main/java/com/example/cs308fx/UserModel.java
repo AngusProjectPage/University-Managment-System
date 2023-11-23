@@ -3,44 +3,35 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class UserModel {
     static Connection connection = MySqlConnect.getConnection();
 
-    public boolean addUser(String firstName, String surname, String email, String gender, String password, String userRole, String dateOfBirth, boolean approved) throws SQLException {
-        if(Objects.equals(userRole, "student")) {
-            String query = "INSERT INTO student(firstname, surname, password, gender, email, dateOfBirth, approved) " +
-                    "VALUES (firstName=?, surname=?, password=?, gender=?, email=?, dateOfBirth=?, approved=?;";
-            PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1, firstName);
-            ps.setString(2, surname);
-            ps.setString(3, password);
-            ps.setString(4, gender);
-            ps.setString(5, email);
-            ps.setBoolean(6, approved);
+    public void addUser(String firstName, String surname, String password, String gender, String email, String role, LocalDate dateOfBirth) throws SQLException {
+        String query;
+        if ("student".equals(role)) {
+            query = "INSERT INTO student (firstname, surname, password, gender, email, dateOfBirth, approved) VALUES (?, ?, ?, ?, ?, ?, ?);";
+        } else if ("lecturer".equals(role)) {
+            query = "INSERT INTO lecturer (firstname, surname, password, gender, email, dateOfBirth, approved) VALUES (?, ?, ?, ?, ?, ?, ?);";
+        } else {
+            // Handle error or throw an exception if the role is not recognized
+            throw new IllegalArgumentException("Invalid role specified.");
         }
-        else if(Objects.equals(userRole, "lecturer")) {
-            String query = "INSERT INTO student(firstname, surname, password, gender, email, dateOfBirth, approved) " +
-                    "VALUES (firstName=?, surname=?, password=?, gender=?, email=?, dateOfBirth=?, approved=?;";
-            PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1, firstName);
-            ps.setString(2, surname);
-            ps.setString(3, password);
-            ps.setString(4, gender);
-            ps.setString(5, email);
-            ps.setBoolean(6, approved);
-        }
-        else {
-            String query = "INSERT INTO student(firstname, surname, password, gender, email, dateOfBirth, approved) " +
-                    "VALUES (firstName=?, surname=?, password=?, gender=?, email=?, dateOfBirth=?, approved=?;";
-            PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1, email);
-            ps.setString(2, password);
 
-        }
-        return true;
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setString(1, firstName);
+        ps.setString(2, surname);
+        ps.setString(3, password);
+        ps.setString(4, gender);
+        ps.setString(5, email);
+        ps.setDate(6, java.sql.Date.valueOf(dateOfBirth));
+        ps.setBoolean(7, false);
+
+        ps.executeUpdate();
     }
+
 
 
     /**

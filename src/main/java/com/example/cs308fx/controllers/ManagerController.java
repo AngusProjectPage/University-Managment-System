@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 
 import com.example.cs308fx.UserModel;
@@ -73,18 +74,44 @@ public class ManagerController {
 
     @FXML
     private void handleApproveButtonAction() {
-        String selectedStudent = usersComboBox.getValue();
-        String[] parts = selectedStudent.split(" - ");
-        String username = parts[0];
-        int userId = Integer.parseInt(username.replaceAll("[^\\d]", "")); // Extracts numeric part, assuming the ID is numeric
-        String role = "";
+        String selectedStudent = usersComboBox.getValue().trim(); // Trim any leading/trailing whitespace
+        System.out.println("Selected student string: " + selectedStudent);
 
-        if (username.startsWith("stu")) {
-            role = "student";
-        } else if (username.startsWith("lct")) {
-            role = "lecturer";
+        String[] parts = selectedStudent.split(" - ");
+        System.out.println("Parts after split: " + Arrays.toString(parts)); // Print the parts for debugging
+
+        if (parts.length < 2) {
+            System.out.println("Error: Unexpected format of user string.");
+            return;
         }
 
+// Parsing userId
+        int userId;
+        try {
+            userId = Integer.parseInt(parts[0].trim());
+        } catch (NumberFormatException e) {
+            System.out.println("Error: User ID is not a valid number.");
+            return;
+        }
+
+// Extracting role from the second part
+        String nameAndRole = parts[1].trim();
+        int startRoleIndex = nameAndRole.lastIndexOf("(");
+        int endRoleIndex = nameAndRole.lastIndexOf(")");
+
+        if (startRoleIndex == -1 || endRoleIndex == -1 || startRoleIndex >= endRoleIndex) {
+            System.out.println("Error: Role does not have the expected format.");
+            return;
+        }
+
+        String role = nameAndRole.substring(startRoleIndex + 1, endRoleIndex).trim();
+
+        String roleFormatted = "";
+        if ("Student".equalsIgnoreCase(role)) {
+            roleFormatted = "student";
+        } else if ("Lecturer".equalsIgnoreCase(role)) {
+            roleFormatted = "lecturer";
+        }
         try {
             loggedInManager.approveUser(userId, role);
             updateFeedback("User approved successfully.");

@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -41,6 +42,23 @@ public class SignupController implements Initializable {
     private DatePicker dateOfBirthField;
     @FXML
     private ComboBox<String> roleField;
+    @FXML
+    private Label errorLabel;
+    @FXML
+    private void clearErrorMessage() {
+        errorLabel.setText("");
+    }
+    private void clearForm() {
+        firstNameField.clear();
+        surnameField.clear();
+        emailField.clear();
+        passwordField.clear();
+        genderField.getSelectionModel().clearSelection();
+        roleField.getSelectionModel().clearSelection();
+        dateOfBirthField.setValue(null);
+        // reset the focus to the first field
+        firstNameField.requestFocus();
+    }
 
     public void setUserModel(UserModel userModel) {
         this.userModel = userModel;
@@ -48,39 +66,40 @@ public class SignupController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        roleField.setItems(FXCollections.observableArrayList("student", "lecturer", "manager"));
-        genderField.setItems(FXCollections.observableArrayList("Male", "Female"));
+        roleField.setItems(FXCollections.observableArrayList("student", "lecturer"));
+        genderField.setItems(FXCollections.observableArrayList("M", "F"));
     }
 
     @FXML
-    public void signUp(ActionEvent event) throws SQLException {
-        String firstName = firstNameField.getText();
-        String surname   = surnameField.getText();
-        String email     = emailField.getText();
-        String gender    = genderField.getValue();
-        String password  = passwordField.getText();
-        String userRole  = roleField.getValue();
+    public void signUp(ActionEvent event) {
+        try {
+            String firstName = firstNameField.getText();
+            String surname = surnameField.getText();
+            String email = emailField.getText();
+            String gender = genderField.getValue();
+            String password = passwordField.getText();
+            String userRole = roleField.getValue();
+            LocalDate date = dateOfBirthField.getValue();
 
-        LocalDate date = dateOfBirthField.getValue();
-        String dateOfBirth = date.format(DateTimeFormatter.ISO_LOCAL_DATE);
-        boolean approved = false;
-
-        // Add User to database
-        userModel.addUser(firstName, surname, email, gender, password, userRole, dateOfBirth, approved);
+            if (date != null && !firstName.isEmpty() && !surname.isEmpty() && !email.isEmpty() && gender != null && !password.isEmpty() && userRole != null) {
+                userModel.addUser(firstName, surname, password, gender, email, userRole, date);
+                clearForm();
+                errorLabel.setText("User added successfully!");
+            } else {
+                errorLabel.setText("Please fill in all fields.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            errorLabel.setText("Error adding user: " + e.getMessage());
+        }
     }
 
     @FXML
     public void login(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/cs308fx/login.fxml"));
         root = loader.load();
-
-        // Get the controller instance from the FXMLLoader
         LoginController loginController = loader.getController();
-
-        // Pass the userModel to the signupController
         loginController.setUserModel(userModel);
-
-        // Set up the stage and scene
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

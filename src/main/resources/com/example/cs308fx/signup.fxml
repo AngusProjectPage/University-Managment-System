@@ -5,8 +5,6 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-
-
 <AnchorPane prefHeight="527.0" prefWidth="600.0" style="-fx-background-color: #d4ebe9;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs308fx.controllers.SignupController">
    <children>
       <Label alignment="CENTER" layoutY="8.0" prefWidth="600.0" text="Signup" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -123,7 +121,7 @@
                         <Font size="13.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" layoutX="236.0" layoutY="31.0" mnemonicParsing="false" onAction="#signUp" prefHeight="29.0" prefWidth="149.0" style="-fx-background-color: db775e; -fx-cursor: hand;" text="Cancel" textAlignment="CENTER">
+                  <Button alignment="CENTER" contentDisplay="CENTER" layoutX="236.0" layoutY="31.0" mnemonicParsing="false" onAction="#login" prefHeight="29.0" prefWidth="149.0" style="-fx-background-color: db775e; -fx-cursor: hand;" text="Cancel" textAlignment="CENTER">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -163,5 +161,10 @@
             <Insets top="40.0" />
          </padding>
       </VBox>
+      <Label fx:id="errorLabel" alignment="CENTER" layoutX="5.0" layoutY="-16.0" prefHeight="20.0" prefWidth="600.0" textFill="RED" AnchorPane.topAnchor="-16.0">
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+      </Label>
    </children>
 </AnchorPane>
