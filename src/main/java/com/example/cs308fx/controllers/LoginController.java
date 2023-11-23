@@ -110,12 +110,14 @@ public class LoginController {
                 }
 
         }
+
         @FXML
         public void signup(ActionEvent event) throws IOException {
-                root = FXMLLoader.load(getClass().getResource("/com/example/cs308fx/signup.fxml"));
+                root = FXMLLoader.load(getClass().getResource("signup.fxml"));
                 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
         }
+
 }
