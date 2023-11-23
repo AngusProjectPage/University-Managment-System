@@ -40,26 +40,31 @@ public class Manager extends Person {
     public Manager(String username, String firstName, String surname, String gender, String dateOfBirth, String email) {
         super(username, firstName, surname, gender, dateOfBirth, email);
     }
-    public List<String> getUnapprovedStudents() throws SQLException {
-        List<String> students = new ArrayList<>();
-        String query = "SELECT studentId, firstname, surname FROM student WHERE approved = false";
+    public List<String> getUnapprovedUsers() throws SQLException {
+        List<String> users = new ArrayList<>();
+        String query = "SELECT studentId AS userId, firstname, surname, 'Student' AS userType FROM student WHERE approved = false " +
+                "UNION " +
+                "SELECT lecturerId AS userId, firstname, surname, 'Lecturer' AS userType FROM lecturer WHERE approved = false";
         PreparedStatement ps = connection.prepareStatement(query);
         ResultSet rs = ps.executeQuery();
 
         while(rs.next()) {
-            String studentInfo = rs.getInt("studentId") + " - " + rs.getString("firstname") + " " + rs.getString("surname");
-            students.add(studentInfo);
+            String userInfo = rs.getInt("userId") + " - " + rs.getString("firstname") + " " + rs.getString("surname") + " (" + rs.getString("userType") + ")";
+            users.add(userInfo);
         }
 
-        return students;
+        return users;
     }
 
-    public void approveStudent(int studentId) throws SQLException {
-        String query = "UPDATE student SET approved = true WHERE studentId = ?";
+
+    public void approveUser(int userId, String userType) throws SQLException {
+        String tableName = userType.equalsIgnoreCase("student") ? "student" : "lecturer";
+        String query = "UPDATE " + tableName + " SET approved = true WHERE " + tableName + "Id = ?";
         PreparedStatement ps = connection.prepareStatement(query);
-        ps.setInt(1, studentId);
+        ps.setInt(1, userId);
         ps.executeUpdate();
     }
+
 
     public void addCourse(String id, String name, String description) throws SQLException {
         String query = "INSERT INTO course (courseId, courseName, courseDescription) VALUES (?, ?, ?)";

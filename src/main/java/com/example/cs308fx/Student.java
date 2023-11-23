@@ -28,7 +28,7 @@ public class Student extends Person {
 
     public Student(String username, String firstName, String surname, String gender,
                    String dateOfBirth, String email, String courseId,
-                   String courseName, boolean approved) {
+                   String courseName, String decision) {
         super(username, firstName, surname, gender, dateOfBirth, email);
         this.courseId = courseId;
         this.courseName = courseName;

@@ -3,30 +3,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class UserModel {
     static Connection connection = MySqlConnect.getConnection();
-    private String username;
-    private String firstName;
-    private String surname;
-    private int id;
-    private String gender;
-    private String email;
-    private String dateOfBirth;
-    private Course course;
-    private List<Module> modules;
-    private String decision;
-    private boolean approved;
-
-    private boolean loginSuccessful = false;
-
-    public boolean isLoginSuccessful() {
-        return loginSuccessful;
-    }
-
 
     public boolean addUser(String firstName, String surname, String email, String gender, String password, String userRole, String dateOfBirth, boolean approved) throws SQLException {
         if(Objects.equals(userRole, "student")) {
@@ -87,13 +67,31 @@ public class UserModel {
                         rs.getString("dateOfBirth"),
                         rs.getString("email"),
                         rs.getString("courseId"),
-                        rs.getString("decision"),
-                        rs.getBoolean("approved")
+                        rs.getString("courseName"),
+                        rs.getString("decision")
+
                 );
             }
         } else if (Objects.equals("lecturer", role)) {
-            // Similar approach for lecturer
-            // Fetch data and create a Lecturer instance
+            String query = "SELECT * FROM lecturer WHERE username = ? AND password = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next() && rs.getBoolean("approved")) {
+                user = new Lecturer(
+                        rs.getString("username"),
+                        rs.getString("firstname"),
+                        rs.getString("surname"),
+                        rs.getString("gender"),
+                        rs.getString("dateOfBirth"),
+                        rs.getString("email"),
+                        rs.getString("qualification"),
+                        rs.getBoolean("approved")
+
+                );
+            }
         } else if (Objects.equals("manager", role)) {
             String query = "SELECT * FROM manager WHERE username = ? AND password = ?";
             PreparedStatement ps = connection.prepareStatement(query);
@@ -115,44 +113,4 @@ public class UserModel {
 
         return user;
     }
-
-
-
-
-
-
-
-
-
-
-    public int getId() {
-        return this.id;
-    }
-
-    public String getFirstName() {
-        return this.firstName;
-    }
-
-    public String getSurname() {
-        return this.surname;
-    }
-
-    public String getGender() {
-        return this.gender;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public String getDateOfBirth() {
-        return this.dateOfBirth;
-    }
-
-    public Course getCourse() { return this.course; }
-
-    public void addUserToDB() {
-
-    }
-
 }

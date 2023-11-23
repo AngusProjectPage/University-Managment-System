@@ -92,8 +92,8 @@ public class LoginController {
                                         StudentController studentController = loader.getController();
                                         studentController.setLoggedInUser((Student) loggedInUser);
                                 } else if (loggedInUser instanceof Lecturer) {
-                                        // LecturerController lecturerController = loader.getController();
-                                        // lecturerController.setLoggedInUser((Lecturer) loggedInUser);
+                                        LecturerController lecturerController = loader.getController();
+                                        lecturerController.setLoggedInUser((Lecturer) loggedInUser);
                                 } else if (loggedInUser instanceof Manager) {
                                         ManagerController managerController = loader.getController();
                                         managerController.setLoggedInUser((Manager) loggedInUser);

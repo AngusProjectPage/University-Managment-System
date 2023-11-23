@@ -59,9 +59,9 @@ public class ManagerController {
 
     public void populateUsersComboBox() {
         try {
-            List<String> unapprovedStudents = loggedInManager.getUnapprovedStudents();
+            List<String> unapprovedUsers = loggedInManager.getUnapprovedUsers();
             usersComboBox.getItems().clear();
-            usersComboBox.getItems().addAll(unapprovedStudents);
+            usersComboBox.getItems().addAll(unapprovedUsers);
         } catch (SQLException e) {
             // Handle SQL Exception
             e.printStackTrace();
@@ -74,16 +74,24 @@ public class ManagerController {
     @FXML
     private void handleApproveButtonAction() {
         String selectedStudent = usersComboBox.getValue();
-        if (selectedStudent != null) {
-            int studentId = Integer.parseInt(selectedStudent.split(" - ")[0]);
-            try {
-                loggedInManager.approveStudent(studentId);
-                updateFeedback("User approved successfully.");
-                populateUsersComboBox();
-            } catch (SQLException e) {
-                updateFeedback("Error: Unable to approve user.");
-                e.printStackTrace();
-            }
+        String[] parts = selectedStudent.split(" - ");
+        String username = parts[0];
+        int userId = Integer.parseInt(username.replaceAll("[^\\d]", "")); // Extracts numeric part, assuming the ID is numeric
+        String role = "";
+
+        if (username.startsWith("stu")) {
+            role = "student";
+        } else if (username.startsWith("lct")) {
+            role = "lecturer";
+        }
+
+        try {
+            loggedInManager.approveUser(userId, role);
+            updateFeedback("User approved successfully.");
+            populateUsersComboBox();
+        } catch (SQLException e) {
+            updateFeedback("Error: Unable to approve user.");
+            e.printStackTrace();
         }
     }
 
@@ -141,11 +149,6 @@ public class ManagerController {
             updateFeedback("Error: Unable to open the update password view.");
         }
     }
-
-
-
-
-
 
 
 }

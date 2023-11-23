@@ -2,8 +2,6 @@ package com.example.cs308fx;
 
 import com.example.cs308fx.controllers.UserController;
 
-import java.util.Date;
-
 /**
  * A Lecturer is a subclass of {@link Person} and a sub-subclass of a {@link UserController} <br>
  * A Lecturer has different permissions to a {@link Student}
