@@ -22,16 +22,25 @@ import java.util.Date;
  */
 
 
-public class Person extends UserController {
-    String firstName;
-    String secondName;
-    String gender;
-    Date DOB;
-    public Person(String email,String firstName, String secondName, String gender, Date DOB) {
-        super(email, new UserModel());
+public class Person {
+    protected String username;
+    protected String firstName;
+    protected String surname;
+    protected String gender;
+    protected String dateOfBirth;
+    protected String email;
+
+    public Person(String username, String firstName, String surname, String gender, String dateOfBirth, String email) {
+        this.username = username;
         this.firstName = firstName;
-        this.secondName = secondName;
+        this.surname = surname;
         this.gender = gender;
-        this.DOB = DOB;
+        this.dateOfBirth = dateOfBirth;
+        this.email = email;
     }
+    public String getId() {
+        return username;
+    }
+
 }
+

@@ -2,9 +2,6 @@ package com.example.cs308fx;
 
 import com.example.cs308fx.controllers.UserController;
 
-import java.util.Date;
-import java.util.List;
-
 /**
  * A Student is a subclass of {@link Person} and a sub-subclass of a {@link UserController} <br>
  * A Student has different permissions to a {@link Lecturer}
@@ -24,12 +21,30 @@ import java.util.List;
  * @see Lecturer
  */
 public class Student extends Person {
-    int labMark;
-    int examMark;
-    public Student(String email, String firstName, String secondName, String gender, Date DOB, List<Module> modules, Course course) {
-        super(email,firstName, secondName, gender, DOB);
+    private String courseId;
+    private String courseName;
+
+    private String decision;
+
+    public Student(String username, String firstName, String surname, String gender,
+                   String dateOfBirth, String email, String courseId,
+                   String courseName, boolean approved) {
+        super(username, firstName, surname, gender, dateOfBirth, email);
+        this.courseId = courseId;
+        this.courseName = courseName;
+        this.decision = decision;
+    }
+
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public String getCourseId() {
+        return courseId;
     }
 }
+
 
 //TODO: view their enrolled course and their modules with their marks
 //TODO: download a lecture note

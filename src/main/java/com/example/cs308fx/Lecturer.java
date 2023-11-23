@@ -20,10 +20,17 @@ import java.util.Date;
  * @see Student
  */
 public class Lecturer extends Person {
-    public Lecturer(String email,String firstName, String secondName, String gender, Date DOB) {
-        super(email, firstName, secondName, gender, DOB);
+    private String qualification;
+
+
+    public Lecturer(String username, String firstName, String surname, String gender, String dateOfBirth, String email, String qualification, boolean approved) {
+        super(username, firstName, surname, gender, dateOfBirth, email);
+        this.qualification = qualification;
     }
+
+    // Getters and setters for lecturer-specific fields
 }
+
 
 //TODO: update module information
 //TODO: upload or update module materials in each week - <em>lecture notes and lab notes</em>
