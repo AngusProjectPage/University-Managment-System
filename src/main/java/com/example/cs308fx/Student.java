@@ -3,6 +3,7 @@ package com.example.cs308fx;
 import com.example.cs308fx.controllers.UserController;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * A Student is a subclass of {@link Person} and a sub-subclass of a {@link UserController} <br>
@@ -22,10 +23,10 @@ import java.util.Date;
  * @see UserModel
  * @see Lecturer
  */
-public class Student extends Person{
+public class Student extends Person {
     int labMark;
     int examMark;
-    public Student(String email, String firstName, String secondName, String gender, Date DOB) {
+    public Student(String email, String firstName, String secondName, String gender, Date DOB, List<Module> modules, Course course) {
         super(email,firstName, secondName, gender, DOB);
     }
 }

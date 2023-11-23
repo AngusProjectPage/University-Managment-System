@@ -29,20 +29,20 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" style="-fx-background-color: #E76F51;" text="Add Course" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Button fx:id="addCourseButton" mnemonicParsing="false" onAction="#handleAddCourseAction" style="-fx-background-color: #E76F51;" text="Add Course" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </Button>
-                  <TextField GridPane.columnIndex="1" GridPane.valignment="TOP">
+                  <TextField fx:id="courseCodeField" GridPane.columnIndex="1" GridPane.valignment="TOP">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin></TextField>
-                  <TextField layoutX="10.0" layoutY="18.0" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
+                  <TextField fx:id="courseNameField" layoutX="10.0" layoutY="18.0" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin></TextField>
-                  <TextField layoutX="10.0" layoutY="18.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <TextField fx:id="courseDescriptionField" layoutX="10.0" layoutY="18.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin></TextField>
@@ -74,22 +74,22 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" style="-fx-background-color: #E76F51;" text="Add Module" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Button fx:id="addModuleButton" mnemonicParsing="false" onAction="#handleAddModuleAction" style="-fx-background-color: #E76F51;" text="Add Module" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </Button>
-                  <TextField GridPane.columnIndex="1" GridPane.valignment="TOP">
+                  <TextField fx:id="moduleCodeField" GridPane.columnIndex="1" GridPane.valignment="TOP">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField layoutX="10.0" layoutY="18.0" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
+                  <TextField fx:id="moduleNameField" layoutX="10.0" layoutY="18.0" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField layoutX="10.0" layoutY="18.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <TextField fx:id="moduleCreditField" layoutX="10.0" layoutY="18.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin>
@@ -116,7 +116,13 @@
                   <Insets top="5.0" />
                </GridPane.margin>
             </Label>
-            <ComboBox prefWidth="150.0" promptText="Users" style="-fx-background-color: #E76F51;" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <ComboBox fx:id="usersComboBox" prefWidth="150.0" promptText="Users" style="-fx-background-color: #E76F51;" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button fx:id="approveButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleApproveButtonAction" style="-fx-background-color: #E76F51;" text="Approve User" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
+            <Label id="managerIdLabel" fx:id="feedbackLabel" alignment="CENTER" textFill="RED" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+            </Label>
          </children>
       </GridPane>
       <Label id="managerIdLabel" fx:id="managerIdLabel" alignment="CENTER" layoutX="211.0" layoutY="14.0" text="Manager ID: Loading..." AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -127,6 +133,6 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Button mnemonicParsing="false" style="-fx-background-color: #E76F51;" text="Update Password" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+      <Button fx:id="updatePasswordButton" mnemonicParsing="false" onAction="#openUpdatePasswordView" style="-fx-background-color: #E76F51;" text="Update Password" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
    </children>
 </AnchorPane>

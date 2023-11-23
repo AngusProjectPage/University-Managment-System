@@ -5,23 +5,18 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<SplitPane dividerPositions="0.3722098214285715" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #d4ebe9;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<SplitPane dividerPositions="0.3722098214285715" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #d4ebe9;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs308fx.controllers.StudentController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
             <VBox layoutX="38.0" layoutY="74.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label text="Student ID: ">
+                  <Label fx:id="studentIdLabel" text="Student ID: ">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="30.0" layoutY="30.0" text="Course:">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="30.0" layoutY="65.0" text="Year:">
+                  <Label fx:id="courseLabel" layoutX="30.0" layoutY="30.0" text="Course:">
                      <font>
                         <Font size="16.0" />
                      </font>
