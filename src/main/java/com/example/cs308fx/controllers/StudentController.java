@@ -18,6 +18,10 @@ public class StudentController {
     private Label studentIdLabel;
     @FXML
     private Label courseLabel;
+    @FXML
+    private Label decision;
+    @FXML
+    private Label name;
 
     private Student loggedInStudent;
 
@@ -30,5 +34,7 @@ public class StudentController {
     private void updateLabels() {
         studentIdLabel.setText("Student ID: " + loggedInStudent.getId());
         courseLabel.setText("Course: " + loggedInStudent.getCourseName());
+        decision.setText("Decision: " + loggedInStudent.getDecision());
+        name.setText("Name: " + loggedInStudent.getFirstName() + " " + loggedInStudent.getSurname());
     }
 }

@@ -41,6 +41,11 @@ public class Person {
     public String getId() {
         return username;
     }
+    public String getFirstName() { return firstName; }
+    public String getSurname() { return surname; }
+    public String getGender() { return gender; }
+    public String getEmail() { return email; }
+    public String getDateOfBirth() { return dateOfBirth; }
 
 }
 

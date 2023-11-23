@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<SplitPane dividerPositions="0.3722098214285715" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #d4ebe9;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs308fx.controllers.StudentController">
+<SplitPane dividerPositions="0.3722098214285715" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #d4ebe9;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs308fx.controllers.StudentController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
@@ -17,6 +17,11 @@
                      </font>
                   </Label>
                   <Label fx:id="courseLabel" layoutX="30.0" layoutY="30.0" text="Course:">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="name" layoutX="30.0" layoutY="65.0" text="Name:">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -38,17 +43,12 @@
               </rowConstraints>
                <children>
                   <Button mnemonicParsing="false" style="-fx-background-color: #E76F51;" text="Update password" GridPane.rowIndex="2" />
-                  <TextField text="* award resit or withdraw here*" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                     <GridPane.margin>
-                        <Insets left="10.0" right="10.0" />
-                     </GridPane.margin>
-                  </TextField>
-                  <Label text="Decision:" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                  <Label fx:id="decision" layoutX="20.0" layoutY="150.0" text="Loading..." GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="System Italic" size="14.0" />
                      </font>
                      <GridPane.margin>
-                        <Insets left="10.0" top="10.0" />
+                        <Insets left="10.0" />
                      </GridPane.margin>
                   </Label>
                </children>

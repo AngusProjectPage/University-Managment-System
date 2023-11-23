@@ -43,6 +43,7 @@ public class Student extends Person {
     public String getCourseId() {
         return courseId;
     }
+    public String getDecision() { return decision; }
 }
 
 

@@ -43,7 +43,11 @@ public class UserModel {
     public Person login(String username, String password, String role) throws SQLException {
         Person user = null;
         if (Objects.equals("student", role)) {
-            String query = "SELECT * FROM student, course WHERE student.username = ? AND student.password = ? AND student.courseId = course.courseId;";
+            String query = "SELECT student.*, course.courseName " +
+                    "FROM student " +
+                    "LEFT JOIN course ON student.courseId = course.courseId " +
+                    "WHERE student.username = ? AND student.password = ?;";
+
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, username);
             ps.setString(2, password);
@@ -60,9 +64,9 @@ public class UserModel {
                         rs.getString("courseId"),
                         rs.getString("courseName"),
                         rs.getString("decision")
-
                 );
             }
+
         } else if (Objects.equals("lecturer", role)) {
             String query = "SELECT * FROM lecturer WHERE username = ? AND password = ?";
             PreparedStatement ps = connection.prepareStatement(query);

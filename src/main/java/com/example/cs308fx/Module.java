@@ -9,15 +9,14 @@ package com.example.cs308fx;
  * @see Course
  */
 public class Module {
-    String code;
-    String name;
-    int maxAttempts;
-    int credits;
+    private String moduleId;
+    private String moduleName;
+    private int credits;
 
-    public Module(String code, String name, int maxAttempts, int credits) {
-        this.code = code;
-        this.name = name;
-        this.maxAttempts = maxAttempts;
+    // Constructor
+    public Module(String moduleId, String moduleName, int credits) {
+        this.moduleId = moduleId;
+        this.moduleName = moduleName;
         this.credits = credits;
     }
 }
