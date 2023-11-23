@@ -3,6 +3,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Objects;
 
 public class UserModel {
@@ -14,7 +15,8 @@ public class UserModel {
     private String gender;
     private String email;
     private String dateOfBirth;
-    private int courseId;
+    private Course course;
+    private List<Module> modules;
     private String decision;
     private boolean approved;
 
@@ -69,10 +71,13 @@ public class UserModel {
     public void login(String username, String password, String role) throws SQLException {
         loginSuccessful = false;
         if(Objects.equals("student", role)) {
-            String query = "SELECT * FROM student WHERE username = ? AND password = ?";
+            String query = "SELECT * FROM student, course WHERE " +
+                    "student.username = ? AND student.password = ?" +
+                    " AND student.courseId = course.courseId;";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, username);
             ps.setString(2, password);
+            System.out.println(ps);
             ResultSet rs = ps.executeQuery();
 
             if(rs.next()) {
@@ -84,7 +89,7 @@ public class UserModel {
                 this.gender       = rs.getString("gender");
                 this.email = rs.getString("email");
                 this.dateOfBirth    = rs.getString("dateOfBirth");
-                this.courseId = rs.getInt("courseId");
+                this.course = new Course(rs.getString("courseId"), rs.getString("courseName"), rs.getString("courseDescription"));
                 this.decision    = rs.getString("decision");
                 this.approved    = rs.getBoolean("approved");
 
@@ -116,7 +121,7 @@ public class UserModel {
                 this.gender      = rs.getString("gender");
                 this.email       = rs.getString("email");
                 this.dateOfBirth = rs.getString("dateOfBirth");
-                this.courseId    = rs.getInt("courseId");
+                this.course = new Course(rs.getString("courseId"), rs.getString("courseName"), rs.getString("courseDescription"));
                 this.decision    = rs.getString("decision");
                 this.approved    = rs.getBoolean("approved");
                 loginSuccessful = true;
@@ -174,6 +179,8 @@ public class UserModel {
     public String getDateOfBirth() {
         return this.dateOfBirth;
     }
+
+    public Course getCourse() { return this.course; }
 
     public void addUserToDB() {
 

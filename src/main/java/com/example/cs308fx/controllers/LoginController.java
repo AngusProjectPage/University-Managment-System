@@ -83,11 +83,11 @@ public class LoginController {
                                                 ManagerController managerController = loader.getController();
                                                 managerController.setUserModel(userModel);
                                                 break;
-                                        /*
                                         case "student":
                                                 StudentController studentController = loader.getController();
                                                 studentController.setUserModel(userModel);
                                                 break;
+                                                /*
                                         case "lecturer":
                                                 LecturerController lecturerController = loader.getController();
                                                 lecturerController.setUserModel(userModel);
