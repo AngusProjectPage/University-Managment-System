@@ -2,6 +2,7 @@ package com.example.cs308fx;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.Scanner;
 
@@ -18,24 +19,25 @@ public class MySqlConnect {
     private static Connection connection = null;
 
     static {
-        Scanner scanner = null;
-        try {
-            scanner = new Scanner(new File("../../resources/database_connection/dbConnect.txt"));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        // Use try-with-resources to ensure the scanner is closed after use
+        try (InputStream dbConfigStream = MySqlConnect.class.getClassLoader().getResourceAsStream("database_connection/dbConnect.txt");
+             Scanner scanner = new Scanner(dbConfigStream)) {
 
-        String url = "jdbc:mysql://localhost:3306/";
-        String dbName = scanner.nextLine();
-        String user = scanner.nextLine();
-        String password = scanner.nextLine();
-        try {
+            String url = "jdbc:mysql://localhost:3306/";
+            String dbName = scanner.nextLine();
+            String user = scanner.nextLine();
+            String password = scanner.nextLine();
+
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(url + dbName, user, password);
             System.out.println("Successfully connected to MySQL db");
-        }
-        catch (ClassNotFoundException | SQLException e) {
+
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException("Failed to connect to the database", e);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Failed to read database connection details", e);
         }
     }
 
