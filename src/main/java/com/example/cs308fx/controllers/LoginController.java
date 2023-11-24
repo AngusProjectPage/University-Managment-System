@@ -73,7 +73,7 @@ public class LoginController {
                 }
 
                 try {
-                        Person loggedInUser = userModel.login(user, pass, role);
+                        UserModel loggedInUser = userModel.login(user, pass, role);
 
                         if (loggedInUser != null) {
                                 String fxmlFile = "";

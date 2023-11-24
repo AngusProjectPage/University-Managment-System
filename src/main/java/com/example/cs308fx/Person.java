@@ -22,7 +22,7 @@ import java.util.Date;
  */
 
 
-public class Person {
+public class Person extends UserModel {
     protected String username;
     protected String firstName;
     protected String surname;
