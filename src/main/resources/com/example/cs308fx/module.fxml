@@ -7,9 +7,9 @@
 
 <!-- this is the students view of a module, they can download the lab notes etc  -->
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #d4ebe9;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs308fx.Module">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #d4ebe9;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs308fx.controllers.ModuleController">
    <children>
-      <Label alignment="CENTER" contentDisplay="CENTER" text="Module:" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Label fx:id="moduleName" alignment="CENTER" contentDisplay="CENTER" text="Module:" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <padding>
             <Insets bottom="5.0" top="5.0" />
          </padding>

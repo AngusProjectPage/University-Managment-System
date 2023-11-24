@@ -66,9 +66,10 @@
                         <Insets />
                      </VBox.margin>
                   </Label>
-                  <HBox prefHeight="39.0" prefWidth="417.0">
+                  <HBox prefHeight="63.0" prefWidth="372.0">
                      <children>
-                        <Label text="Modules:">
+
+                         <Label text="Modules:">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -86,54 +87,7 @@
                   <Insets top="20.0" />
                </padding>
             </VBox>
-            <GridPane layoutX="109.0" layoutY="112.0" prefHeight="286.0" prefWidth="417.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="112.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
-                     <children>
-                        <Label text="Module 1" />
-                        <Button mnemonicParsing="false" style="-fx-background-color: #E76F51;" text="Go to module" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" GridPane.columnIndex="1">
-                     <children>
-                        <Label text="Module 2" />
-                        <Button mnemonicParsing="false" style="-fx-background-color: #E76F51;" text="Go to module" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" GridPane.rowIndex="1">
-                     <children>
-                        <Label text="Module 3" />
-                        <Button mnemonicParsing="false" style="-fx-background-color: #E76F51;" text="Go to module" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <children>
-                        <Label text="Module 4" />
-                        <Button mnemonicParsing="false" style="-fx-background-color: #E76F51;" text="Go to module" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" GridPane.rowIndex="2">
-                     <children>
-                        <Label text="Module 5" />
-                        <Button mnemonicParsing="false" style="-fx-background-color: #E76F51;" text="Go to module" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                     <children>
-                        <Label text="Module 6" />
-                        <Button mnemonicParsing="false" style="-fx-background-color: #E76F51;" text="Go to module" />
-                     </children></VBox>
-               </children>
-            </GridPane>
+             <ListView fx:id="moduleListView" layoutX="20.0" layoutY="99.0" prefHeight="190.0" prefWidth="248.0" />
          </children></AnchorPane>
   </items>
 </SplitPane>
