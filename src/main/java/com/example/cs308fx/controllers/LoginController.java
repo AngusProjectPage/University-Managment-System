@@ -27,6 +27,7 @@ public class LoginController {
         @FXML
         private Label errorLabel;
 
+        private UserModel userModel;
 
         @FXML
         public void initialize() {
@@ -34,12 +35,14 @@ public class LoginController {
                 password.setOnKeyPressed(e -> clearErrorMessage());
         }
 
+        public void setUserModel(UserModel userModel) {
+                this.userModel = userModel;
+        }
+
         @FXML
         private void clearErrorMessage() {
                 errorLabel.setText("");
         }
-
-        private UserModel userModel = new UserModel();
 
         @FXML
         public void login(ActionEvent event) throws IOException {
@@ -130,7 +133,4 @@ public class LoginController {
                 stage.show();
         }
 
-        public void setUserModel(UserModel userModel) {
-                this.userModel = userModel;
-        }
 }
