@@ -21,6 +21,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SignupController implements Initializable {
 
@@ -44,6 +46,8 @@ public class SignupController implements Initializable {
     private ComboBox<String> roleField;
     @FXML
     private Label errorLabel;
+
+    String nameRegex;
     @FXML
     private void clearErrorMessage() {
         errorLabel.setText("");
@@ -62,6 +66,41 @@ public class SignupController implements Initializable {
 
     public void setUserModel(UserModel userModel) {
         this.userModel = userModel;
+        nameRegex = "^[a-zA-Z]+$";
+    }
+
+    public boolean validateFirstName(String firstName) {
+        return firstName.matches(nameRegex);
+    }
+
+    public boolean validateSurname(String surname) {
+        return surname.matches(nameRegex);
+    }
+
+    public boolean validateEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+
+    public boolean validateGender(String gender) {
+        return gender != null && !gender.isEmpty();
+    }
+
+    public boolean validatePassword(String password) {
+        String passwordRegex = "^.{8,}$";
+        Pattern pattern = Pattern.compile(passwordRegex);
+        Matcher matcher = pattern.matcher(password);
+        return matcher.matches();
+    }
+
+    public boolean validateUserRole(String userRole) {
+        return userRole != null && !userRole.isEmpty();
+    }
+
+    public boolean validateDateOfBirth(LocalDate dateOfBirth) {
+        return dateOfBirth != null && !dateOfBirth.isAfter(LocalDate.now());
     }
 
     @Override
@@ -81,12 +120,18 @@ public class SignupController implements Initializable {
             String userRole = roleField.getValue();
             LocalDate date = dateOfBirthField.getValue();
 
-            if (date != null && !firstName.isEmpty() && !surname.isEmpty() && !email.isEmpty() && gender != null && !password.isEmpty() && userRole != null) {
+            if (validateFirstName(firstName) &&
+                    validateSurname(surname) &&
+                    validateEmail(email) &&
+                    validateGender(gender) &&
+                    validatePassword(password) &&
+                    validateUserRole(userRole) &&
+                    validateDateOfBirth(date)) {
                 userModel.addUser(firstName, surname, password, gender, email, userRole, date);
                 clearForm();
                 errorLabel.setText("User added successfully!");
             } else {
-                errorLabel.setText("Please fill in all fields.");
+                errorLabel.setText("Please fill in all fields correctly.");
             }
         } catch (SQLException e) {
             e.printStackTrace();
