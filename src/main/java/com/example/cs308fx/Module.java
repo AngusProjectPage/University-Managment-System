@@ -19,4 +19,17 @@ public class Module {
         this.moduleName = moduleName;
         this.credits = credits;
     }
+
+    public String getModuleId() {
+        return moduleId;
+    }
+
+    public String getModuleName() {
+        return moduleName;
+    }
+
+    public int getCredits() {
+        return credits;
+    }
+
 }
