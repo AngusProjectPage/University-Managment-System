@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeoutException;
 
 import com.example.cs308fx.UserModel;
 import com.example.cs308fx.Manager;
@@ -57,6 +58,24 @@ public class ManagerController {
 
     @FXML
     private ComboBox<String> usersComboBox;
+
+    @FXML
+    private TextField addUserToCourseStudentIdField;
+    @FXML
+    private TextField addUserToCourseCourseIdField;
+
+    @FXML
+    private void addUserToCourse() {
+        int courseId  = Integer.parseInt(addUserToCourseCourseIdField.getText());
+        int studentId = Integer.parseInt(addUserToCourseStudentIdField.getText());
+        try {
+            loggedInManager.addStudentToCourse(studentId, courseId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 
     public void populateUsersComboBox() {
         try {

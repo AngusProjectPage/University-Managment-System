@@ -123,6 +123,28 @@
                   <Insets top="5.0" />
                </padding>
             </Label>
+            <VBox alignment="CENTER" prefHeight="93.0" prefWidth="304.0" GridPane.rowIndex="2">
+               <children>
+                  <Label text="Add User to Course" />
+                  <HBox alignment="BOTTOM_CENTER" prefHeight="45.0" prefWidth="304.0">
+                     <children>
+                        <Label prefWidth="62.0" text="Student ID:" />
+                        <TextField fx:id="addUserToCourseStudentIdField" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="56.0" prefWidth="304.0">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="62.0" text="Course ID:" />
+                        <TextField fx:id="addUserToCourseCourseIdField" />
+                     </children>
+                  </HBox>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#addUserToCourse" style="-fx-background-color: #E76F51; -fx-cursor: hand;" text="Add User">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
          </children>
       </GridPane>
       <Label id="managerIdLabel" fx:id="managerIdLabel" alignment="CENTER" layoutX="211.0" layoutY="14.0" text="Manager ID: Loading..." AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

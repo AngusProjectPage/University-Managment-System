@@ -89,6 +89,14 @@ public class Manager extends Person {
         ps.executeUpdate();
     }
 
+    public void addStudentToCourse(int studentId, int courseId) throws SQLException {
+        String query = "UPDATE student SET courseId = ? WHERE studentId = ?";
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setInt(1, courseId);
+        ps.setInt(2, studentId);
+        ps.execute();
+    }
+
     public void updatePassword(String userId, String newPassword) throws SQLException {
         String table;
         if (userId.startsWith("stu")) {
