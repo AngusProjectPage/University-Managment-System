@@ -40,8 +40,8 @@ public class UserModel {
      * @param username, password
      * @return userType of Student, Lecturer or Manager
      */
-    public Person login(String username, String password, String role) throws SQLException {
-        Person user = null;
+    public UserModel login(String username, String password, String role) throws SQLException {
+        UserModel user = null;
         if (Objects.equals("student", role)) {
             String query = "SELECT student.*, course.courseName " +
                     "FROM student " +
@@ -108,4 +108,7 @@ public class UserModel {
 
         return user;
     }
+
+
+
 }

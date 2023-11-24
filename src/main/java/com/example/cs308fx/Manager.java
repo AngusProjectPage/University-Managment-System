@@ -35,7 +35,6 @@ import java.util.List;
  */
 public class Manager extends Person {
 
-    static Connection connection = MySqlConnect.getConnection();
 
     public Manager(String username, String firstName, String surname, String gender, String dateOfBirth, String email) {
         super(username, firstName, surname, gender, dateOfBirth, email);
@@ -56,7 +55,6 @@ public class Manager extends Person {
         return users;
     }
 
-
     public void approveUser(int userId, String userType) throws SQLException {
         System.out.println("User Type: " + userType); // For debugging purposes
 
@@ -72,7 +70,6 @@ public class Manager extends Person {
         ps.setInt(2, userId);
         ps.executeUpdate();
     }
-
 
     public void addCourse(String id, String name, String description) throws SQLException {
         String query = "INSERT INTO course (courseId, courseName, courseDescription) VALUES (?, ?, ?)";

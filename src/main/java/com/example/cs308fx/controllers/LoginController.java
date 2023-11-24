@@ -27,7 +27,7 @@ public class LoginController {
         @FXML
         private Label errorLabel;
 
-        private UserModel userModel;
+        private UserModel loggedInUser;
 
         @FXML
         public void initialize() {
@@ -36,7 +36,7 @@ public class LoginController {
         }
 
         public void setUserModel(UserModel userModel) {
-                this.userModel = userModel;
+                loggedInUser = userModel;
         }
 
         @FXML
@@ -73,7 +73,7 @@ public class LoginController {
                 }
 
                 try {
-                        Person loggedInUser = userModel.login(user, pass, role);
+                        loggedInUser = loggedInUser.login(user, pass, role);
 
                         if (loggedInUser != null) {
                                 String fxmlFile = "";
@@ -113,8 +113,6 @@ public class LoginController {
                 }
         }
 
-
-
         @FXML
         public void signup(ActionEvent event) throws IOException {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../signup.fxml"));
@@ -124,7 +122,7 @@ public class LoginController {
                 SignupController signupController = loader.getController();
 
                 // Pass the userModel to the signupController
-                signupController.setUserModel(userModel);
+                signupController.setUserModel(loggedInUser);
 
                 // Set up the stage and scene
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
