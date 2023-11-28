@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #d4ebe9;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs308fx.controllers.ManagerController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #d4ebe9;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs308fx.controllers.ManagerController">
    <children>
       <GridPane layoutX="-2.0" layoutY="37.0" prefHeight="363.0" prefWidth="607.0" AnchorPane.leftAnchor="-2.0">
         <columnConstraints>
@@ -24,12 +24,13 @@
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints maxHeight="58.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="36.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="58.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="39.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="39.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="addCourseButton" mnemonicParsing="false" onAction="#handleAddCourseAction" style="-fx-background-color: #E76F51;" text="Add Course" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Button fx:id="addCourseButton" mnemonicParsing="false" onAction="#handleAddCourseAction" style="-fx-background-color: #E76F51;" text="Add Course" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
@@ -38,25 +39,25 @@
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin></TextField>
-                  <TextField fx:id="courseNameField" layoutX="10.0" layoutY="18.0" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
+                  <TextField fx:id="courseNameField" layoutX="10.0" layoutY="18.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin></TextField>
-                  <TextField fx:id="courseDescriptionField" layoutX="10.0" layoutY="18.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <TextField fx:id="courseDescriptionField" layoutX="10.0" layoutY="18.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin></TextField>
-                  <Label text="Code:" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+                  <Label text="Code:" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label layoutX="121.0" layoutY="10.0" text="Name:" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+                  <Label layoutX="121.0" layoutY="10.0" text="Name:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label layoutX="121.0" layoutY="10.0" text="Description:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                  <Label layoutX="121.0" layoutY="10.0" text="Description:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin>
@@ -69,42 +70,43 @@
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                </columnConstraints>
                <rowConstraints>
-                  <RowConstraints maxHeight="58.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="36.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="58.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="36.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="38.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button fx:id="addModuleButton" mnemonicParsing="false" onAction="#handleAddModuleAction" style="-fx-background-color: #E76F51;" text="Add Module" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Button fx:id="addModuleButton" mnemonicParsing="false" onAction="#handleAddModuleAction" style="-fx-background-color: #E76F51;" text="Add Module" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </Button>
-                  <TextField fx:id="moduleCodeField" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                  <TextField fx:id="moduleCodeField" GridPane.columnIndex="1" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField fx:id="moduleNameField" layoutX="10.0" layoutY="18.0" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
+                  <TextField fx:id="moduleNameField" layoutX="10.0" layoutY="18.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField fx:id="moduleCreditField" layoutX="10.0" layoutY="18.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <TextField fx:id="moduleCreditField" layoutX="10.0" layoutY="18.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin>
                   </TextField>
-                  <Label text="Code:" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+                  <Label layoutX="121.0" layoutY="10.0" text="Code:" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label layoutX="121.0" layoutY="10.0" text="Name:" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+                  <Label layoutX="121.0" layoutY="10.0" text="Name:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label layoutX="121.0" layoutY="10.0" text="Credit:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                  <Label layoutX="121.0" layoutY="10.0" text="Credit:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin>
