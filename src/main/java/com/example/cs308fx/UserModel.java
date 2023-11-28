@@ -1,8 +1,5 @@
 package com.example.cs308fx;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +60,7 @@ public class UserModel {
                         rs.getString("gender"),
                         rs.getString("dateOfBirth"),
                         rs.getString("email"),
-                        rs.getString("courseId"),
+                        rs.getInt("courseId"),
                         rs.getString("courseName"),
                         rs.getString("decision")
                 );
@@ -86,7 +83,6 @@ public class UserModel {
                         rs.getString("email"),
                         rs.getString("qualification"),
                         rs.getBoolean("approved")
-
                 );
             }
         } else if (Objects.equals("manager", role)) {
@@ -135,6 +131,37 @@ public class UserModel {
         }
 
         return modules;
+    }
+
+    public List<Student> getStudentsForModule(int moduleId) {
+        List<Student> students = new ArrayList<>();
+        String query = "SELECT s.username, s.firstname, s.surname, s.gender, s.email, s.dateOfBirth, s.courseId, s.decision, s.approved " +
+                "FROM student s " +
+                "JOIN studentModule sm ON s.studentId = sm.studentId " +
+                "WHERE sm.moduleId = ?;";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setInt(1, moduleId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    String studentUsername    = rs.getString("username");
+                    String studentFirstname   = rs.getString("firstname");
+                    String studentSurname     = rs.getString("surname");
+                    String studentGender      = rs.getString("gender");
+                    String studentEmail       = rs.getString("email");
+                    String studentDateOfBirth = rs.getString("dateOfBirth");
+                    int studentCourseId       = rs.getInt("courseId");
+                    String studentDecision    = rs.getString("decision");
+                    String studentApproved    = rs.getString("approved");
+                    students.add(new Student(studentUsername, studentFirstname, studentSurname, studentGender, studentEmail, studentDateOfBirth, studentCourseId, studentDecision, studentApproved));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle exceptions
+        }
+
+        return students;
     }
 
     public List<Module> getModulesForLecturer(String lecturerId) {
