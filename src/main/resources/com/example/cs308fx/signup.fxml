@@ -64,11 +64,11 @@
                      <font>
                         <Font size="16.0" />
                      </font></Label>
-                  <VBox prefHeight="59.0" prefWidth="151.0">
+                  <VBox>
                      <children>
-                        <PasswordField fx:id="passwordField" prefHeight="25.0" prefWidth="150.0" />
-                        <Label prefHeight="16.0" prefWidth="169.0" text="Password should contain" />
-                        <Label text="8 characters or more" />
+                        <PasswordField fx:id="passwordField" />
+                        <Label alignment="CENTER" prefHeight="16.0" prefWidth="171.0" text="Password should contain" />
+                        <Label alignment="CENTER" prefHeight="16.0" prefWidth="171.0" text="8 characters or more" />
                      </children>
                   </VBox>
                </children>
@@ -151,7 +151,7 @@
                   </Button>
                </children>
                <VBox.margin>
-                  <Insets />
+                  <Insets bottom="10.0" />
                </VBox.margin>
             </HBox>
          </children>
@@ -159,7 +159,7 @@
             <Insets />
          </opaqueInsets>
          <padding>
-            <Insets top="40.0" />
+            <Insets top="20.0" />
          </padding>
       </VBox>
       <Label fx:id="errorLabel" alignment="CENTER" layoutX="5.0" layoutY="-16.0" prefHeight="20.0" prefWidth="600.0" textFill="RED" AnchorPane.topAnchor="-16.0">

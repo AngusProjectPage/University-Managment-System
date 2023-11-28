@@ -24,7 +24,6 @@ public class UpdatePasswordManagerController {
     private PasswordField newPasswordField;
     @FXML
     private PasswordField confirmNewPasswordField;
-
     @FXML
     private Label feedbackLabel;
 

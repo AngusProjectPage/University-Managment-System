@@ -136,6 +136,25 @@ public class UserModel {
         return modules;
     }
 
+    public void updatePassword(Person user, String newPassword) throws SQLException {
+        String username = user.getUsername();
+        String table;
+        if (username.startsWith("stu")) {
+            table = "student";
+        } else if (username.startsWith("lct")) {
+            table = "lecturer";
+        } else {
+            throw new IllegalArgumentException("Invalid user ID prefix.");
+        }
 
-
-}
+        String query = "UPDATE " + table + " SET password = ? WHERE username = ?";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, newPassword);
+            ps.setString(2, username);
+            int affectedRows = ps.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Updating password failed, no rows affected.");
+            }
+        }
+    }
+    }
