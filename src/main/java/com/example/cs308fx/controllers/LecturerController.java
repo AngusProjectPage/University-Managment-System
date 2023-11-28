@@ -34,7 +34,7 @@ public class LecturerController {
 
     private void updateLecturerDetails() {
         if (loggedInLecturer != null) {
-            lecturerId.setText("Lecturer ID: " + loggedInLecturer.getId());
+            lecturerId.setText("Lecturer ID: " + loggedInLecturer.getUsername());
         }
     }
 
@@ -58,7 +58,7 @@ public class LecturerController {
     }
 
     private void populateModules() {
-        String lecturerId = loggedInLecturer.getId();
+        String lecturerId = loggedInLecturer.getUsername();
         lecturerId = lecturerId.replaceAll("\\D+", "");
         lecturerId = lecturerId.replaceFirst("^0+(?!$)", "");
         List<Module> modules = loggedInLecturer.getModulesForLecturer(lecturerId);

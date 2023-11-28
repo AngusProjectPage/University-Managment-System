@@ -30,7 +30,7 @@ public class ManagerController {
     private void updateManagerDetails() {
         if (loggedInManager != null) {
             // Use loggedInManager's details to update the UI
-            managerIdLabel.setText("Manager ID: " + loggedInManager.getId());
+            managerIdLabel.setText("Manager ID: " + loggedInManager.getUsername());
             // Other UI updates or logic based on manager's details
         }
     }
