@@ -35,6 +35,13 @@ public class ModuleLecturerController {
     @FXML
     private TextArea moduleInfo;
 
+    @FXML
+    private Label feedbackLabel;
+
+    private void updateFeedback(String message) {
+        feedbackLabel.setText(message);
+    }
+
     private void updateModuleDetails() {
         moduleName.setText("Module: " + lecturerModule.getModuleName());
         moduleInfo.setText(lecturerModule.getModuleInfo());
@@ -44,8 +51,8 @@ public class ModuleLecturerController {
     private void handleUpdateInfoAction() {
         Integer moduleCode = lecturerModule.getModuleId();
         String moduleInfoTA = moduleInfo.getText();
-
         loggedInLecturer.updateModuleInfo(moduleCode, moduleInfoTA);
+        updateFeedback("Updated!");
     }
 
 
