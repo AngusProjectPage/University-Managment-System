@@ -9,10 +9,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class ModuleLecturerController {
     private Lecturer loggedInLecturer;
@@ -30,9 +32,20 @@ public class ModuleLecturerController {
     @FXML
     private Label moduleName;
 
+    @FXML
+    private TextArea moduleInfo;
+
     private void updateModuleDetails() {
         moduleName.setText("Module: " + lecturerModule.getModuleName());
+        moduleInfo.setText(lecturerModule.getModuleInfo());
+    }
 
+    @FXML
+    private void handleUpdateInfoAction() {
+        Integer moduleCode = lecturerModule.getModuleId();
+        String moduleInfoTA = moduleInfo.getText();
+
+        loggedInLecturer.updateModuleInfo(moduleCode, moduleInfoTA);
     }
 
 
