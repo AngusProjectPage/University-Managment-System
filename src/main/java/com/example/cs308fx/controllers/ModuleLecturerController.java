@@ -36,10 +36,6 @@ public class ModuleLecturerController {
     }
 
 
-    public void setLecturer(Lecturer lecturer) {
-        this.lecturer = lecturer;
-    }
-
     @FXML
     public void backToMain(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/cs308fx/lecturer.fxml"));
