@@ -1,6 +1,7 @@
 package com.example.cs308fx.controllers;
 
 import com.example.cs308fx.Module;
+import com.example.cs308fx.Student;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,10 +24,16 @@ import com.example.cs308fx.Manager;
 
 public class ModuleController {
 
+    private Student student;
+
     private Module currentModule;
 
     @FXML
     private Label moduleName;
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
 
     public void setCurrentModule(Module module) {
         this.currentModule = module;
@@ -37,5 +44,18 @@ public class ModuleController {
         moduleName.setText("Module: " + currentModule.getModuleName());
     }
 
+    @FXML
+    public void backToMain(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/cs308fx/student.fxml"));
+        Parent root = loader.load();
+
+        StudentController stuController = loader.getController();
+        stuController.setLoggedInUser(student);
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 
 }
