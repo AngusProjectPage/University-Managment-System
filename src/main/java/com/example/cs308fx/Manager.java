@@ -31,7 +31,7 @@ import java.util.List;
  * @see UserModel
  * @see Lecturer
  * @see Student
- * @author Connor
+ * @author Connor, Callum
  */
 public class Manager extends Person {
 

@@ -101,6 +101,7 @@ public class LoginController {
                                 } else if (loggedInUser instanceof Manager) {
                                         ManagerController managerController = loader.getController();
                                         managerController.setLoggedInUser((Manager) loggedInUser);
+                                        managerController.populateCombos();
                                 }
 
                                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

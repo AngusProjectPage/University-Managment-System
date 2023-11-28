@@ -1,5 +1,9 @@
 package com.example.cs308fx.controllers;
 
+import com.example.cs308fx.Course;
+import com.example.cs308fx.MySqlConnect;
+import com.example.cs308fx.Module;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,15 +12,18 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import com.example.cs308fx.Manager;
+
 public class ManagerController {
 
     private Manager loggedInManager;
@@ -55,6 +62,39 @@ public class ManagerController {
 
     @FXML
     private ComboBox<String> usersComboBox;
+
+    @FXML
+    private ComboBox<Module> modulesCombo;
+
+    @FXML
+    private Label moduleCodeLabel;
+
+    @FXML
+    private Label moduleNameLabel;
+
+    @FXML
+    private Label moduleCreditsLabel;
+
+    @FXML
+    private TextField moduleMaxAttemptsField;
+
+    @FXML
+    private Label businessRuleFeedback;
+
+    @FXML
+    private ComboBox<Course> coursesCombo;
+
+    @FXML
+    private Label courseCodeLabel;
+
+    @FXML
+    private Label courseSemestersLabel;
+
+    @FXML
+    private ListView<Module> courseModuleList;
+
+    @FXML
+    private TextField courseMaxCompField;
 
     public void populateUsersComboBox() {
         try {
@@ -175,5 +215,127 @@ public class ManagerController {
         }
     }
 
+    public void populateCombos() {
+        try {
+            Connection conn = MySqlConnect.getConnection();
+            populateModuleCombo(conn);
+            populateCourseCombo(conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private ArrayList<Module> getModules(Connection conn) throws SQLException {
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM module;");
+        ResultSet rs = ps.executeQuery();
+        ArrayList<Module> mods = new ArrayList<>();
+
+        while (rs.next()) {
+            Module mod = new Module(rs.getInt("moduleId"), rs.getString("moduleName"), rs.getString("moduleInfo"), rs.getInt("credit"), rs.getInt("maxAttempts"), rs.getString("courseId"));
+            mods.add(mod);
+        }
+
+        return mods;
+    }
+
+    private void populateCourseCombo(Connection conn) throws SQLException {
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM course;");
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            ArrayList<Module> modsInCourse = new ArrayList<>();
+            for (Module m: modulesCombo.getItems()) {
+                if (m.getCourseId() != null && m.getCourseId().equals(rs.getString("courseId"))) {
+                    modsInCourse.add(m);
+                }
+            }
+            Course course = new Course(rs.getString("courseId"), rs.getString("courseName"), rs.getString("courseDescription"), rs.getString("semesters"), modsInCourse, rs.getInt("maxCompensation"));
+            coursesCombo.getItems().add(course);
+        }
+    }
+
+    private void populateModuleCombo(Connection conn) throws SQLException {
+        for (Module m: getModules(conn)) {
+            modulesCombo.getItems().add(m);
+        }
+    }
+
+    @FXML
+    public void loadModuleDetails(ActionEvent event) {
+        Module mod = modulesCombo.getValue();
+
+        moduleCodeLabel.setText(mod.getModuleId().toString());
+        moduleNameLabel.setText(mod.getModuleName());
+        moduleCreditsLabel.setText(mod.getCredits().toString());
+        moduleMaxAttemptsField.setText(mod.getMaxAttempts().toString());
+    }
+
+    @FXML
+    public void editMaxAttempts(ActionEvent event) {
+        if (modulesCombo.getValue() == null) {
+            businessRuleFeedback.setText("Select a module before setting max attempts");
+            return;
+        }
+
+        try {
+            Connection conn = MySqlConnect.getConnection();
+
+            try {
+                int maxAttempts = Integer.parseInt(moduleMaxAttemptsField.getText());
+                Module mod = modulesCombo.getValue();
+                mod.setMaxAttempts(maxAttempts);;
+
+                PreparedStatement ps = conn.prepareStatement("UPDATE module SET maxAttempts = ? WHERE moduleId = ?");
+                ps.setInt(1, maxAttempts);
+                ps.setInt(2, mod.getModuleId());
+                ps.executeUpdate();
+
+                businessRuleFeedback.setText("Successfully set new max attempts");
+            } catch (NumberFormatException ignored) {
+                businessRuleFeedback.setText("Module max attempts not a valid number");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void loadCourseDetails(ActionEvent event) {
+        Course course = coursesCombo.getValue();
+
+        courseCodeLabel.setText(course.getCourseId());
+        courseSemestersLabel.setText(course.getSemesters());
+        courseModuleList.getItems().setAll(course.getModules());
+        courseMaxCompField.setText(course.getMaxComp().toString());
+    }
+
+    @FXML
+    public void editMaxComp(ActionEvent event) {
+        if (coursesCombo.getValue() == null) {
+            businessRuleFeedback.setText("Select a course before setting max modules to compensate");
+            return;
+        }
+
+        try {
+            Connection conn = MySqlConnect.getConnection();
+
+            try {
+                int maxComp = Integer.parseInt(courseMaxCompField.getText());
+                Course course = coursesCombo.getValue();
+                course.setMaxComp(maxComp);
+
+                PreparedStatement ps = conn.prepareStatement("UPDATE course SET maxCompensation = ? WHERE courseId = ?");
+                ps.setInt(1, maxComp);
+                ps.setString(2, course.getCourseId());
+                ps.executeUpdate();
+
+                businessRuleFeedback.setText("Successfully set new max module compensation");
+            } catch (NumberFormatException ignored) {
+                businessRuleFeedback.setText("Course max module compensation not a valid number");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

@@ -113,7 +113,7 @@ public class UserModel {
 
     public List<Module> getModulesForStudent(String studentId) {
         List<Module> modules = new ArrayList<>();
-        String query = "SELECT m.moduleId, m.moduleName, m.credit, m.moduleInfo " +
+        String query = "SELECT m.moduleId, m.moduleName, m.credit, m.moduleInfo, m.maxAttempts, m.courseId " +
                 "FROM module m " +
                 "JOIN studentModule sm ON m.moduleId = sm.moduleId " +
                 "WHERE sm.studentId = ?;";
@@ -126,7 +126,9 @@ public class UserModel {
                     String moduleName = rs.getString("moduleName");
                     String moduleInfo = rs.getString("moduleInfo");
                     int credits = rs.getInt("credit");
-                    modules.add(new Module(moduleId, moduleName, moduleInfo, credits));
+                    int maxAttempts = rs.getInt("maxAttempts");
+                    String courseId = rs.getString("courseId");
+                    modules.add(new Module(moduleId, moduleName, moduleInfo, credits, maxAttempts, courseId));
                 }
             }
         } catch (SQLException e) {
@@ -139,7 +141,7 @@ public class UserModel {
 
     public List<Module> getModulesForLecturer(String lecturerId) {
         List<Module> modules = new ArrayList<>();
-        String query = "SELECT m.moduleId, m.moduleName, m.credit, m.moduleInfo " +
+        String query = "SELECT m.moduleId, m.moduleName, m.credit, m.moduleInfo, m.maxAttempts, m.courseId " +
                 "FROM module m " +
                 "JOIN lecturerModule lm ON m.moduleId = lm.moduleId " +
                 "WHERE lm.lecturerId = ?;";
@@ -152,7 +154,9 @@ public class UserModel {
                     String moduleName = rs.getString("moduleName");
                     String moduleInfo = rs.getString("moduleInfo");
                     int credits = rs.getInt("credit");
-                    modules.add(new Module(moduleId, moduleName, moduleInfo, credits));
+                    int maxAttempts = rs.getInt("maxAttempts");
+                    String courseId = rs.getString("courseId");
+                    modules.add(new Module(moduleId, moduleName, moduleInfo, credits, maxAttempts, courseId));
                 }
             }
         } catch (SQLException e) {

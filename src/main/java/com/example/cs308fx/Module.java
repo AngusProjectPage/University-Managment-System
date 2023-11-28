@@ -11,15 +11,19 @@ package com.example.cs308fx;
 public class Module {
     private Integer moduleId;
     private String moduleName;
-    private int credits;
+    private Integer credits;
     private String moduleInfo;
+    private Integer maxAttempts;
+    private String courseId;
 
     // Constructor
-    public Module(Integer moduleId, String moduleName, String moduleInfo, int credits) {
+    public Module(Integer moduleId, String moduleName, String moduleInfo, int credits, int maxAttempts, String courseId) {
         this.moduleId = moduleId;
         this.moduleName = moduleName;
         this.moduleInfo = moduleInfo;
         this.credits = credits;
+        this.maxAttempts = maxAttempts;
+        this.courseId = courseId;
     }
 
     public Integer getModuleId() {
@@ -32,8 +36,25 @@ public class Module {
 
     public String getModuleInfo() { return moduleInfo; }
 
-    public int getCredits() {
+    public Integer getCredits() {
         return credits;
+    }
+    public Integer getMaxAttempts() {
+        return maxAttempts;
+    }
+
+    public void setMaxAttempts(Integer maxAttempts) {
+        this.maxAttempts = maxAttempts;
+    }
+
+    // WARNING: This one bites (returns NULL sometimes...)
+    public String getCourseId() {
+        return courseId;
+    }
+
+    @Override
+    public String toString() {
+        return this.moduleName;
     }
 
 }
