@@ -76,6 +76,7 @@ public class StudentController {
 
         ModuleController moduleController = loader.getController();
         moduleController.setCurrentModule(module);
+        moduleController.setStudent(loggedInStudent);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(moduleView);

@@ -9,24 +9,28 @@ package com.example.cs308fx;
  * @see Course
  */
 public class Module {
-    private String moduleId;
+    private Integer moduleId;
     private String moduleName;
     private int credits;
+    private String moduleInfo;
 
     // Constructor
-    public Module(String moduleId, String moduleName, int credits) {
+    public Module(Integer moduleId, String moduleName, String moduleInfo, int credits) {
         this.moduleId = moduleId;
         this.moduleName = moduleName;
+        this.moduleInfo = moduleInfo;
         this.credits = credits;
     }
 
-    public String getModuleId() {
+    public Integer getModuleId() {
         return moduleId;
     }
 
     public String getModuleName() {
         return moduleName;
     }
+
+    public String getModuleInfo() { return moduleInfo; }
 
     public int getCredits() {
         return credits;

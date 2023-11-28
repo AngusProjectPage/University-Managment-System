@@ -113,7 +113,7 @@ public class UserModel {
 
     public List<Module> getModulesForStudent(String studentId) {
         List<Module> modules = new ArrayList<>();
-        String query = "SELECT m.moduleId, m.moduleName, m.credit " +
+        String query = "SELECT m.moduleId, m.moduleName, m.credit, m.moduleInfo " +
                 "FROM module m " +
                 "JOIN studentModule sm ON m.moduleId = sm.moduleId " +
                 "WHERE sm.studentId = ?;";
@@ -122,10 +122,37 @@ public class UserModel {
 
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    String moduleId = rs.getString("moduleId");
+                    Integer moduleId = rs.getInt("moduleId");
                     String moduleName = rs.getString("moduleName");
+                    String moduleInfo = rs.getString("moduleInfo");
                     int credits = rs.getInt("credit");
-                    modules.add(new Module(moduleId, moduleName, credits));
+                    modules.add(new Module(moduleId, moduleName, moduleInfo, credits));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle exceptions
+        }
+
+        return modules;
+    }
+
+    public List<Module> getModulesForLecturer(String lecturerId) {
+        List<Module> modules = new ArrayList<>();
+        String query = "SELECT m.moduleId, m.moduleName, m.credit, m.moduleInfo " +
+                "FROM module m " +
+                "JOIN lecturerModule lm ON m.moduleId = lm.moduleId " +
+                "WHERE lm.lecturerId = ?;";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, lecturerId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Integer moduleId = rs.getInt("moduleId");
+                    String moduleName = rs.getString("moduleName");
+                    String moduleInfo = rs.getString("moduleInfo");
+                    int credits = rs.getInt("credit");
+                    modules.add(new Module(moduleId, moduleName, moduleInfo, credits));
                 }
             }
         } catch (SQLException e) {
