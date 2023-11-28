@@ -14,6 +14,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class UpdatePasswordManagerController {
 
@@ -35,6 +37,14 @@ public class UpdatePasswordManagerController {
         feedbackLabel.setText(message);
     }
 
+    public boolean validatePassword(String password) {
+        String passwordRegex = "^.{8,}$";
+        Pattern pattern = Pattern.compile(passwordRegex);
+        Matcher matcher = pattern.matcher(password);
+        return matcher.matches();
+    }
+
+
     @FXML
     private void handleUpdatePassword() {
         String userIdText = userIdField.getText();
@@ -43,6 +53,11 @@ public class UpdatePasswordManagerController {
 
         if (!newPassword.equals(confirmNewPassword)) {
             updateFeedback("Passwords do not match.");
+            return;
+        }
+
+        if(!validatePassword(newPassword)) {
+            updateFeedback("Password must be at least 8 characters in length");
             return;
         }
 

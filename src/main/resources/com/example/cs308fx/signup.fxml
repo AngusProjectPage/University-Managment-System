@@ -64,9 +64,9 @@
                      <font>
                         <Font size="16.0" />
                      </font></Label>
-                  <VBox>
+                  <VBox prefHeight="59.0" prefWidth="150.0">
                      <children>
-                        <PasswordField fx:id="passwordField" />
+                        <PasswordField fx:id="passwordField" prefHeight="25.0" prefWidth="185.0" />
                         <Label alignment="CENTER" prefHeight="16.0" prefWidth="171.0" text="Password should contain" />
                         <Label alignment="CENTER" prefHeight="16.0" prefWidth="171.0" text="8 characters or more" />
                      </children>
@@ -81,7 +81,7 @@
             </HBox>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="231.0" prefWidth="600.0" spacing="20.0">
                <children>
-                  <Label prefHeight="25.0" prefWidth="114.0" text="Gender: ">
+                  <Label prefHeight="25.0" prefWidth="97.0" text="Gender: ">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -94,7 +94,7 @@
             </HBox>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="164.0" prefWidth="600.0" spacing="20.0">
                <children>
-                  <Label prefHeight="25.0" prefWidth="114.0" text="Role:">
+                  <Label prefHeight="25.0" prefWidth="97.0" text="Role:">
                      <font>
                         <Font size="16.0" />
                      </font></Label>
@@ -106,7 +106,7 @@
             </HBox>
             <HBox fx:id="password11" alignment="CENTER" layoutX="10.0" layoutY="141.0" prefWidth="600.0" spacing="20.0">
                <children>
-                  <Label prefHeight="24.0" prefWidth="114.0" text="Date Of Birth:">
+                  <Label prefHeight="24.0" prefWidth="97.0" text="Date Of Birth:">
                      <font>
                         <Font size="16.0" />
                      </font>
