@@ -42,7 +42,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" style="-fx-background-color: #E76F51;" text="Update password" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#updatePassword" style="-fx-background-color: #E76F51;" text="Update password" GridPane.rowIndex="2" />
                   <Label fx:id="decision" layoutX="20.0" layoutY="150.0" text="Loading..." GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                      <font>
                         <Font name="System Italic" size="14.0" />

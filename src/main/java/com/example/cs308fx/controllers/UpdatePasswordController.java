@@ -1,26 +1,19 @@
 package com.example.cs308fx.controllers;
 
 import com.example.cs308fx.Manager;
+import com.example.cs308fx.Person;
 import com.example.cs308fx.UserModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.sql.SQLException;
 
 public class UpdatePasswordController {
 
-    private Manager loggedInManager;
-    @FXML
-    private TextField userIdField;
+    private Person loggedInUser;
     @FXML
     private PasswordField newPasswordField;
     @FXML
@@ -29,8 +22,8 @@ public class UpdatePasswordController {
     @FXML
     private Label feedbackLabel;
 
-    public void setLoggedInUser(Manager manager) {
-        this.loggedInManager = manager;
+    public void setLoggedInUser(Person user) {
+        this.loggedInUser = user;
     }
 
     private void updateFeedback(String message) {
@@ -38,8 +31,7 @@ public class UpdatePasswordController {
     }
 
     @FXML
-    private void handleUpdatePassword() {
-        String userIdText = userIdField.getText();
+    public void updatePassword(ActionEvent event) {
         String newPassword = newPasswordField.getText();
         String confirmNewPassword = confirmNewPasswordField.getText();
 
@@ -49,7 +41,7 @@ public class UpdatePasswordController {
         }
 
         try {
-            loggedInManager.updatePassword(userIdText, newPassword);
+            loggedInUser.updatePassword(loggedInUser, newPassword);
             updateFeedback("Password updated successfully.");
         } catch (IllegalArgumentException e) {
             updateFeedback("Invalid user ID.");
@@ -59,27 +51,4 @@ public class UpdatePasswordController {
             e.printStackTrace();
         }
     }
-
-
-    @FXML
-    private void handleReturnToManager(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/cs308fx/manager.fxml"));
-            Parent root = loader.load();
-
-
-            ManagerController managerController = loader.getController();
-            managerController.setLoggedInUser(loggedInManager);
-
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            // Handle IOException
-        }
-    }
-
 }
-

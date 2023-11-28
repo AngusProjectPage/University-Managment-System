@@ -43,6 +43,7 @@ public class Person extends UserModel {
     }
     public String getFirstName() { return firstName; }
     public String getSurname() { return surname; }
+    public String getUsername() {return username; }
     public String getGender() { return gender; }
     public String getEmail() { return email; }
     public String getDateOfBirth() { return dateOfBirth; }
