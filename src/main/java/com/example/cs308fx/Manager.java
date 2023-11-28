@@ -36,8 +36,8 @@ import java.util.List;
 public class Manager extends Person {
 
 
-    public Manager(String username, String firstName, String surname, String gender, String dateOfBirth, String email) {
-        super(username, firstName, surname, gender, dateOfBirth, email);
+    public Manager(int id, String username, String firstName, String surname, String gender, String dateOfBirth, String email) {
+        super(id, username, firstName, surname, gender, dateOfBirth, email);
     }
     public List<String> getUnapprovedUsers() throws SQLException {
         List<String> users = new ArrayList<>();

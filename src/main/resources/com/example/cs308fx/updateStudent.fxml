@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs308fx.controllers.UpdateStudentController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #d4ebe9;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs308fx.controllers.UpdateStudentController">
    <children>
       <Label fx:id="studentNameLabel" alignment="CENTER" layoutX="260.0" layoutY="32.0" text="Student Name: Filler Text" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
          <font>
@@ -36,14 +36,20 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField alignment="CENTER" />
-                  <Button mnemonicParsing="false" onAction="#updateExamMark" text="Update Exam Mark" />
+                  <TextField fx:id="examMarkField" alignment="CENTER">
+                     <font>
+                        <Font size="13.0" />
+                     </font></TextField>
+                  <Button mnemonicParsing="false" onAction="#updateExamMark" style="-fx-background-color: #E76F51; -fx-cursor: hand;" text="Update Exam Mark">
+                     <font>
+                        <Font size="13.0" />
+                     </font></Button>
                </children>
                <padding>
                   <Insets left="40.0" right="40.0" />
                </padding>
             </VBox>
-            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" GridPane.columnIndex="1">
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" style="-fx-background-color: #d4ebe9;" GridPane.columnIndex="1">
                <children>
                   <Label text="Update Lab Mark:">
                      <font>
@@ -58,8 +64,14 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField alignment="CENTER" />
-                  <Button mnemonicParsing="false" onAction="#updateLabMark" text="Update Lab Mark" />
+                  <TextField fx:id="labMarkField" alignment="CENTER">
+                     <font>
+                        <Font size="13.0" />
+                     </font></TextField>
+                  <Button mnemonicParsing="false" onAction="#updateLabMark" style="-fx-background-color: #E76F51; -fx-cursor: hand;" text="Update Lab Mark">
+                     <font>
+                        <Font size="13.0" />
+                     </font></Button>
                </children>
                <padding>
                   <Insets left="40.0" right="40.0" />

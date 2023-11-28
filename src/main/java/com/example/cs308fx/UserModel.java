@@ -1,8 +1,5 @@
 package com.example.cs308fx;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,13 +54,14 @@ public class UserModel {
 
             if (rs.next() && rs.getBoolean("approved")) {
                 user = new Student(
+                        rs.getInt("studentId"),
                         rs.getString("username"),
                         rs.getString("firstname"),
                         rs.getString("surname"),
                         rs.getString("gender"),
                         rs.getString("dateOfBirth"),
                         rs.getString("email"),
-                        rs.getString("courseId"),
+                        rs.getInt("courseId"),
                         rs.getString("courseName"),
                         rs.getString("decision")
                 );
@@ -78,13 +76,15 @@ public class UserModel {
 
             if (rs.next() && rs.getBoolean("approved")) {
                 user = new Lecturer(
+                        rs.getInt("lecturerId"),
                         rs.getString("username"),
                         rs.getString("firstname"),
                         rs.getString("surname"),
                         rs.getString("gender"),
                         rs.getString("dateOfBirth"),
                         rs.getString("email"),
-                        rs.getString("qualification")
+                        rs.getString("qualification"),
+                        rs.getBoolean("approved")
                 );
             }
         } else if (Objects.equals("manager", role)) {
@@ -96,6 +96,7 @@ public class UserModel {
 
             if (rs.next()) {
                 user = new Manager(
+                        rs.getInt(("managerId")),
                         rs.getString("username"),
                         rs.getString("firstname"),
                         rs.getString("surname"),
@@ -111,7 +112,7 @@ public class UserModel {
 
     public List<Module> getModulesForStudent(String studentId) {
         List<Module> modules = new ArrayList<>();
-        String query = "SELECT m.moduleId, m.moduleName, m.credit, m.moduleInfo, m.maxAttempts, m.courseId " +
+        String query = "SELECT m.moduleId, m.moduleName, m.credit, m.moduleInfo " +
                 "FROM module m " +
                 "JOIN studentModule sm ON m.moduleId = sm.moduleId " +
                 "WHERE sm.studentId = ?;";
@@ -124,9 +125,7 @@ public class UserModel {
                     String moduleName = rs.getString("moduleName");
                     String moduleInfo = rs.getString("moduleInfo");
                     int credits = rs.getInt("credit");
-                    int maxAttempts = rs.getInt("maxAttempts");
-                    String courseId = rs.getString("courseId");
-                    modules.add(new Module(moduleId, moduleName, moduleInfo, credits, maxAttempts, courseId));
+                    modules.add(new Module(moduleId, moduleName, moduleInfo, credits));
                 }
             }
         } catch (SQLException e) {
@@ -137,9 +136,41 @@ public class UserModel {
         return modules;
     }
 
+    public List<Student> getStudentsForModule(int moduleId) {
+        List<Student> students = new ArrayList<>();
+        String query = "SELECT * " +
+                "FROM student s " +
+                "JOIN studentModule sm ON s.studentId = sm.studentId " +
+                "WHERE sm.moduleId = ?;";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setInt(1, moduleId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    int studentId             = rs.getInt("studentId");
+                    String studentUsername    = rs.getString("username");
+                    String studentFirstname   = rs.getString("firstname");
+                    String studentSurname     = rs.getString("surname");
+                    String studentGender      = rs.getString("gender");
+                    String studentEmail       = rs.getString("email");
+                    String studentDateOfBirth = rs.getString("dateOfBirth");
+                    int studentCourseId       = rs.getInt("courseId");
+                    String studentDecision    = rs.getString("decision");
+                    String studentApproved    = rs.getString("approved");
+                    students.add(new Student(studentId, studentUsername, studentFirstname, studentSurname, studentGender, studentEmail, studentDateOfBirth, studentCourseId, studentDecision, studentApproved));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle exceptions
+        }
+
+        return students;
+    }
+
     public List<Module> getModulesForLecturer(String lecturerId) {
         List<Module> modules = new ArrayList<>();
-        String query = "SELECT m.moduleId, m.moduleName, m.credit, m.moduleInfo, m.maxAttempts, m.courseId " +
+        String query = "SELECT m.moduleId, m.moduleName, m.credit, m.moduleInfo " +
                 "FROM module m " +
                 "JOIN lecturerModule lm ON m.moduleId = lm.moduleId " +
                 "WHERE lm.lecturerId = ?;";
@@ -152,9 +183,7 @@ public class UserModel {
                     String moduleName = rs.getString("moduleName");
                     String moduleInfo = rs.getString("moduleInfo");
                     int credits = rs.getInt("credit");
-                    int maxAttempts = rs.getInt("maxAttempts");
-                    String courseId = rs.getString("courseId");
-                    modules.add(new Module(moduleId, moduleName, moduleInfo, credits, maxAttempts, courseId));
+                    modules.add(new Module(moduleId, moduleName, moduleInfo, credits));
                 }
             }
         } catch (SQLException e) {

@@ -23,6 +23,8 @@ import java.util.Date;
 
 
 public class Person extends UserModel {
+
+    protected int id;
     protected String username;
     protected String firstName;
     protected String surname;
@@ -30,7 +32,8 @@ public class Person extends UserModel {
     protected String dateOfBirth;
     protected String email;
 
-    public Person(String username, String firstName, String surname, String gender, String dateOfBirth, String email) {
+    public Person(int id, String username, String firstName, String surname, String gender, String dateOfBirth, String email) {
+        this.id = id;
         this.username = username;
         this.firstName = firstName;
         this.surname = surname;
@@ -38,12 +41,13 @@ public class Person extends UserModel {
         this.dateOfBirth = dateOfBirth;
         this.email = email;
     }
-    public String getId() {
+    public String getUsername() {
         return username;
     }
+
+    public int getId() { return id; }
     public String getFirstName() { return firstName; }
     public String getSurname() { return surname; }
-    public String getUsername() {return username; }
     public String getGender() { return gender; }
     public String getEmail() { return email; }
     public String getDateOfBirth() { return dateOfBirth; }
