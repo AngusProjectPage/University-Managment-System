@@ -7,7 +7,7 @@
 
 <!-- this is the students view of a module, they can download the lab notes etc  -->
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #d4ebe9;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs308fx.controllers.ModuleController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #d4ebe9;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs308fx.controllers.ModuleController">
    <children>
       <Label fx:id="moduleName" alignment="CENTER" contentDisplay="CENTER" text="Module:" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <padding>
@@ -69,5 +69,6 @@
             </TextField>
          </children>
       </GridPane>
+      <Button layoutX="14.0" layoutY="32.0" mnemonicParsing="false" onAction="#backToMain" style="-fx-background-color: #E76F51;" text="Back" />
    </children>
 </AnchorPane>
