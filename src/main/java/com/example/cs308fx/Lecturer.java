@@ -2,6 +2,10 @@ package com.example.cs308fx;
 
 import com.example.cs308fx.controllers.UserController;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  * A Lecturer is a subclass of {@link Person} and a sub-subclass of a {@link UserController} <br>
  * A Lecturer has different permissions to a {@link Student}
@@ -26,8 +30,20 @@ public class Lecturer extends Person {
         this.qualification = qualification;
     }
 
+    public void updateModuleInfo(Integer moduleId, String moduleInfo){
+        String query = "UPDATE module SET moduleInfo = ? WHERE moduleId = ?";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, moduleInfo);
+            ps.setInt(2, moduleId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            // Handling any SQL Exceptions
+            e.printStackTrace();
+        }
+        }
+    }
+
     // Getters and setters for lecturer-specific fields
-}
 
 
 //TODO: update module information

@@ -7,7 +7,7 @@
 
 <!-- this is the lecturers view of a module, they can change the lab notes etc  -->
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #d4ebe9;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs308fx.controllers.ModuleLecturerController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #d4ebe9;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs308fx.controllers.ModuleLecturerController">
    <children>
       <Button mnemonicParsing="false" onAction="#backToMain" style="-fx-background-color: #E76F51;" text="Back" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="30.0">
          <opaqueInsets>
@@ -33,12 +33,7 @@
                <font>
                   <Font size="13.0" />
                </font></Label>
-            <ListView editable="true" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
-               <GridPane.margin>
-                  <Insets top="20.0" />
-               </GridPane.margin>
-            </ListView>
-            <Button mnemonicParsing="false" style="-fx-background-color: #E76F51;" text="Update Information" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+            <Button mnemonicParsing="false" onAction="#handleUpdateInfoAction" style="-fx-background-color: #E76F51;" text="Update Information" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets left="10.0" top="10.0" />
                </GridPane.margin></Button>
@@ -79,6 +74,11 @@
                   </VBox>
                </children>
             </HBox>
+            <TextArea fx:id="moduleInfo" prefHeight="79.0" prefWidth="300.0" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets top="20.0" />
+               </GridPane.margin>
+            </TextArea>
          </children>
       </GridPane>
       <Label fx:id="moduleName" alignment="TOP_CENTER" contentDisplay="CENTER" text="Module:" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
