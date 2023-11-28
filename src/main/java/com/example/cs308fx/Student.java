@@ -21,13 +21,12 @@ import com.example.cs308fx.controllers.UserController;
  * @see Lecturer
  */
 public class Student extends Person {
-    private String courseId;
+    private int courseId;
     private String courseName;
-
     private String decision;
 
     public Student(String username, String firstName, String surname, String gender,
-                   String dateOfBirth, String email, String courseId,
+                   String dateOfBirth, String email, int courseId,
                    String courseName, String decision) {
         super(username, firstName, surname, gender, dateOfBirth, email);
         this.courseId = courseId;
@@ -40,7 +39,7 @@ public class Student extends Person {
         return courseName;
     }
 
-    public String getCourseId() {
+    public int getCourseId() {
         return courseId;
     }
     public String getDecision() { return decision; }

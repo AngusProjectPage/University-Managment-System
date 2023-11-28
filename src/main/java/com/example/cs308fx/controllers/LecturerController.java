@@ -86,8 +86,8 @@ public class LecturerController {
         Parent moduleView = loader.load();
 
         ModuleLecturerController moduleLecturerController = loader.getController();
-        moduleLecturerController.setCurrentLecturerModule(module);
         moduleLecturerController.setLecturer(loggedInLecturer);
+        moduleLecturerController.setCurrentLecturerModule(module);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(moduleView);
