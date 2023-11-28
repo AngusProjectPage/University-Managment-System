@@ -136,6 +136,31 @@ public class UserModel {
         return modules;
     }
 
+    public List<Module> getModulesForLecturer(String lecturerId) {
+        List<Module> modules = new ArrayList<>();
+        String query = "SELECT m.moduleId, m.moduleName, m.credit " +
+                "FROM module m " +
+                "JOIN lecturerModule lm ON m.moduleId = lm.moduleId " +
+                "WHERE lm.lecturerId = ?;";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, lecturerId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    String moduleId = rs.getString("moduleId");
+                    String moduleName = rs.getString("moduleName");
+                    int credits = rs.getInt("credit");
+                    modules.add(new Module(moduleId, moduleName, credits));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle exceptions
+        }
+
+        return modules;
+    }
+
 
 
 }
