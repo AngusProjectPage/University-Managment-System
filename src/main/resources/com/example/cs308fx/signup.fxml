@@ -67,7 +67,7 @@
                   <VBox prefHeight="59.0" prefWidth="151.0">
                      <children>
                         <PasswordField fx:id="passwordField" prefHeight="25.0" prefWidth="150.0" />
-                        <Label text="Password should contain" />
+                        <Label prefHeight="16.0" prefWidth="169.0" text="Password should contain" />
                         <Label text="8 characters or more" />
                      </children>
                   </VBox>
@@ -81,7 +81,7 @@
             </HBox>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="231.0" prefWidth="600.0" spacing="20.0">
                <children>
-                  <Label prefHeight="25.0" prefWidth="97.0" text="Gender: ">
+                  <Label prefHeight="25.0" prefWidth="114.0" text="Gender: ">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -94,7 +94,7 @@
             </HBox>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="164.0" prefWidth="600.0" spacing="20.0">
                <children>
-                  <Label prefHeight="25.0" prefWidth="97.0" text="Role:">
+                  <Label prefHeight="25.0" prefWidth="114.0" text="Role:">
                      <font>
                         <Font size="16.0" />
                      </font></Label>
@@ -106,7 +106,7 @@
             </HBox>
             <HBox fx:id="password11" alignment="CENTER" layoutX="10.0" layoutY="141.0" prefWidth="600.0" spacing="20.0">
                <children>
-                  <Label prefHeight="25.0" prefWidth="97.0" text="Date Of Birth:">
+                  <Label prefHeight="24.0" prefWidth="114.0" text="Date Of Birth:">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -139,17 +139,12 @@
             </HBox>
             <HBox alignment="BOTTOM_CENTER" prefHeight="66.0" prefWidth="600.0" spacing="20.0">
                <children>
-                  <Label prefHeight="29.0" prefWidth="158.0" text="Already have an account?">
+                  <Label prefHeight="29.0" text="Already have an account?">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
                   <Button mnemonicParsing="false" onAction="#login" prefHeight="8.0" prefWidth="79.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Sign In" textFill="#e76f51" underline="true">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Button>
-                  <Button layoutX="360.0" layoutY="46.0" mnemonicParsing="false" onAction="#login" prefHeight="30.0" prefWidth="122.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Create Manager" textFill="#e76f51" underline="true">
                      <font>
                         <Font size="14.0" />
                      </font>

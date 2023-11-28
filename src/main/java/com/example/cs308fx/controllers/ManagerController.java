@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -17,7 +16,6 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
-import com.example.cs308fx.UserModel;
 import com.example.cs308fx.Manager;
 public class ManagerController {
 
@@ -160,10 +158,10 @@ public class ManagerController {
     @FXML
     private void openUpdatePasswordView(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/cs308fx/UpdatePassword.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/cs308fx/UpdatePasswordManager.fxml"));
             Parent root = loader.load();
 
-            UpdatePasswordController updatePasswordController = loader.getController();
+            UpdatePasswordManagerController updatePasswordController = loader.getController();
             updatePasswordController.setLoggedInUser(loggedInManager); // Assuming you have a method like this in UpdatePasswordController
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
