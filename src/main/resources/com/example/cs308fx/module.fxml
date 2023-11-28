@@ -67,10 +67,7 @@
                   <Insets left="10.0" right="10.0" />
                </GridPane.margin>
             </TextField>
-            <Label fx:id="description" alignment="CENTER" GridPane.rowIndex="1">
-               <padding>
-                  <Insets left="10.0" />
-               </padding></Label>
+            <TextArea fx:id="description" editable="false" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #d4ebe9;" GridPane.rowIndex="1" />
          </children>
       </GridPane>
       <Button layoutX="14.0" layoutY="32.0" mnemonicParsing="false" onAction="#backToMain" style="-fx-background-color: #E76F51;" text="Back" />
