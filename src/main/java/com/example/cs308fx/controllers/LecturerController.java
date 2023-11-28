@@ -32,7 +32,7 @@ public class LecturerController {
     }
 
 
-    private void openUpdatePasswordView(ActionEvent event) {
+    public void updatePassword(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/cs308fx/updatePassword.fxml"));
             Parent root = loader.load();
