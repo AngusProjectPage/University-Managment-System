@@ -31,6 +31,9 @@ public class ModuleController {
     @FXML
     private Label moduleName;
 
+    @FXML
+    private Label description;
+
     public void setStudent(Student student) {
         this.student = student;
     }
@@ -42,6 +45,7 @@ public class ModuleController {
 
     private void setLabels() {
         moduleName.setText("Module: " + currentModule.getModuleName());
+        description.setText(currentModule.getModuleInfo());
     }
 
     @FXML
