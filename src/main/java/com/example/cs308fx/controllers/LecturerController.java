@@ -65,8 +65,9 @@ public class LecturerController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/cs308fx/moduleLecturer.fxml"));
         Parent moduleView = loader.load();
 
-        ModuleController moduleController = loader.getController();
-        moduleController.setCurrentModule(module);
+        ModuleLecturerController moduleLecturerController = loader.getController();
+        moduleLecturerController.setCurrentLecturerModule(module);
+        moduleLecturerController.setLecturer(loggedInLecturer);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(moduleView);
