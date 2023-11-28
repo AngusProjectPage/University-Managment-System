@@ -1,8 +1,9 @@
 package com.example.cs308fx.controllers;
 
-import com.example.cs308fx.*;
-
+import com.example.cs308fx.Course;
+import com.example.cs308fx.MySqlConnect;
 import com.example.cs308fx.Module;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +21,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import com.example.cs308fx.Manager;
 
 public class ManagerController {
 
@@ -93,21 +96,11 @@ public class ManagerController {
     @FXML
     private TextField courseMaxCompField;
 
-    @FXML
-    private ComboBox<Person> activeUsersCombo;
-
     public void populateUsersComboBox() {
-        usersComboBox.promptTextProperty().set("Users");
-        activeUsersCombo.promptTextProperty().set("Users");
-
         try {
             List<String> unapprovedUsers = loggedInManager.getUnapprovedUsers();
             usersComboBox.getItems().clear();
             usersComboBox.getItems().addAll(unapprovedUsers);
-
-            List<Person> approvedUsers = loggedInManager.getApprovedUsers();
-            activeUsersCombo.getItems().clear();
-            activeUsersCombo.getItems().addAll(approvedUsers);
         } catch (SQLException e) {
             // Handle SQL Exception
             e.printStackTrace();
@@ -342,24 +335,6 @@ public class ManagerController {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-    }
-
-    @FXML
-    public void deactivateUser(ActionEvent event) {
-        Person user = activeUsersCombo.getValue();
-        if (user == null) {
-            updateFeedback("Please select a user before deactivating");
-            return;
-        }
-
-        try {
-            loggedInManager.deactivateUser(user);
-            updateFeedback(user.getUsername() + " deactivated");
-            populateUsersComboBox();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            updateFeedback("Could not deactivate user");
         }
     }
 

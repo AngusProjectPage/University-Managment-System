@@ -13,13 +13,13 @@ import java.util.Arrays;
  
 public class Course {
     ArrayList<Module> modules;
-    String code;
+    int code;
     String name;
     String description;
     boolean[] semesters;
     Integer maxModuleCompensation;
 
-    public Course(String code, String name, String description, String sems, ArrayList<Module> modules, int maxComp) {
+    public Course(int code, String name, String description, String sems, ArrayList<Module> modules, int maxComp) {
         this.code = code;
         this.name = name;
         this.description = description;
@@ -46,7 +46,7 @@ public class Course {
         return name;
     }
 
-    public String getCourseId() {
+    public Integer getCourseId() {
         return code;
     }
 
