@@ -23,14 +23,15 @@
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="293.0" prefWidth="301.0" spacing="10.0">
                <children>
-                  <Label text="Update Exam Mark:">
+                  <Label contentDisplay="CENTER" text="Update Exam Mark:">
                      <font>
                         <Font size="16.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="20.0" />
+                        <Insets bottom="10.0" />
                      </VBox.margin>
                   </Label>
+                  <Label fx:id="errMsgExamLabel" alignment="CENTER" contentDisplay="CENTER" style="-fx-text-fill: red;" />
                   <Label text="New Exam Mark">
                      <font>
                         <Font size="14.0" />
@@ -51,14 +52,15 @@
             </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" style="-fx-background-color: #d4ebe9;" GridPane.columnIndex="1">
                <children>
-                  <Label text="Update Lab Mark:">
+                  <Label contentDisplay="CENTER" text="Update Lab Mark:">
                      <font>
                         <Font size="16.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="20.0" />
+                        <Insets bottom="10.0" />
                      </VBox.margin>
                   </Label>
+                  <Label fx:id="errMsgLabLabel" alignment="CENTER" contentDisplay="CENTER" style="-fx-text-fill: red;" />
                   <Label text="New Lab Mark">
                      <font>
                         <Font size="14.0" />

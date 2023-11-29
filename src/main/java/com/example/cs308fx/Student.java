@@ -48,7 +48,7 @@ public class Student extends Person {
     public String getDecision() { return decision; }
 
     public void addLabMark(int labMark, Student student, Module module) throws SQLException {
-        String query = "UPDATE studentModule SET labMark = ? WHERE studentId = ?, moduleId = ?";
+        String query = "UPDATE studentModule SET labMark = ? WHERE studentId = ? AND moduleId = ?";
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setInt(1, labMark);
         ps.setInt(2, student.getId());
@@ -57,7 +57,7 @@ public class Student extends Person {
     }
 
     public void addExamMark(int examMark, Student student, Module module) throws SQLException {
-        String query = "UPDATE studentModule SET examMark = ? WHERE studentId = ?, moduleId = ?";
+        String query = "UPDATE studentModule SET examMark = ? WHERE studentId = ? AND moduleId = ?";
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setInt(1, examMark);
         ps.setInt(2, student.getId());
