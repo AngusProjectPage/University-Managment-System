@@ -76,6 +76,9 @@ public class ManagerController {
     private TextField moduleMaxAttemptsField;
 
     @FXML
+    private TextField moduleMaxAttemptsCreateField;
+
+    @FXML
     private Label businessRuleFeedback;
 
     @FXML
@@ -95,6 +98,15 @@ public class ManagerController {
 
     @FXML
     private ComboBox<Person> activeUsersCombo;
+
+    @FXML
+    private TextField courseSemestersField;
+
+    @FXML
+    private TextField courseCompensationField;
+
+    @FXML
+    private TextField moduleInfoField;
 
     public void populateUsersComboBox() {
         usersComboBox.promptTextProperty().set("Users");
@@ -179,28 +191,40 @@ public class ManagerController {
         String courseCode = courseCodeField.getText();
         String courseName = courseNameField.getText();
         String courseDescription = courseDescriptionField.getText();
+        String courseSemesters = courseSemestersField.getText();
+        String courseCompensation = courseCompensationField.getText();
 
         try {
-            loggedInManager.addCourse(courseCode, courseName, courseDescription);
-            updateFeedback("Course added successfully.");
+            loggedInManager.addOrUpdateCourse(courseCode, courseName, courseDescription, courseSemesters, courseCompensation);
+            updateFeedback("Course added/updated successfully.");
         } catch (SQLException e) {
-            updateFeedback("Error adding course: " + e.getMessage());
+            updateFeedback("Error adding/updating course: " + e.getMessage());
         }
     }
 
     @FXML
     private void handleAddModuleAction() {
-        String moduleCode = moduleCodeField.getText();
-        String moduleName = moduleNameField.getText();
-        String moduleCredit = moduleCreditField.getText();
-
         try {
-            loggedInManager.addModule(moduleCode, moduleName, moduleCredit);
-            updateFeedback("Module added successfully.");
+            Integer moduleCode = !moduleCodeField.getText().isEmpty() ? Integer.valueOf(moduleCodeField.getText()) : null;
+            String moduleName = moduleNameField.getText();
+            Integer moduleCredit = !moduleCreditField.getText().isEmpty() ? Integer.valueOf(moduleCreditField.getText()) : null;
+            String moduleInfo = moduleInfoField.getText();
+            Integer moduleMaxAttempts = !moduleMaxAttemptsCreateField.getText().isEmpty() ? Integer.valueOf(moduleMaxAttemptsCreateField.getText()) : null;
+
+            if (moduleCode != null && moduleCredit != null && moduleMaxAttempts != null) {
+                loggedInManager.addOrUpdateModule(moduleCode, moduleName, moduleCredit, moduleInfo, moduleMaxAttempts);
+                updateFeedback("Module added/updated successfully.");
+            } else {
+                updateFeedback("Please enter valid module details.");
+            }
+
+        } catch (NumberFormatException e) {
+            updateFeedback("Invalid input: " + e.getMessage());
         } catch (SQLException e) {
-            updateFeedback("Error adding module: " + e.getMessage());
+            updateFeedback("Error adding/updating module: " + e.getMessage());
         }
     }
+
 
     @FXML
     private void openUpdatePasswordView(ActionEvent event) {

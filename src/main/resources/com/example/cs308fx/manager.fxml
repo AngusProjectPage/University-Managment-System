@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #d4ebe9;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs308fx.controllers.ManagerController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #d4ebe9;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs308fx.controllers.ManagerController">
    <children>
       <GridPane layoutX="-2.0" layoutY="37.0" prefHeight="363.0" prefWidth="607.0" AnchorPane.leftAnchor="-2.0">
         <columnConstraints>
@@ -13,9 +13,9 @@
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="160.0" minHeight="10.0" prefHeight="126.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="163.0" minHeight="10.0" prefHeight="112.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="167.0" minHeight="10.0" prefHeight="125.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <GridPane GridPane.columnIndex="1">
@@ -24,17 +24,13 @@
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints maxHeight="58.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="58.0" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="39.0" minHeight="6.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="39.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="39.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="40.0" minHeight="8.0" prefHeight="24.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="addCourseButton" mnemonicParsing="false" onAction="#handleAddCourseAction" style="-fx-background-color: #E76F51;" text="Add Course" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                     <GridPane.margin>
-                        <Insets left="10.0" />
-                     </GridPane.margin>
-                  </Button>
                   <TextField fx:id="courseCodeField" GridPane.columnIndex="1" GridPane.valignment="TOP">
                      <GridPane.margin>
                         <Insets right="10.0" />
@@ -44,6 +40,7 @@
                         <Insets right="10.0" />
                      </GridPane.margin></TextField>
                   <TextField fx:id="courseDescriptionField" layoutX="10.0" layoutY="18.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin></TextField>
@@ -62,25 +59,41 @@
                         <Insets right="10.0" />
                      </GridPane.margin>
                   </Label>
+                  <Label layoutX="89.0" layoutY="65.0" text="Semesters:" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label layoutX="89.0" layoutY="93.0" text="Max Compenstation:" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <TextField fx:id="courseSemestersField" layoutX="162.0" layoutY="61.0" prefHeight="18.0" prefWidth="151.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <TextField fx:id="courseCompensationField" layoutX="162.0" layoutY="89.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin>
+                  </TextField>
                </children>
             </GridPane>
-            <GridPane layoutX="314.0" layoutY="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <GridPane layoutX="314.0" layoutY="10.0" prefHeight="125.0" prefWidth="295.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                </columnConstraints>
                <rowConstraints>
-                  <RowConstraints maxHeight="58.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="36.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="38.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="58.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="43.0" minHeight="9.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="46.0" minHeight="2.0" prefHeight="24.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="38.0" minHeight="0.0" prefHeight="27.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="38.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button fx:id="addModuleButton" mnemonicParsing="false" onAction="#handleAddModuleAction" style="-fx-background-color: #E76F51;" text="Add Module" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                     <GridPane.margin>
-                        <Insets left="10.0" />
-                     </GridPane.margin>
-                  </Button>
                   <TextField fx:id="moduleCodeField" GridPane.columnIndex="1" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets right="10.0" />
@@ -111,6 +124,26 @@
                         <Insets right="10.0" />
                      </GridPane.margin>
                   </Label>
+                  <Label layoutX="117.0" layoutY="64.0" text="Module Info:" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label layoutX="84.0" layoutY="94.0" text="Max Attempts:" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <TextField fx:id="moduleInfoField" layoutX="162.0" layoutY="60.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <TextField fx:id="moduleMaxAttemptsCreateField" layoutX="162.0" layoutY="90.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin>
+                  </TextField>
                </children>
             </GridPane>
             <GridPane GridPane.rowIndex="1">
@@ -228,6 +261,16 @@
                </padding>
             </Label>
             <Label fx:id="businessRuleFeedback" alignment="CENTER" textFill="RED" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <Button fx:id="addCourseButton" mnemonicParsing="false" onAction="#handleAddCourseAction" style="-fx-background-color: #E76F51;" text="Add/Edit Course" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="50.0" left="175.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="addModuleButton" mnemonicParsing="false" onAction="#handleAddModuleAction" style="-fx-background-color: #E76F51;" text="Add/Edit Module" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="175.0" top="50.0" />
+               </GridPane.margin>
+            </Button>
          </children>
       </GridPane>
       <Label id="managerIdLabel" fx:id="managerIdLabel" alignment="CENTER" layoutX="211.0" layoutY="14.0" text="Manager ID: Loading..." AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

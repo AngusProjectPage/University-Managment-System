@@ -111,23 +111,38 @@ public class Manager extends Person {
         ps.executeUpdate();
     }
 
-    public void addCourse(String id, String name, String description) throws SQLException {
-        String query = "INSERT INTO course (courseId, courseName, courseDescription) VALUES (?, ?, ?)";
+    public void addOrUpdateCourse(String id, String name, String description, String semesters, String compensation) throws SQLException {
+        String query = "INSERT INTO course (courseId, courseName, courseDescription, semesters, maxCompensation) VALUES (?, ?, ?, ?, ?) " +
+                "ON DUPLICATE KEY UPDATE courseName = ?, courseDescription = ?, semesters = ?, maxCompensation = ?";
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setString(1, id);
         ps.setString(2, name);
         ps.setString(3, description);
+        ps.setString(4, semesters);
+        ps.setString(5, compensation);
+        ps.setString(6, name);
+        ps.setString(7, description);
+        ps.setString(8, semesters);
+        ps.setString(9, compensation);
         ps.executeUpdate();
     }
 
-    public void addModule(String id, String name, String credit) throws SQLException {
-        String query = "INSERT INTO module (moduleId, moduleName, credit) VALUES (?, ?, ?)";
+    public void addOrUpdateModule(Integer id, String name, Integer credit, String moduleInfo, Integer maxAttempts) throws SQLException {
+        String query = "INSERT INTO module (moduleId, moduleName, credit, moduleInfo, maxAttempts) VALUES (?, ?, ?, ?, ?) " +
+                "ON DUPLICATE KEY UPDATE moduleName = ?, credit = ?, moduleInfo = ?, maxAttempts = ?";
         PreparedStatement ps = connection.prepareStatement(query);
-        ps.setString(1, id);
+        ps.setInt(1, id);
         ps.setString(2, name);
-        ps.setString(3, credit);
+        ps.setInt(3, credit);
+        ps.setString(4, moduleInfo);
+        ps.setInt(5, maxAttempts);
+        ps.setString(6, name);
+        ps.setInt(7, credit);
+        ps.setString(8, moduleInfo);
+        ps.setInt(9, maxAttempts);
         ps.executeUpdate();
     }
+
 
     public void updatePassword(String userId, String newPassword) throws SQLException {
         String table;
@@ -163,6 +178,18 @@ public class Manager extends Person {
         int affectedRows = ps.executeUpdate();
         if (affectedRows == 0) {
             throw new SQLException("Deactivating user failed, no rows affected.");
+        }
+    }
+
+    public void updateCourseInfo(Integer moduleId, String courseInfo) {
+        String query = "UPDATE course SET courseDescription = ? WHERE courseId = ?";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, courseInfo);
+            ps.setInt(2, moduleId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            // Handling any SQL Exceptions
+            e.printStackTrace();
         }
     }
 
