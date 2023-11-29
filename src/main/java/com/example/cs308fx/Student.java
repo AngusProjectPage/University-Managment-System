@@ -47,6 +47,12 @@ public class Student extends Person {
     }
     public String getDecision() { return decision; }
 
+    @Override
+    public String toString() {
+        return username;
+    }
+
+
     public void addLabMark(int labMark, Student student, Module module) throws SQLException {
         String query = "UPDATE studentModule SET labMark = ? WHERE studentId = ? AND moduleId = ?";
         PreparedStatement ps = connection.prepareStatement(query);

@@ -190,19 +190,38 @@
                   <TextField fx:id="courseMaxCompField" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                </children>
             </GridPane>
-            <Label text="Users waiting approval:" GridPane.halignment="CENTER" GridPane.valignment="TOP">
-               <GridPane.margin>
-                  <Insets top="5.0" />
-               </GridPane.margin>
-            </Label>
-            <ComboBox fx:id="usersComboBox" prefWidth="150.0" promptText="Users" style="-fx-background-color: #E76F51;" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets bottom="30.0" />
-               </GridPane.margin></ComboBox>
-            <Button fx:id="approveButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleApproveButtonAction" style="-fx-background-color: #E76F51;" text="Approve User" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
-               <GridPane.margin>
-                  <Insets bottom="30.0" />
-               </GridPane.margin></Button>
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="64.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Users waiting approval:" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Label>
+                  <ComboBox fx:id="usersComboBox" prefWidth="150.0" promptText="Users" style="-fx-background-color: #E76F51;" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </ComboBox>
+                  <Button fx:id="approveButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleApproveButtonAction" style="-fx-background-color: #E76F51;" text="Approve User" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+                  <Label text="Active Users:" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <ComboBox fx:id="activeUsersCombo" layoutX="11.0" layoutY="52.0" prefWidth="150.0" promptText="Users" style="-fx-background-color: #E76F51;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                  <Button alignment="CENTER" contentDisplay="CENTER" layoutX="35.0" layoutY="101.0" mnemonicParsing="false" onAction="#deactivateUser" style="-fx-background-color: #E76F51;" text="Deactivate User" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+               </children>
+            </GridPane>
             <Label id="managerIdLabel" fx:id="feedbackLabel" alignment="CENTER" textFill="RED" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <padding>
                   <Insets top="5.0" />
