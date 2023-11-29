@@ -1,6 +1,7 @@
 package com.example.cs308fx;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Course is a class that has a code, name description and a number of assigned {@link Module}'s.<br>
@@ -11,16 +12,25 @@ import java.util.ArrayList;
 
  
 public class Course {
-    ArrayList<Module> modules = new ArrayList<>();
+    ArrayList<Module> modules;
     int code;
     String name;
     String description;
-    boolean[] semesters = new boolean[]{true, true};
+    boolean[] semesters;
+    Integer maxModuleCompensation;
 
-    public Course(int code, String name, String description) {
+    public Course(int code, String name, String description, String sems, ArrayList<Module> modules, int maxComp) {
         this.code = code;
         this.name = name;
         this.description = description;
+        this.modules = modules;
+        this.maxModuleCompensation = maxComp;
+
+        switch (sems) {
+            case "first" -> this.semesters = new boolean[]{true, false};
+            case "second" -> this.semesters = new boolean[]{false, true};
+            case "both" -> this.semesters = new boolean[]{true, true};
+        }
     }
 
     /**
@@ -35,4 +45,35 @@ public class Course {
     public String getName() {
         return name;
     }
+
+    public Integer getCourseId() {
+        return code;
+    }
+
+    public String getSemesters() {
+        String sem = "";
+        if (Arrays.equals(semesters, new boolean[]{true, false})) {
+            sem = "First Only";
+        } else if (Arrays.equals(semesters, new boolean[]{false, true})) {
+            sem = "Second Only";
+        } else if (Arrays.equals(semesters, new boolean[]{true, true})) {
+            sem = "Both";
+        }
+
+        return sem;
+    }
+
+    public Integer getMaxComp() {
+        return maxModuleCompensation;
+    }
+
+    public void setMaxComp(Integer maxComp) {
+        this.maxModuleCompensation = maxComp;
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
 }

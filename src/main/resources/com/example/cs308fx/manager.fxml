@@ -5,148 +5,332 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #d4ebe9;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs308fx.controllers.ManagerController">
+<AnchorPane prefHeight="933.0" prefWidth="890.0" style="-fx-background-color: #d4ebe9;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs308fx.controllers.ManagerController">
    <children>
-      <GridPane layoutX="-2.0" layoutY="37.0" prefHeight="363.0" prefWidth="607.0" AnchorPane.leftAnchor="-2.0">
+      <GridPane gridLinesVisible="true" layoutX="-2.0" layoutY="37.0" prefHeight="771.0" prefWidth="890.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="396.0" minHeight="255.0" prefHeight="255.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="330.0" minHeight="255.0" prefHeight="218.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="350.0" minHeight="255.0" prefHeight="279.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <GridPane GridPane.columnIndex="1">
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Add/Edit Course" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <GridPane alignment="TOP_CENTER" maxHeight="180.0" prefHeight="165.0" prefWidth="445.0" GridPane.columnIndex="1" GridPane.valignment="CENTER">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="223.0" minWidth="10.0" prefWidth="223.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="293.0" minWidth="10.0" prefWidth="222.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints maxHeight="58.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="36.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="39.0" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="39.0" minHeight="6.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="39.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="40.0" minHeight="8.0" prefHeight="24.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="addCourseButton" mnemonicParsing="false" onAction="#handleAddCourseAction" style="-fx-background-color: #E76F51;" text="Add Course" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                     <GridPane.margin>
-                        <Insets left="10.0" />
-                     </GridPane.margin>
-                  </Button>
-                  <TextField fx:id="courseCodeField" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                  <TextField fx:id="courseCodeField" maxWidth="170.0" GridPane.columnIndex="1" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin></TextField>
-                  <TextField fx:id="courseNameField" layoutX="10.0" layoutY="18.0" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
+                  <TextField fx:id="courseNameField" layoutX="10.0" layoutY="18.0" maxWidth="170.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin></TextField>
-                  <TextField fx:id="courseDescriptionField" layoutX="10.0" layoutY="18.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <TextField fx:id="courseDescriptionField" layoutX="10.0" layoutY="18.0" maxWidth="170.0" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin></TextField>
-                  <Label text="Code:" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+                  <Label text="Code:" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+                     <GridPane.margin>
+                        <Insets right="30.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label layoutX="121.0" layoutY="10.0" text="Name:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                     <GridPane.margin>
+                        <Insets right="30.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label layoutX="121.0" layoutY="10.0" text="Description:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                     <GridPane.margin>
+                        <Insets right="30.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label layoutX="89.0" layoutY="65.0" text="Semesters:" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets right="30.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label layoutX="89.0" layoutY="93.0" text="Max Compenstation:" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                     <GridPane.margin>
+                        <Insets right="30.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <TextField fx:id="courseSemestersField" layoutX="162.0" layoutY="61.0" maxWidth="170.0" prefHeight="18.0" prefWidth="151.0" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin>
-                  </Label>
-                  <Label layoutX="121.0" layoutY="10.0" text="Name:" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+                  </TextField>
+                  <TextField fx:id="courseCompensationField" layoutX="162.0" layoutY="89.0" maxWidth="170.0" prefHeight="25.0" prefWidth="182.0" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin>
-                  </Label>
-                  <Label layoutX="121.0" layoutY="10.0" text="Description:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                     <GridPane.margin>
-                        <Insets right="10.0" />
-                     </GridPane.margin>
-                  </Label>
+                  </TextField>
                </children>
             </GridPane>
-            <GridPane layoutX="314.0" layoutY="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Button fx:id="addCourseButton" mnemonicParsing="false" onAction="#handleAddCourseAction" style="-fx-background-color: #E76F51;" text="Add/Edit Course" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="175.0" />
+               </GridPane.margin>
+            </Button>
+            <GridPane layoutX="314.0" layoutY="10.0" maxHeight="180.0" prefHeight="125.0" prefWidth="295.0" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                </columnConstraints>
                <rowConstraints>
-                  <RowConstraints maxHeight="58.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="36.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="58.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="43.0" minHeight="9.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="46.0" minHeight="2.0" prefHeight="24.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="38.0" minHeight="0.0" prefHeight="27.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="38.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button fx:id="addModuleButton" mnemonicParsing="false" onAction="#handleAddModuleAction" style="-fx-background-color: #E76F51;" text="Add Module" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                     <GridPane.margin>
-                        <Insets left="10.0" />
-                     </GridPane.margin>
-                  </Button>
-                  <TextField fx:id="moduleCodeField" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                  <TextField fx:id="moduleCodeField" maxWidth="170.0" GridPane.columnIndex="1" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField fx:id="moduleNameField" layoutX="10.0" layoutY="18.0" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
+                  <TextField fx:id="moduleNameField" layoutX="10.0" layoutY="18.0" maxWidth="170.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField fx:id="moduleCreditField" layoutX="10.0" layoutY="18.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <TextField fx:id="moduleCreditField" layoutX="10.0" layoutY="18.0" maxWidth="170.0" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin>
                   </TextField>
-                  <Label text="Code:" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+                  <Label layoutX="121.0" layoutY="10.0" text="Code:" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+                     <GridPane.margin>
+                        <Insets right="30.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label layoutX="121.0" layoutY="10.0" text="Name:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                     <GridPane.margin>
+                        <Insets right="30.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label layoutX="121.0" layoutY="10.0" text="Credit:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                     <GridPane.margin>
+                        <Insets right="30.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label layoutX="117.0" layoutY="64.0" text="Module Info:" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets right="30.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label layoutX="84.0" layoutY="94.0" text="Max Attempts:" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                     <GridPane.margin>
+                        <Insets right="30.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <TextField fx:id="moduleInfoField" layoutX="162.0" layoutY="60.0" maxWidth="170.0" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin>
-                  </Label>
-                  <Label layoutX="121.0" layoutY="10.0" text="Name:" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+                  </TextField>
+                  <TextField fx:id="moduleMaxAttemptsCreateField" layoutX="162.0" layoutY="90.0" maxWidth="170.0" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin>
-                  </Label>
-                  <Label layoutX="121.0" layoutY="10.0" text="Credit:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                     <GridPane.margin>
-                        <Insets right="10.0" />
-                     </GridPane.margin>
-                  </Label>
+                  </TextField>
                </children>
             </GridPane>
-            <Label text="Users waiting approval:" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+            <GridPane maxHeight="180.0" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="218.0" minWidth="10.0" prefWidth="174.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="271.0" minWidth="10.0" prefWidth="271.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="84.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <ComboBox fx:id="modulesCombo" onAction="#loadModuleDetails" prefWidth="150.0" promptText="Modules" style="-fx-background-color: #E76F51;" GridPane.halignment="CENTER" />
+                  <GridPane GridPane.columnIndex="1">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Code:" />
+                        <Label text="Name:" GridPane.rowIndex="1" />
+                        <Label text="Credits:" GridPane.rowIndex="2" />
+                        <Label fx:id="moduleCodeLabel" alignment="CENTER" contentDisplay="CENTER" GridPane.columnIndex="1" />
+                        <Label fx:id="moduleNameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="86.0" layoutY="15.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="moduleCreditsLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="86.0" layoutY="43.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                     </children>
+                  </GridPane>
+                  <Button fx:id="editModuleButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#editMaxAttempts" style="-fx-background-color: #E76F51;" text="Edit" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin></Button>
+                  <Label text="Max Attempts:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="moduleMaxAttemptsField" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets left="90.0" />
+                     </GridPane.margin></TextField>
+               </children>
                <GridPane.margin>
-                  <Insets top="5.0" />
+                  <Insets top="40.0" />
+               </GridPane.margin>
+            </GridPane>
+            <GridPane layoutX="10.0" layoutY="131.0" maxHeight="180.0" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="218.0" minWidth="10.0" prefWidth="170.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="283.0" minWidth="10.0" prefWidth="275.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="95.0" minHeight="10.0" prefHeight="95.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <ComboBox fx:id="coursesCombo" onAction="#loadCourseDetails" prefWidth="150.0" promptText="Courses" style="-fx-background-color: #E76F51;" GridPane.halignment="CENTER" />
+                  <GridPane GridPane.columnIndex="1">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="68.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="90.0" minWidth="10.0" prefWidth="84.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="22.0" minHeight="10.0" prefHeight="16.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="39.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="59.0" minHeight="10.0" prefHeight="59.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Label text="Code:" />
+                        <Label text="Semesters:" GridPane.rowIndex="1" />
+                        <Label text="Modules:" GridPane.rowIndex="2" />
+                        <Label fx:id="courseSemestersLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="86.0" layoutY="15.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="courseCodeLabel" alignment="CENTER" contentDisplay="CENTER" GridPane.columnIndex="1" />
+                        <ListView fx:id="courseModuleList" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                     </children>
+                  </GridPane>
+                  <Button fx:id="editCourseButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#editMaxComp" style="-fx-background-color: #E76F51;" text="Edit" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+                  <Label text="Max Comp:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="courseMaxCompField" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets left="90.0" />
+                     </GridPane.margin></TextField>
+               </children>
+               <GridPane.margin>
+                  <Insets top="40.0" />
+               </GridPane.margin>
+            </GridPane>
+            <Label id="managerIdLabel" fx:id="feedbackLabel11" alignment="CENTER" contentDisplay="CENTER" layoutX="177.0" layoutY="10.0" prefHeight="50.0" text="Edit Module Attempts" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets />
                </GridPane.margin>
             </Label>
-            <ComboBox fx:id="usersComboBox" prefWidth="150.0" promptText="Users" style="-fx-background-color: #E76F51;" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Button fx:id="approveButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleApproveButtonAction" style="-fx-background-color: #E76F51;" text="Approve User" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
-            <Label id="managerIdLabel" fx:id="feedbackLabel" alignment="CENTER" textFill="RED" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+            <GridPane alignment="BOTTOM_CENTER" prefHeight="181.0" prefWidth="445.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="232.0" minWidth="10.0" prefWidth="223.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="225.0" minWidth="10.0" prefWidth="222.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints />
+                <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+                <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="64.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Users waiting approval:" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Label>
+                  <ComboBox fx:id="usersComboBox" prefWidth="150.0" promptText="Users" style="-fx-background-color: #E76F51;" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </ComboBox>
+                  <Button fx:id="approveButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleApproveButtonAction" style="-fx-background-color: #E76F51;" text="Approve User" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+                  <Label text="Active Users:" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                  <ComboBox fx:id="activeUsersCombo" layoutX="11.0" layoutY="52.0" prefWidth="150.0" promptText="Users" style="-fx-background-color: #E76F51;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                  <Button alignment="CENTER" contentDisplay="CENTER" layoutX="35.0" layoutY="101.0" mnemonicParsing="false" onAction="#deactivateUser" style="-fx-background-color: #E76F51;" text="Deactivate User" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+               </children>
+            </GridPane>
+            <Label id="managerIdLabel" fx:id="feedbackLabel" alignment="CENTER" textFill="RED" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <padding>
                   <Insets top="5.0" />
                </padding>
             </Label>
-            <VBox alignment="CENTER" prefHeight="125.0" prefWidth="304.0" spacing="10.0" GridPane.rowIndex="2">
-               <children>
-                  <Label text="Add lecturer to module" />
-                  <HBox alignment="CENTER" prefWidth="200.0" spacing="10.0">
-                     <children>
-                        <Label prefHeight="17.0" prefWidth="102.0" text="LecturerUsername:" />
-                        <TextField fx:id="lecturerUsernameField" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" layoutX="10.0" layoutY="53.0" prefWidth="200.0" spacing="10.0">
-                     <children>
-                        <Label prefHeight="17.0" prefWidth="102.0" text="Module Id:" />
-                        <TextField fx:id="lecturerModuleIdField" />
-                     </children>
-                  </HBox>
-                  <Button mnemonicParsing="false" onAction="#addLecturerToModule" style="-fx-background-color: #E76F51;" text="Add Lecturer to Module" />
-               </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
+            <Label fx:id="businessRuleFeedback" alignment="CENTER" textFill="RED" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
+            <Button fx:id="addModuleButton" mnemonicParsing="false" onAction="#handleAddModuleAction" style="-fx-background-color: #E76F51;" text="Add/Edit Module" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
                <GridPane.margin>
-                  <Insets top="10.0" />
+                  <Insets bottom="10.0" left="175.0" />
                </GridPane.margin>
-            </VBox>
+            </Button>
+            <Label id="managerIdLabel" fx:id="feedbackLabel1" alignment="CENTER" contentDisplay="CENTER" layoutX="233.0" layoutY="218.0" prefHeight="16.0" prefWidth="111.0" text="Edit User Status" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Add/Edit Module" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label id="managerIdLabel" fx:id="feedbackLabel111" alignment="CENTER" contentDisplay="CENTER" layoutX="155.0" layoutY="265.0" prefHeight="50.0" text="Edit Max Comp" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
          </children>
       </GridPane>
       <Label id="managerIdLabel" fx:id="managerIdLabel" alignment="CENTER" layoutX="211.0" layoutY="14.0" text="Manager ID: Loading..." AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -157,6 +341,6 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Button fx:id="updatePasswordButton" mnemonicParsing="false" onAction="#openUpdatePasswordView" style="-fx-background-color: #E76F51;" text="Update Password" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+      <Button fx:id="updatePasswordButton" layoutX="23.0" layoutY="9.0" mnemonicParsing="false" onAction="#openUpdatePasswordView" prefHeight="32.0" prefWidth="123.0" style="-fx-background-color: #E76F51;" text="Update Password" AnchorPane.leftAnchor="23.0" AnchorPane.topAnchor="9.0" />
    </children>
 </AnchorPane>

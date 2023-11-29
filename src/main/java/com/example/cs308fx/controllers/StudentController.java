@@ -42,7 +42,7 @@ public class StudentController {
     private void updateLabels() {
         studentIdLabel.setText("Student ID: " + loggedInStudent.getUsername());
         courseLabel.setText("Course: " + loggedInStudent.getCourseName());
-        decision.setText("Decision: " + loggedInStudent.getDecision());
+        decision.setText("Decision: " + (loggedInStudent.getDecision() == null ? "No decision" : loggedInStudent.getDecision()));
         name.setText("Name: " + loggedInStudent.getFirstName() + " " + loggedInStudent.getSurname());
     }
 

@@ -25,12 +25,12 @@ public class Lecturer extends Person {
     private String qualification;
 
 
-    public Lecturer(int id, String username, String firstName, String surname, String gender, String dateOfBirth, String email, String qualification, boolean approved) {
+    public Lecturer(int id, String username, String firstName, String surname, String gender, String dateOfBirth, String email, String qualification) {
         super(id, username, firstName, surname, gender, dateOfBirth, email);
         this.qualification = qualification;
     }
 
-    public void updateModuleInfo(Integer moduleId, String moduleInfo){
+    public void updateModuleInfo(Integer moduleId, String moduleInfo) {
         String query = "UPDATE module SET moduleInfo = ? WHERE moduleId = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, moduleInfo);
@@ -40,8 +40,14 @@ public class Lecturer extends Person {
             // Handling any SQL Exceptions
             e.printStackTrace();
         }
-        }
     }
+
+    @Override
+    public String toString() {
+        return username;
+    }
+
+}
 
     // Getters and setters for lecturer-specific fields
 
