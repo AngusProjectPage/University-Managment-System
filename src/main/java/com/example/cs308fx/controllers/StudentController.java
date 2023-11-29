@@ -40,14 +40,14 @@ public class StudentController {
     }
 
     private void updateLabels() {
-        studentIdLabel.setText("Student ID: " + loggedInStudent.getId());
+        studentIdLabel.setText("Student ID: " + loggedInStudent.getUsername());
         courseLabel.setText("Course: " + loggedInStudent.getCourseName());
         decision.setText("Decision: " + loggedInStudent.getDecision());
         name.setText("Name: " + loggedInStudent.getFirstName() + " " + loggedInStudent.getSurname());
     }
 
     private void populateModules() {
-        String studentId = loggedInStudent.getId();
+        String studentId = loggedInStudent.getUsername();
         studentId = studentId.replaceAll("\\D+", "");
         studentId = studentId.replaceFirst("^0+(?!$)", "");
         List<Module> modules = loggedInStudent.getModulesForStudent(studentId);

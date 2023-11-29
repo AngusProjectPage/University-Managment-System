@@ -25,8 +25,8 @@ public class Lecturer extends Person {
     private String qualification;
 
 
-    public Lecturer(String username, String firstName, String surname, String gender, String dateOfBirth, String email, String qualification, boolean approved) {
-        super(username, firstName, surname, gender, dateOfBirth, email);
+    public Lecturer(int id, String username, String firstName, String surname, String gender, String dateOfBirth, String email, String qualification, boolean approved) {
+        super(id, username, firstName, surname, gender, dateOfBirth, email);
         this.qualification = qualification;
     }
 

@@ -2,6 +2,9 @@ package com.example.cs308fx;
 
 import com.example.cs308fx.controllers.UserController;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 /**
  * A Student is a subclass of {@link Person} and a sub-subclass of a {@link UserController} <br>
  * A Student has different permissions to a {@link Lecturer}
@@ -25,10 +28,10 @@ public class Student extends Person {
     private String courseName;
     private String decision;
 
-    public Student(String username, String firstName, String surname, String gender,
+    public Student(int id, String username, String firstName, String surname, String gender,
                    String dateOfBirth, String email, int courseId,
                    String courseName, String decision) {
-        super(username, firstName, surname, gender, dateOfBirth, email);
+        super(id, username, firstName, surname, gender, dateOfBirth, email);
         this.courseId = courseId;
         this.courseName = courseName;
         this.decision = decision;
@@ -43,6 +46,24 @@ public class Student extends Person {
         return courseId;
     }
     public String getDecision() { return decision; }
+
+    public void addLabMark(int labMark, Student student, Module module) throws SQLException {
+        String query = "UPDATE studentModule SET labMark = ? WHERE studentId = ? AND moduleId = ?";
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setInt(1, labMark);
+        ps.setInt(2, student.getId());
+        ps.setInt(3, module.getModuleId());
+        ps.executeUpdate();
+    }
+
+    public void addExamMark(int examMark, Student student, Module module) throws SQLException {
+        String query = "UPDATE studentModule SET examMark = ? WHERE studentId = ? AND moduleId = ?";
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setInt(1, examMark);
+        ps.setInt(2, student.getId());
+        ps.setInt(3, module.getModuleId());
+        ps.executeUpdate();
+    }
 }
 
 

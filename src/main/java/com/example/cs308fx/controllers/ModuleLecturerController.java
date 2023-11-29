@@ -82,7 +82,7 @@ public class ModuleLecturerController {
         Parent moduleView = loader.load();
 
         UpdateStudentController updateStudentController = loader.getController();
-        updateStudentController.init(loggedInLecturer, student);
+        updateStudentController.init(loggedInLecturer, student, lecturerModule);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(moduleView);

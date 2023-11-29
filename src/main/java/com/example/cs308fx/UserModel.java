@@ -54,6 +54,7 @@ public class UserModel {
 
             if (rs.next() && rs.getBoolean("approved")) {
                 user = new Student(
+                        rs.getInt("studentId"),
                         rs.getString("username"),
                         rs.getString("firstname"),
                         rs.getString("surname"),
@@ -75,6 +76,7 @@ public class UserModel {
 
             if (rs.next() && rs.getBoolean("approved")) {
                 user = new Lecturer(
+                        rs.getInt("lecturerId"),
                         rs.getString("username"),
                         rs.getString("firstname"),
                         rs.getString("surname"),
@@ -94,6 +96,7 @@ public class UserModel {
 
             if (rs.next()) {
                 user = new Manager(
+                        rs.getInt(("managerId")),
                         rs.getString("username"),
                         rs.getString("firstname"),
                         rs.getString("surname"),
@@ -135,7 +138,7 @@ public class UserModel {
 
     public List<Student> getStudentsForModule(int moduleId) {
         List<Student> students = new ArrayList<>();
-        String query = "SELECT s.username, s.firstname, s.surname, s.gender, s.email, s.dateOfBirth, s.courseId, s.decision, s.approved " +
+        String query = "SELECT * " +
                 "FROM student s " +
                 "JOIN studentModule sm ON s.studentId = sm.studentId " +
                 "WHERE sm.moduleId = ?;";
@@ -144,6 +147,7 @@ public class UserModel {
 
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
+                    int studentId             = rs.getInt("studentId");
                     String studentUsername    = rs.getString("username");
                     String studentFirstname   = rs.getString("firstname");
                     String studentSurname     = rs.getString("surname");
@@ -153,7 +157,7 @@ public class UserModel {
                     int studentCourseId       = rs.getInt("courseId");
                     String studentDecision    = rs.getString("decision");
                     String studentApproved    = rs.getString("approved");
-                    students.add(new Student(studentUsername, studentFirstname, studentSurname, studentGender, studentEmail, studentDateOfBirth, studentCourseId, studentDecision, studentApproved));
+                    students.add(new Student(studentId, studentUsername, studentFirstname, studentSurname, studentGender, studentEmail, studentDateOfBirth, studentCourseId, studentDecision, studentApproved));
                 }
             }
         } catch (SQLException e) {
