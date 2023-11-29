@@ -31,7 +31,7 @@ import java.util.List;
  * @see UserModel
  * @see Lecturer
  * @see Student
- * @author Connor
+ * @author Connor, Callum
  */
 public class Manager extends Person {
 
@@ -50,6 +50,46 @@ public class Manager extends Person {
         while(rs.next()) {
             String userInfo = rs.getInt("userId") + " - " + rs.getString("firstname") + " " + rs.getString("surname") + " (" + rs.getString("userType") + ")";
             users.add(userInfo);
+        }
+
+        return users;
+    }
+
+    public List<Person> getApprovedUsers() throws SQLException {
+        List<Person> users = new ArrayList<>();
+
+        PreparedStatement ps = connection.prepareStatement("SELECT * FROM student, course WHERE student.courseId = course.courseId AND approved=true");
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            int studentId = rs.getInt("studentId");
+            String username = rs.getString("username");
+            String firstName = rs.getString("firstname");
+            String surname = rs.getString("surname");
+            String gender = rs.getString("gender");
+            String dob = rs.getString("dateOfBirth");
+            String email = rs.getString("email");
+            int courseId = rs.getInt("courseId");
+            String courseName = rs.getString("courseName");
+            String decision = rs.getString("decision");
+
+            users.add(new Student(studentId, username, firstName, surname, gender, dob, email, courseId, courseName, decision));
+        }
+
+        ps = connection.prepareStatement("SELECT * FROM lecturer WHERE approved=true");
+        rs = ps.executeQuery();
+
+        while (rs.next()) {
+            int id = rs.getInt("lecturerId");
+            String username = rs.getString("username");
+            String firstName = rs.getString("firstname");
+            String surname = rs.getString("surname");
+            String gender = rs.getString("gender");
+            String dob = rs.getString("dateOfBirth");
+            String email = rs.getString("email");
+            String qualification = rs.getString("qualification");
+
+            users.add(new Lecturer(id, username, firstName, surname, gender, dob, email, qualification));
         }
 
         return users;
@@ -109,6 +149,20 @@ public class Manager extends Person {
             if (affectedRows == 0) {
                 throw new SQLException("Updating password failed, no rows affected.");
             }
+        }
+    }
+
+    public void deactivateUser(Person user) throws SQLException {
+        String table = (user instanceof Student) ? "student" : "lecturer";
+        String idField = (user instanceof Student) ? "studentId" : "lecturerId";
+        String id = user.getUsername().substring(3);
+
+        PreparedStatement ps = connection.prepareStatement("UPDATE " + table + " SET approved=false WHERE " + idField + "=?;");
+        ps.setInt(1, Integer.parseInt(id));
+
+        int affectedRows = ps.executeUpdate();
+        if (affectedRows == 0) {
+            throw new SQLException("Deactivating user failed, no rows affected.");
         }
     }
 
