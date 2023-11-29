@@ -256,7 +256,7 @@ public class ManagerController {
                     modsInCourse.add(m);
                 }
             }
-            Course course = new Course(rs.getString("courseId"), rs.getString("courseName"), rs.getString("courseDescription"), rs.getString("semesters"), modsInCourse, rs.getInt("maxCompensation"));
+            Course course = new Course(rs.getInt("courseId"), rs.getString("courseName"), rs.getString("courseDescription"), rs.getString("semesters"), modsInCourse, rs.getInt("maxCompensation"));
             coursesCombo.getItems().add(course);
         }
     }
@@ -310,7 +310,7 @@ public class ManagerController {
     public void loadCourseDetails(ActionEvent event) {
         Course course = coursesCombo.getValue();
 
-        courseCodeLabel.setText(course.getCourseId());
+        courseCodeLabel.setText(course.getCourseId().toString());
         courseSemestersLabel.setText(course.getSemesters());
         courseModuleList.getItems().setAll(course.getModules());
         courseMaxCompField.setText(course.getMaxComp().toString());
@@ -333,7 +333,7 @@ public class ManagerController {
 
                 PreparedStatement ps = conn.prepareStatement("UPDATE course SET maxCompensation = ? WHERE courseId = ?");
                 ps.setInt(1, maxComp);
-                ps.setString(2, course.getCourseId());
+                ps.setString(2, course.getCourseId().toString());
                 ps.executeUpdate();
 
                 businessRuleFeedback.setText("Successfully set new max module compensation");

@@ -30,7 +30,7 @@ public class Lecturer extends Person {
         this.qualification = qualification;
     }
 
-    public void updateModuleInfo(Integer moduleId, String moduleInfo){
+    public void updateModuleInfo(Integer moduleId, String moduleInfo) {
         String query = "UPDATE module SET moduleInfo = ? WHERE moduleId = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, moduleInfo);
@@ -41,10 +41,13 @@ public class Lecturer extends Person {
             e.printStackTrace();
         }
     }
+
     @Override
     public String toString() {
         return username;
     }
+
+}
 
     // Getters and setters for lecturer-specific fields
 

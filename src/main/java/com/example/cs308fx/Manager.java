@@ -62,23 +62,25 @@ public class Manager extends Person {
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
+            int studentId = rs.getInt("studentId");
             String username = rs.getString("username");
             String firstName = rs.getString("firstname");
             String surname = rs.getString("surname");
             String gender = rs.getString("gender");
             String dob = rs.getString("dateOfBirth");
             String email = rs.getString("email");
-            String courseId = rs.getString("courseId");
+            int courseId = rs.getInt("courseId");
             String courseName = rs.getString("courseName");
             String decision = rs.getString("decision");
 
-            users.add(new Student(username, firstName, surname, gender, dob, email, courseId, courseName, decision));
+            users.add(new Student(studentId, username, firstName, surname, gender, dob, email, courseId, courseName, decision));
         }
 
         ps = connection.prepareStatement("SELECT * FROM lecturer WHERE approved=true");
         rs = ps.executeQuery();
 
         while (rs.next()) {
+            int id = rs.getInt("lecturerId");
             String username = rs.getString("username");
             String firstName = rs.getString("firstname");
             String surname = rs.getString("surname");
@@ -87,7 +89,7 @@ public class Manager extends Person {
             String email = rs.getString("email");
             String qualification = rs.getString("qualification");
 
-            users.add(new Lecturer(username, firstName, surname, gender, dob, email, qualification));
+            users.add(new Lecturer(id, username, firstName, surname, gender, dob, email, qualification));
         }
 
         return users;
