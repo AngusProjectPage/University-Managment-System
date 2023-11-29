@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #d4ebe9;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs308fx.controllers.ManagerController">
+<AnchorPane prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #d4ebe9;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs308fx.controllers.ManagerController">
    <children>
       <GridPane layoutX="-2.0" layoutY="37.0" prefHeight="363.0" prefWidth="607.0" AnchorPane.leftAnchor="-2.0">
         <columnConstraints>
@@ -123,6 +123,30 @@
                   <Insets top="5.0" />
                </padding>
             </Label>
+            <VBox alignment="CENTER" prefHeight="125.0" prefWidth="304.0" spacing="10.0" GridPane.rowIndex="2">
+               <children>
+                  <Label text="Add lecturer to module" />
+                  <HBox alignment="CENTER" prefWidth="200.0" spacing="10.0">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="102.0" text="LecturerUsername:" />
+                        <TextField fx:id="lecturerUsernameField" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="53.0" prefWidth="200.0" spacing="10.0">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="102.0" text="Module Id:" />
+                        <TextField fx:id="lecturerModuleIdField" />
+                     </children>
+                  </HBox>
+                  <Button mnemonicParsing="false" onAction="#addLecturerToModule" style="-fx-background-color: #E76F51;" text="Add Lecturer to Module" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <GridPane.margin>
+                  <Insets top="10.0" />
+               </GridPane.margin>
+            </VBox>
          </children>
       </GridPane>
       <Label id="managerIdLabel" fx:id="managerIdLabel" alignment="CENTER" layoutX="211.0" layoutY="14.0" text="Manager ID: Loading..." AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

@@ -56,6 +56,10 @@ public class ManagerController {
     @FXML
     private ComboBox<String> usersComboBox;
 
+    @FXML TextField lecturerUsernameField;
+
+    @FXML TextField lecturerModuleIdField;
+
     public void populateUsersComboBox() {
         try {
             List<String> unapprovedUsers = loggedInManager.getUnapprovedUsers();
@@ -173,6 +177,11 @@ public class ManagerController {
             // Handle IOException
             updateFeedback("Error: Unable to open the update password view.");
         }
+    }
+
+    @FXML
+    private void addLecturerToModuel(ActionEvent event) {
+
     }
 
 
