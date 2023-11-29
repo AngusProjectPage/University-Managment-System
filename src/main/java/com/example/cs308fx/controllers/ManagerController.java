@@ -60,10 +60,6 @@ public class ManagerController {
     @FXML
     private ComboBox<String> usersComboBox;
 
-    @FXML TextField lecturerUsernameField;
-
-    @FXML TextField lecturerModuleIdField;
-
     @FXML
     private ComboBox<Module> modulesCombo;
 
@@ -111,7 +107,6 @@ public class ManagerController {
 
     @FXML
     private TextField moduleInfoField;
-
 
     public void populateUsersComboBox() {
         usersComboBox.promptTextProperty().set("Users");
@@ -251,10 +246,6 @@ public class ManagerController {
         }
     }
 
-    @FXML
-    private void addLecturerToModuel(ActionEvent event) {
-
-    }
     public void populateCombos() {
         try {
             Connection conn = MySqlConnect.getConnection();
@@ -395,6 +386,5 @@ public class ManagerController {
             updateFeedback("Could not deactivate user");
         }
     }
-
 
 }
