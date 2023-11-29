@@ -84,9 +84,7 @@ public class UserModel {
                         rs.getString("gender"),
                         rs.getString("dateOfBirth"),
                         rs.getString("email"),
-                        rs.getString("qualification"),
-                        rs.getBoolean("approved")
-
+                        rs.getString("qualification")
                 );
             }
         } else if (Objects.equals("manager", role)) {

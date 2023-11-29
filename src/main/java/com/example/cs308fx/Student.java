@@ -44,6 +44,12 @@ public class Student extends Person {
         return courseId;
     }
     public String getDecision() { return decision; }
+
+    @Override
+    public String toString() {
+        return username;
+    }
+
 }
 
 

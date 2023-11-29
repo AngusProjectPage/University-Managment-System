@@ -55,6 +55,44 @@ public class Manager extends Person {
         return users;
     }
 
+    public List<Person> getApprovedUsers() throws SQLException {
+        List<Person> users = new ArrayList<>();
+
+        PreparedStatement ps = connection.prepareStatement("SELECT * FROM student, course WHERE student.courseId = course.courseId AND approved=true");
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            String username = rs.getString("username");
+            String firstName = rs.getString("firstname");
+            String surname = rs.getString("surname");
+            String gender = rs.getString("gender");
+            String dob = rs.getString("dateOfBirth");
+            String email = rs.getString("email");
+            String courseId = rs.getString("courseId");
+            String courseName = rs.getString("courseName");
+            String decision = rs.getString("decision");
+
+            users.add(new Student(username, firstName, surname, gender, dob, email, courseId, courseName, decision));
+        }
+
+        ps = connection.prepareStatement("SELECT * FROM lecturer WHERE approved=true");
+        rs = ps.executeQuery();
+
+        while (rs.next()) {
+            String username = rs.getString("username");
+            String firstName = rs.getString("firstname");
+            String surname = rs.getString("surname");
+            String gender = rs.getString("gender");
+            String dob = rs.getString("dateOfBirth");
+            String email = rs.getString("email");
+            String qualification = rs.getString("qualification");
+
+            users.add(new Lecturer(username, firstName, surname, gender, dob, email, qualification));
+        }
+
+        return users;
+    }
+
     public void approveUser(int userId, String userType) throws SQLException {
         System.out.println("User Type: " + userType); // For debugging purposes
 
@@ -109,6 +147,20 @@ public class Manager extends Person {
             if (affectedRows == 0) {
                 throw new SQLException("Updating password failed, no rows affected.");
             }
+        }
+    }
+
+    public void deactivateUser(Person user) throws SQLException {
+        String table = (user instanceof Student) ? "student" : "lecturer";
+        String idField = (user instanceof Student) ? "studentId" : "lecturerId";
+        String id = user.getUsername().substring(3);
+
+        PreparedStatement ps = connection.prepareStatement("UPDATE " + table + " SET approved=false WHERE " + idField + "=?;");
+        ps.setInt(1, Integer.parseInt(id));
+
+        int affectedRows = ps.executeUpdate();
+        if (affectedRows == 0) {
+            throw new SQLException("Deactivating user failed, no rows affected.");
         }
     }
 
