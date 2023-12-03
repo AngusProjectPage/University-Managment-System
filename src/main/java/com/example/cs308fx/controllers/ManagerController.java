@@ -13,6 +13,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -107,6 +108,25 @@ public class ManagerController {
 
     @FXML
     private TextField moduleInfoField;
+
+    @FXML
+    private TextField moduleToLecturerLIdField;
+
+    @FXML
+    private TextField moduleToLecturerMIdField;
+
+    @FXML
+    public void addModuleToLecturer (ActionEvent event) {
+        try {
+            String lecturerId = moduleToLecturerLIdField.getText();
+            String moduleId   = moduleToLecturerMIdField.getText();
+            loggedInManager.updateModuleLecturer(lecturerId, moduleId);
+        }
+        catch (SQLException e) {
+            // Handle SQL Exception
+            e.printStackTrace();
+        }
+    }
 
     public void populateUsersComboBox() {
         usersComboBox.promptTextProperty().set("Users");
