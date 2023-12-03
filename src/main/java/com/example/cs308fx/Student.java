@@ -2,8 +2,12 @@ package com.example.cs308fx;
 
 import com.example.cs308fx.controllers.UserController;
 
+import java.io.File;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A Student is a subclass of {@link Person} and a sub-subclass of a {@link UserController} <br>
@@ -70,6 +74,39 @@ public class Student extends Person {
         ps.setInt(3, module.getModuleId());
         ps.executeUpdate();
     }
+
+    public File downloadLabNote(int weekId, int moduleId) throws SQLException {
+        String query = "SELECT labNote FROM week WHERE moduleId = ? AND weekId = ?";
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setInt(1, moduleId);
+        ps.setInt(2, weekId);
+        try (ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Integer moduleId = rs.getInt("moduleId");
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            // Handle exceptions
+        }
+    }
+
+    public File downloadLectureNote(int weekId, int moduleId) throws SQLException {
+        String query = "SELECT lectureNote FROM week WHERE moduleId = ? AND weekId = ?";
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setInt(1, moduleId);
+        ps.setInt(2, weekId);
+        try (ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Integer moduleId = rs.getInt("moduleId");
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            // Handle exceptions
+        }
+    }
+
 }
 
 
