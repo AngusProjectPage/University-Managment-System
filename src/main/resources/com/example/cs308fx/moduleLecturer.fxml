@@ -60,16 +60,28 @@
                <children>
                   <VBox prefHeight="80.0" prefWidth="306.0">
                      <children>
-                        <Label prefHeight="17.0" prefWidth="79.0" text="This week:" />
-                        <Button mnemonicParsing="false" style="-fx-background-color: #E76F51;" text="Upload Lab Notes">
+                        <Label prefHeight="17.0" prefWidth="79.0" text="Select week:">
                            <VBox.margin>
                               <Insets left="10.0" />
-                           </VBox.margin></Button>
-                        <Button mnemonicParsing="false" style="-fx-background-color: #E76F51;" text="Upload Lecture Notes">
-                           <VBox.margin>
-                              <Insets left="10.0" top="10.0" />
-                           </VBox.margin>
-                        </Button>
+                           </VBox.margin></Label>
+                        <HBox prefHeight="31.0" prefWidth="300.0">
+                           <children>
+                              <ComboBox fx:id="weeks" prefWidth="150.0" style="-fx-background-color: #E76F51;">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </ComboBox>
+                           </children></HBox>
+
+                        <HBox prefHeight="32.0" prefWidth="300.0">
+                           <children>
+                              <Button fx:id="uploadLabNotes" mnemonicParsing="false" onAction="#uploadNotes" style="-fx-background-color: #E76F51;" text="Upload Lab Notes">
+                                 <HBox.margin>
+                                    <Insets left="10.0" right="10.0" />
+                                 </HBox.margin></Button>
+                              <Button fx:id="uploadLectureNotes" mnemonicParsing="false" onAction="#uploadNotes" style="-fx-background-color: #E76F51;" text="Upload Lecture Notes" />
+                           </children>
+                        </HBox>
                      </children>
                   </VBox>
                </children>

@@ -3,18 +3,18 @@ package com.example.cs308fx.controllers;
 import com.example.cs308fx.Lecturer;
 import com.example.cs308fx.Module;
 import com.example.cs308fx.Student;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -31,6 +31,7 @@ public class ModuleLecturerController {
         this.lecturerModule = lecturerModule;
         updateModuleDetails();
         enrolledStudents();
+        setWeeks();
     }
 
     @FXML
@@ -45,6 +46,15 @@ public class ModuleLecturerController {
     @FXML
     private ListView<Button> enrolledStudentsList;
 
+    @FXML
+    private ComboBox<String> weeks;
+
+    private FileChooser fileChooser = new FileChooser();
+
+    public void setWeeks() {
+        weeks.setItems(FXCollections.observableArrayList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"));
+    }
+
     private void updateFeedback(String message) {
         feedbackLabel.setText(message);
     }
@@ -53,6 +63,23 @@ public class ModuleLecturerController {
         moduleName.setText("Module: " + lecturerModule.getModuleName());
         moduleInfo.setText(lecturerModule.getModuleInfo());
     }
+
+    @FXML
+    public void uploadNotes(ActionEvent event) {
+        String week = weeks.getValue();
+        Button btn = (Button) event.getSource();
+
+        fileChooser.setTitle("Upload " + btn.getText());
+        File file = fileChooser.showOpenDialog(null);
+
+        if (file != null) {
+            // Now you insert the file content into the database
+            loggedInLecturer.uploadNote(file, week, btn.getId().equals("uploadLabNotes") ? "lab" : "lecture", lecturerModule.getModuleId());
+        } else {
+            updateFeedback("No file selected!");
+        }
+    }
+
 
     @FXML
     private void handleUpdateInfoAction() {

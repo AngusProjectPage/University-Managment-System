@@ -2,6 +2,9 @@ package com.example.cs308fx;
 
 import com.example.cs308fx.controllers.UserController;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,6 +44,64 @@ public class Lecturer extends Person {
             e.printStackTrace();
         }
     }
+
+    public void uploadNote(File file, String week, String noteType, Integer moduleId) {
+        // Determine the column to update based on the note type
+        String columnToUpdate = noteType.equals("lab") ? "labNote" : "lectureNote";
+
+        String insertQuery = "INSERT INTO week (weekId, moduleId, " + columnToUpdate + ") VALUES (?, ?, ?)";
+        String updateQuery = "UPDATE week SET " + columnToUpdate + " = ? WHERE weekId = ? AND moduleId = ?";
+
+        // Convert file to byte array
+        byte[] fileContent = readFileToByteArray(file);
+
+        if (fileContent != null) {
+            try {
+                // Check if an entry exists for the week and module
+                boolean exists = entryExists(week, moduleId);
+
+                try (PreparedStatement ps = connection.prepareStatement(exists ? updateQuery : insertQuery)) {
+                    if (exists) {
+                        ps.setBytes(1, fileContent);
+                        ps.setInt(2, Integer.parseInt(week));
+                        ps.setInt(3, moduleId);
+                    } else {
+                        ps.setInt(1, Integer.parseInt(week));
+                        ps.setInt(2, moduleId);
+                        ps.setBytes(3, fileContent);
+                    }
+                    ps.executeUpdate();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private byte[] readFileToByteArray(File file) {
+        byte[] fileContent = null;
+        try (FileInputStream fis = new FileInputStream(file)) {
+            fileContent = new byte[(int) file.length()];
+            fis.read(fileContent);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return fileContent;
+    }
+
+    private boolean entryExists(String week, int moduleId) throws SQLException {
+        String checkQuery = "SELECT COUNT(*) FROM week WHERE weekId = ? AND moduleId = ?";
+        try (PreparedStatement checkStmt = connection.prepareStatement(checkQuery)) {
+            checkStmt.setInt(1, Integer.parseInt(week));
+            checkStmt.setInt(2, moduleId);
+            ResultSet rs = checkStmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        }
+        return false;
+    }
+
 
     @Override
     public String toString() {
