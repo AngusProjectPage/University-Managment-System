@@ -1,5 +1,9 @@
 package com.example.cs308fx;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 /**
  * A Module is a class that is taught by a lecturer and attended by students.<br>
  * Each module is worth a certain number of credits and has a name and code.<br>
@@ -56,5 +60,10 @@ public class Module {
     public String toString() {
         return this.moduleName;
     }
+
+
+
+
+
 
 }

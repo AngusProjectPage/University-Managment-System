@@ -34,15 +34,41 @@ public class ModuleController {
 
     public void setStudent(Student student) {
         this.student = student;
+        setGrades();
     }
 
     public void setCurrentModule(Module module) {
         this.currentModule = module;
         setLabels();
+
     }
+
+    @FXML
+    private Label examMark;
+
+    @FXML
+    private Label labMark;
 
     public void setWeeks() {
         weeks.setItems(FXCollections.observableArrayList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"));
+    }
+
+
+    public void setGrades() {
+        if (student != null) {
+            int studentId = student.getId();
+            int moduleId = currentModule.getModuleId();
+            int[] marks = student.getMarksForStudent(studentId, moduleId);
+            String examResult = marks[1] >= 50 ? "Pass" : "Fail";
+            String labResult = marks[0] >= 50 ? "Pass" : "Fail";
+
+            examMark.setText("Exam mark: " + marks[1] + " (" + examResult + ")");
+            labMark.setText("Lab mark: " + marks[0] + " (" + labResult + ")");
+
+        } else {
+            examMark.setText("Student information is not available.");
+            labMark.setText("Student information is not available.");
+        }
     }
 
     private void setLabels() {

@@ -2,13 +2,7 @@ package com.example.cs308fx;
 
 import com.example.cs308fx.controllers.UserController;
 
-import java.io.File;
-import java.sql.Blob;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.*;
 
 /**
  * A Student is a subclass of {@link Person} and a sub-subclass of a {@link UserController} <br>
@@ -111,6 +105,33 @@ public class Student extends Person {
         }
         return null;
     }
+
+    public int[] getMarksForStudent(int studentId, int moduleId) {
+        String query = "SELECT labMark, examMark FROM studentModule WHERE studentId = ? AND moduleId = ?";
+        int[] marks = new int[2];
+
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setInt(1, studentId);
+            ps.setInt(2, moduleId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    int labMark = rs.getInt("labMark");
+                    marks[0] = rs.wasNull() ? -1 : labMark; // -1 to indicate that the mark is not set
+
+                    int examMark = rs.getInt("examMark");
+                    marks[1] = rs.wasNull() ? -1 : examMark; // -1 to indicate that the mark is not set
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // In case of an exception, you may want to return null or a specific error value
+            return null; // or some error indication
+        }
+
+        return marks;
+    }
+
 
 }
 
