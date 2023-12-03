@@ -208,6 +208,14 @@ public class Manager extends Person {
         ps.setInt(2, moduleId);
         ps.executeUpdate();
     }
+
+    public void awardStudent(String award, int studentId) throws SQLException {
+        String query = "UPDATE student SET decision = ? WHERE studentId = ? ";
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setString(1, award);
+        ps.setInt(2, studentId);
+        ps.executeUpdate();
+    }
 }
 
 

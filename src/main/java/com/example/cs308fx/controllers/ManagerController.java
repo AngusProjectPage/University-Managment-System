@@ -3,6 +3,7 @@ package com.example.cs308fx.controllers;
 import com.example.cs308fx.*;
 
 import com.example.cs308fx.Module;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,6 +31,7 @@ public class ManagerController {
         this.loggedInManager = manager;
         updateManagerDetails();
         populateUsersComboBox();
+        populateAwardComboBox();
     }
 
     private void updateManagerDetails() {
@@ -121,6 +123,27 @@ public class ManagerController {
     @FXML
     private TextField addModuleToCourseMIdField;
 
+    @FXML
+    private TextField issueStudentAwardSIdField;
+
+    @FXML
+    private ComboBox<String> awardComboBox;
+
+
+    @FXML public void populateAwardComboBox() {
+        awardComboBox.setItems(FXCollections.observableArrayList("Pass", "Resit", "Withdraw"));
+    }
+
+    @FXML
+    public void awardStudent(ActionEvent event) {
+        String award = awardComboBox.getValue();
+        int studentId = Integer.parseInt(issueStudentAwardSIdField.getText());
+        try {
+            loggedInManager.awardStudent(award, studentId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @FXML
     public void addModuleToCourse(ActionEvent event) {
