@@ -116,10 +116,30 @@ public class ManagerController {
     private TextField moduleToLecturerMIdField;
 
     @FXML
+    private TextField addModuleToCourseCIdField;
+
+    @FXML
+    private TextField addModuleToCourseMIdField;
+
+
+    @FXML
+    public void addModuleToCourse(ActionEvent event) {
+        try {
+            int courseId   = Integer.parseInt(addModuleToCourseCIdField.getText());
+            int moduleId   = Integer.parseInt(addModuleToCourseMIdField.getText());
+            loggedInManager.updateModuleCourse(courseId, moduleId);
+        }
+        catch (SQLException e) {
+            // Handle SQL Exception
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     public void addModuleToLecturer (ActionEvent event) {
         try {
-            String lecturerId = moduleToLecturerLIdField.getText();
-            String moduleId   = moduleToLecturerMIdField.getText();
+            int lecturerId = Integer.parseInt(moduleToLecturerLIdField.getText());
+            int moduleId   = Integer.parseInt(moduleToLecturerMIdField.getText());
             loggedInManager.updateModuleLecturer(lecturerId, moduleId);
         }
         catch (SQLException e) {

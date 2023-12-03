@@ -359,6 +359,34 @@
                   <Button mnemonicParsing="false" onAction="#addModuleToLecturer" style="-fx-background-color: #E76F51;" text="Add Module to Lecturer" />
                </children>
             </VBox>
+            <VBox alignment="CENTER" layoutX="419.0" layoutY="314.0" prefHeight="176.0" prefWidth="408.0" spacing="20.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <children>
+                  <HBox alignment="CENTER" spacing="20.0">
+                     <children>
+                        <Label text="Course ID:" />
+                        <TextField fx:id="addModuleToCourseCIdField" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="88.0" spacing="20.0">
+                     <children>
+                        <Label text="Module ID:" />
+                        <TextField fx:id="addModuleToCourseMIdField" />
+                     </children>
+                  </HBox>
+                  <Button mnemonicParsing="false" onAction="#addModuleToCourse" style="-fx-background-color: #E76F51;" text="Add Module to Course" />
+               </children>
+               <GridPane.margin>
+                  <Insets top="20.0" />
+               </GridPane.margin>
+            </VBox>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Add Module to Course" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
          </children>
       </GridPane>
       <Label id="managerIdLabel" fx:id="managerIdLabel" alignment="CENTER" layoutX="211.0" layoutY="14.0" text="Manager ID: Loading..." AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

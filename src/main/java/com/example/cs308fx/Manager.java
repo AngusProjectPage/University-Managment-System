@@ -193,11 +193,19 @@ public class Manager extends Person {
         }
     }
 
-    public void updateModuleLecturer(String lecturerId, String moduleId) throws SQLException {
+    public void updateModuleLecturer(int lecturerId, int moduleId) throws SQLException {
         String query = "INSERT INTO lecturerModule (moduleId, lecturerId) VALUES (?, ?) ";
         PreparedStatement ps = connection.prepareStatement(query);
-        ps.setInt(1, Integer.parseInt(moduleId));
-        ps.setInt(2, Integer.parseInt(lecturerId));
+        ps.setInt(1, moduleId);
+        ps.setInt(2, lecturerId);
+        ps.executeUpdate();
+    }
+
+    public void updateModuleCourse(int courseId, int moduleId) throws SQLException {
+        String query = "UPDATE module SET courseId = ? WHERE moduleId = ? ";
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setInt(1, courseId);
+        ps.setInt(2, moduleId);
         ps.executeUpdate();
     }
 }
