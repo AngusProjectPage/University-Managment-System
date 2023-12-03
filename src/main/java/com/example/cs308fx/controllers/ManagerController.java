@@ -3,6 +3,7 @@ package com.example.cs308fx.controllers;
 import com.example.cs308fx.*;
 
 import com.example.cs308fx.Module;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -29,6 +31,7 @@ public class ManagerController {
         this.loggedInManager = manager;
         updateManagerDetails();
         populateUsersComboBox();
+        populateAwardComboBox();
     }
 
     private void updateManagerDetails() {
@@ -107,6 +110,66 @@ public class ManagerController {
 
     @FXML
     private TextField moduleInfoField;
+
+    @FXML
+    private TextField moduleToLecturerLIdField;
+
+    @FXML
+    private TextField moduleToLecturerMIdField;
+
+    @FXML
+    private TextField addModuleToCourseCIdField;
+
+    @FXML
+    private TextField addModuleToCourseMIdField;
+
+    @FXML
+    private TextField issueStudentAwardSIdField;
+
+    @FXML
+    private ComboBox<String> awardComboBox;
+
+
+    @FXML public void populateAwardComboBox() {
+        awardComboBox.setItems(FXCollections.observableArrayList("Pass", "Resit", "Withdraw"));
+    }
+
+    @FXML
+    public void awardStudent(ActionEvent event) {
+        String award = awardComboBox.getValue();
+        int studentId = Integer.parseInt(issueStudentAwardSIdField.getText());
+        try {
+            loggedInManager.awardStudent(award, studentId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    public void addModuleToCourse(ActionEvent event) {
+        try {
+            int courseId   = Integer.parseInt(addModuleToCourseCIdField.getText());
+            int moduleId   = Integer.parseInt(addModuleToCourseMIdField.getText());
+            loggedInManager.updateModuleCourse(courseId, moduleId);
+        }
+        catch (SQLException e) {
+            // Handle SQL Exception
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void addModuleToLecturer (ActionEvent event) {
+        try {
+            int lecturerId = Integer.parseInt(moduleToLecturerLIdField.getText());
+            int moduleId   = Integer.parseInt(moduleToLecturerMIdField.getText());
+            loggedInManager.updateModuleLecturer(lecturerId, moduleId);
+        }
+        catch (SQLException e) {
+            // Handle SQL Exception
+            e.printStackTrace();
+        }
+    }
 
     public void populateUsersComboBox() {
         usersComboBox.promptTextProperty().set("Users");

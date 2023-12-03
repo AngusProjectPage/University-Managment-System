@@ -2,8 +2,13 @@ package com.example.cs308fx;
 
 import com.example.cs308fx.controllers.UserController;
 
+import java.io.File;
+import java.sql.Blob;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A Student is a subclass of {@link Person} and a sub-subclass of a {@link UserController} <br>
@@ -70,6 +75,43 @@ public class Student extends Person {
         ps.setInt(3, module.getModuleId());
         ps.executeUpdate();
     }
+
+    public Blob downloadLabNote(int weekId, int moduleId) throws SQLException {
+        String query = "SELECT labNote FROM week WHERE moduleId = ? AND weekId = ?";
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setInt(1, moduleId);
+        ps.setInt(2, weekId);
+        try (ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Blob labNote = rs.getBlob("labNote");
+                return labNote;
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            // Handle exceptions
+        }
+        return null;
+    }
+
+    public Blob downloadLectureNote(int weekId, int moduleId) throws SQLException {
+        String query = "SELECT lectureNote FROM week WHERE moduleId = ? AND weekId = ?";
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setInt(1, moduleId);
+        ps.setInt(2, weekId);
+        try (ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Blob lectureNote = rs.getBlob("lectureNote");
+                return lectureNote;
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            // Handle exceptions
+        }
+        return null;
+    }
+
 }
 
 
