@@ -3,6 +3,7 @@ package com.example.cs308fx;
 import com.example.cs308fx.controllers.UserController;
 
 import java.io.File;
+import java.sql.Blob;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -75,36 +76,40 @@ public class Student extends Person {
         ps.executeUpdate();
     }
 
-    public File downloadLabNote(int weekId, int moduleId) throws SQLException {
+    public Blob downloadLabNote(int weekId, int moduleId) throws SQLException {
         String query = "SELECT labNote FROM week WHERE moduleId = ? AND weekId = ?";
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setInt(1, moduleId);
         ps.setInt(2, weekId);
         try (ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
-                Integer moduleId = rs.getInt("moduleId");
+                Blob labNote = rs.getBlob("labNote");
+                return labNote;
             }
         }
         catch (SQLException e) {
             e.printStackTrace();
             // Handle exceptions
         }
+        return null;
     }
 
-    public File downloadLectureNote(int weekId, int moduleId) throws SQLException {
+    public Blob downloadLectureNote(int weekId, int moduleId) throws SQLException {
         String query = "SELECT lectureNote FROM week WHERE moduleId = ? AND weekId = ?";
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setInt(1, moduleId);
         ps.setInt(2, weekId);
         try (ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
-                Integer moduleId = rs.getInt("moduleId");
+                Blob lectureNote = rs.getBlob("lectureNote");
+                return lectureNote;
             }
         }
         catch (SQLException e) {
             e.printStackTrace();
             // Handle exceptions
         }
+        return null;
     }
 
 }
