@@ -3,8 +3,11 @@ package com.example.cs308fx.controllers;
 import com.example.cs308fx.*;
 
 import com.example.cs308fx.Module;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -16,6 +19,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.sql.*;
@@ -129,18 +133,51 @@ public class ManagerController {
     @FXML
     private ComboBox<String> awardComboBox;
 
+    @FXML
+    private Label errorSuccessLabel;
+
 
     @FXML public void populateAwardComboBox() {
         awardComboBox.setItems(FXCollections.observableArrayList("Pass", "Resit", "Withdraw"));
+    }
+
+    public void updateErrorSuccessLabel(Boolean trueOrFalse) {
+        if(trueOrFalse) {
+            errorSuccessLabel.setTextFill(Color.GREEN);
+            errorSuccessLabel.setText("Success!");
+            showLabelForDuration(2);
+        }
+        else {
+            showLabelForDuration(3);
+            errorSuccessLabel.setTextFill(Color.RED);
+            errorSuccessLabel.setText("Something went wrong!, try again");
+        }
+    }
+
+    private void showLabelForDuration(int seconds) {
+        errorSuccessLabel.setVisible(true);
+        // Create a timeline to hide the label after the specified duration
+        Timeline timeline = new Timeline(new KeyFrame(
+                Duration.seconds(seconds),
+                new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        errorSuccessLabel.setVisible(false);
+                    }
+                }));
+
+        timeline.play();
     }
 
     @FXML
     public void awardStudent(ActionEvent event) {
         String award = awardComboBox.getValue();
         int studentId = Integer.parseInt(issueStudentAwardSIdField.getText());
+        updateErrorSuccessLabel(true);
         try {
             loggedInManager.awardStudent(award, studentId);
         } catch (SQLException e) {
+            updateErrorSuccessLabel(false);
             throw new RuntimeException(e);
         }
     }
@@ -151,9 +188,11 @@ public class ManagerController {
             int courseId   = Integer.parseInt(addModuleToCourseCIdField.getText());
             int moduleId   = Integer.parseInt(addModuleToCourseMIdField.getText());
             loggedInManager.updateModuleCourse(courseId, moduleId);
+            updateErrorSuccessLabel(true);
         }
         catch (SQLException e) {
             // Handle SQL Exception
+            updateErrorSuccessLabel(false);
             e.printStackTrace();
         }
     }
@@ -164,9 +203,11 @@ public class ManagerController {
             int lecturerId = Integer.parseInt(moduleToLecturerLIdField.getText());
             int moduleId   = Integer.parseInt(moduleToLecturerMIdField.getText());
             loggedInManager.updateModuleLecturer(lecturerId, moduleId);
+            updateErrorSuccessLabel(true);
         }
         catch (SQLException e) {
             // Handle SQL Exception
+            updateErrorSuccessLabel(false);
             e.printStackTrace();
         }
     }
@@ -194,6 +235,11 @@ public class ManagerController {
 
     @FXML
     private void handleApproveButtonAction() {
+        Person user = activeUsersCombo.getValue();
+        if (user == null) {
+            updateErrorSuccessLabel(false);
+            return;
+        }
         String selectedStudent = usersComboBox.getValue().trim(); // Trim any leading/trailing whitespace
         System.out.println("Selected student string: " + selectedStudent);
 
@@ -202,6 +248,7 @@ public class ManagerController {
 
         if (parts.length < 2) {
             System.out.println("Error: Unexpected format of user string.");
+            updateErrorSuccessLabel(false);
             return;
         }
 
@@ -211,6 +258,7 @@ public class ManagerController {
             userId = Integer.parseInt(parts[0].trim());
         } catch (NumberFormatException e) {
             System.out.println("Error: User ID is not a valid number.");
+            updateErrorSuccessLabel(false);
             return;
         }
 
@@ -221,6 +269,7 @@ public class ManagerController {
 
         if (startRoleIndex == -1 || endRoleIndex == -1 || startRoleIndex >= endRoleIndex) {
             System.out.println("Error: Role does not have the expected format.");
+            updateErrorSuccessLabel(false);
             return;
         }
 
@@ -234,20 +283,16 @@ public class ManagerController {
         }
         try {
             loggedInManager.approveUser(userId, role);
-            updateFeedback("User approved successfully.");
             populateUsersComboBox();
+            updateErrorSuccessLabel(true);
         } catch (SQLException e) {
-            updateFeedback("Error: Unable to approve user.");
+            updateErrorSuccessLabel(false);
             e.printStackTrace();
         }
     }
 
     @FXML
     private Label feedbackLabel;
-
-    private void updateFeedback(String message) {
-        feedbackLabel.setText(message);
-    }
 
     @FXML
     private void handleAddCourseAction() {
@@ -259,9 +304,9 @@ public class ManagerController {
 
         try {
             loggedInManager.addOrUpdateCourse(courseCode, courseName, courseDescription, courseSemesters, courseCompensation);
-            updateFeedback("Course added/updated successfully.");
+            updateErrorSuccessLabel(true);
         } catch (SQLException e) {
-            updateFeedback("Error adding/updating course: " + e.getMessage());
+            updateErrorSuccessLabel(false);
         }
     }
 
@@ -276,15 +321,15 @@ public class ManagerController {
 
             if (moduleCode != null && moduleCredit != null && moduleMaxAttempts != null) {
                 loggedInManager.addOrUpdateModule(moduleCode, moduleName, moduleCredit, moduleInfo, moduleMaxAttempts);
-                updateFeedback("Module added/updated successfully.");
+                updateErrorSuccessLabel(true);
             } else {
-                updateFeedback("Please enter valid module details.");
+                updateErrorSuccessLabel(false);
             }
 
         } catch (NumberFormatException e) {
-            updateFeedback("Invalid input: " + e.getMessage());
+            updateErrorSuccessLabel(false);
         } catch (SQLException e) {
-            updateFeedback("Error adding/updating module: " + e.getMessage());
+            updateErrorSuccessLabel(false);
         }
     }
 
@@ -305,7 +350,7 @@ public class ManagerController {
         } catch (IOException e) {
             e.printStackTrace();
             // Handle IOException
-            updateFeedback("Error: Unable to open the update password view.");
+            updateErrorSuccessLabel(false);
         }
     }
 
@@ -367,7 +412,7 @@ public class ManagerController {
     @FXML
     public void editMaxAttempts(ActionEvent event) {
         if (modulesCombo.getValue() == null) {
-            businessRuleFeedback.setText("Select a module before setting max attempts");
+            updateErrorSuccessLabel(false);
             return;
         }
 
@@ -384,11 +429,12 @@ public class ManagerController {
                 ps.setInt(2, mod.getModuleId());
                 ps.executeUpdate();
 
-                businessRuleFeedback.setText("Successfully set new max attempts");
+                updateErrorSuccessLabel(true);
             } catch (NumberFormatException ignored) {
-                businessRuleFeedback.setText("Module max attempts not a valid number");
+                updateErrorSuccessLabel(false);
             }
         } catch (SQLException e) {
+            updateErrorSuccessLabel(false);
             e.printStackTrace();
         }
     }
@@ -406,7 +452,7 @@ public class ManagerController {
     @FXML
     public void editMaxComp(ActionEvent event) {
         if (coursesCombo.getValue() == null) {
-            businessRuleFeedback.setText("Select a course before setting max modules to compensate");
+            updateErrorSuccessLabel(false);
             return;
         }
 
@@ -423,11 +469,12 @@ public class ManagerController {
                 ps.setString(2, course.getCourseId().toString());
                 ps.executeUpdate();
 
-                businessRuleFeedback.setText("Successfully set new max module compensation");
+                updateErrorSuccessLabel(true);
             } catch (NumberFormatException ignored) {
-                businessRuleFeedback.setText("Course max module compensation not a valid number");
+                updateErrorSuccessLabel(false);
             }
         } catch (SQLException e) {
+            updateErrorSuccessLabel(false);
             e.printStackTrace();
         }
     }
@@ -436,17 +483,17 @@ public class ManagerController {
     public void deactivateUser(ActionEvent event) {
         Person user = activeUsersCombo.getValue();
         if (user == null) {
-            updateFeedback("Please select a user before deactivating");
+            updateErrorSuccessLabel(false);
             return;
         }
 
         try {
             loggedInManager.deactivateUser(user);
-            updateFeedback(user.getUsername() + " deactivated");
             populateUsersComboBox();
+            updateErrorSuccessLabel(true);
         } catch (SQLException e) {
             e.printStackTrace();
-            updateFeedback("Could not deactivate user");
+            updateErrorSuccessLabel(false);
         }
     }
 
